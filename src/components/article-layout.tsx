@@ -34,10 +34,10 @@ export function ArticleLayout({
   children,
 }: ArticleLayoutProps) {
   return (
-    <main className="w-full flex-1 flex flex-col items-center pt-24 pb-32">
+    <main className="w-full flex-1 flex flex-col items-center pt-8 pb-32">
       <article className="max-w-5xl mx-auto px-6 w-full">
         {/* Back Button */}
-        <div className="mb-12">
+        <div className="mb-8">
           <Link
             href={backHref}
             className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
