@@ -6,7 +6,7 @@ export function Banner() {
 
   return (
     <section className="dark w-full px-6 py-24 z-10 relative">
-      <div className="relative max-w-6xl mx-auto flex flex-col items-center text-center rounded-3xl overflow-hidden border border-border px-8 py-20 md:py-32 shadow-2xl">
+      <div className="bg-background relative max-w-6xl mx-auto flex flex-col items-center text-center rounded-3xl overflow-hidden border border-border px-8 py-20 md:py-32 shadow-2xl">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <video
