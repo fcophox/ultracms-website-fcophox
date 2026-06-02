@@ -279,5 +279,25 @@
   "ArticleNav": {
     "prev": "Previous",
     "next": "Next"
+  },
+  "DesignSystemPage": {
+    "backHome": "Back to Home",
+    "title": "Design System",
+    "subtitle": "Guide to visual tokens, colors, and typography to ensure consistency across the ecosystem.",
+    "colorsLight": "Colors - Light Mode",
+    "colorsDark": "Colors - Dark Mode",
+    "typography": "Typography",
+    "typographySans": "Sans Serif (Primary)",
+    "typographyMono": "Monospace (Code & Badges)",
+    "colorNames": {
+      "background": "Background",
+      "foreground": "Foreground",
+      "surface": "Surface",
+      "border": "Border",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "accent": "Accent",
+      "muted": "Muted"
+    }
   }
 }

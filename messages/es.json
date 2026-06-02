@@ -279,5 +279,25 @@
   "ArticleNav": {
     "prev": "Anterior",
     "next": "Siguiente"
+  },
+  "DesignSystemPage": {
+    "backHome": "Volver al Inicio",
+    "title": "Sistema de Diseño",
+    "subtitle": "Guía de tokens visuales, colores y tipografía para asegurar consistencia en todo el ecosistema.",
+    "colorsLight": "Colores - Light Mode",
+    "colorsDark": "Colores - Dark Mode",
+    "typography": "Tipografía",
+    "typographySans": "Sans Serif (Principal)",
+    "typographyMono": "Monospace (Código & Etiquetas)",
+    "colorNames": {
+      "background": "Background",
+      "foreground": "Foreground",
+      "surface": "Surface",
+      "border": "Border",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "accent": "Accent",
+      "muted": "Muted"
+    }
   }
 }
