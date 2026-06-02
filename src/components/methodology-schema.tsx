@@ -63,13 +63,13 @@ export function MethodologySchema() {
           >
             {/* Header */}
             <div className="flex flex-col mb-8">
-              <div className="flex items-center gap-2 mb-2">
-                {/* <step.icon className={`w-6 h-6 ${step.color}`} /> */}
-                <h3 className={`text-xl font-light tracking-wide ${step.color}`}>
-                  {step.title}
-                </h3>
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${step.bgLight}`}>
+                <step.icon className={`w-6 h-6 ${step.color}`} />
               </div>
-              <p className="text-sm font-light text-muted">
+              <h3 className={`text-xl font-medium tracking-wide mb-2 ${step.color}`}>
+                {step.title}
+              </h3>
+              <p className="text-sm font-light text-muted leading-relaxed">
                 {step.subtitle}
               </p>
             </div>
