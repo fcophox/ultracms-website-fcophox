@@ -1,26 +1,24 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslations } from "next-intl";
 
 export function Hero() {
   const t = useTranslations('Hero');
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const phrases = [
-    t('phrase1'),
-    t('phrase2'),
-    t('phrase3'),
-  ];
+  const titles = t.raw('titles') as { line1: string; line2: string }[];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % phrases.length);
-    }, 4000); // Cambia cada 4 segundos
-    return () => clearInterval(timer);
-  }, [phrases.length]);
+    if (!titles || titles.length === 0) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % titles.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [titles]);
+
+  const currentTitle = titles?.[currentIndex] || { line1: "", line2: "" };
 
   return (
     <section className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20">
@@ -42,29 +40,29 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-        <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-6 leading-tight">
-          {t('titleLine1')}
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            {t('titleLine2')}
-          </span>
-        </h1>
-
-        <div className="h-20 md:h-16 flex items-center justify-center mb-10 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+        <div className="h-[140px] md:h-[180px] flex items-center justify-center mb-6 relative w-full">
           <AnimatePresence mode="wait">
-            <motion.p
+            <motion.h1
               key={currentIndex}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed text-center"
+              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
             >
-              {phrases[currentIndex]}
-            </motion.p>
+              {currentTitle.line1}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                {currentTitle.line2}
+              </span>
+            </motion.h1>
           </AnimatePresence>
         </div>
+
+        <p className="text-lg md:text-xl text-muted max-w-2xl mb-10 leading-relaxed">
+          {t('subtitle')}
+        </p>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a

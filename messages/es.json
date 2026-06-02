@@ -7,12 +7,25 @@
     "contact": "Contacto"
   },
   "Hero": {
-    "titleLine1": "Optimización de",
-    "titleLine2": "experiencias digitales",
+    "titles": [
+      {
+        "line1": "Optimización de",
+        "line2": "experiencias digitales"
+      },
+      {
+        "line1": "Pensamiento estratégico para",
+        "line2": "descubrir oportunidades."
+      },
+      {
+        "line1": "Experiencia y tecnología aplicada para",
+        "line2": "diseñar soluciones reales."
+      },
+      {
+        "line1": "Conocimiento y experiencia para",
+        "line2": "convertir ideas en realidad."
+      }
+    ],
     "subtitle": "Estrategia, estética y usabilidad combinada para optimizar experiencias digitales que conectan personas con lo digital.",
-    "phrase1": "Pensamiento estratégico para descubrir oportunidades.",
-    "phrase2": "Experiencia y tecnología aplicada para diseñar soluciones reales.",
-    "phrase3": "Conocimiento y experiencia para convertir ideas en realidad.",
     "viewProjects": "Ver proyectos",
     "visitLinkedin": "Visita mi LinkedIn"
   },

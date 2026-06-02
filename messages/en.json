@@ -7,12 +7,25 @@
     "contact": "Contact"
   },
   "Hero": {
-    "titleLine1": "Optimization of",
-    "titleLine2": "digital experiences",
-    "subtitle": "Strategy, aesthetics, and usability combined to optimize digital experiences that connect people with digital.",
-    "phrase1": "Strategic thinking to discover opportunities.",
-    "phrase2": "Applied experience and technology to design real solutions.",
-    "phrase3": "Knowledge and expertise to turn ideas into reality.",
+    "titles": [
+      {
+        "line1": "Optimization of",
+        "line2": "digital experiences"
+      },
+      {
+        "line1": "Strategic thinking to",
+        "line2": "discover opportunities."
+      },
+      {
+        "line1": "Applied experience and technology to",
+        "line2": "design real solutions."
+      },
+      {
+        "line1": "Knowledge and experience to",
+        "line2": "turn ideas into reality."
+      }
+    ],
+    "subtitle": "Strategy, aesthetics, and usability combined to optimize digital experiences that connect people with the digital world.",
     "viewProjects": "View projects",
     "visitLinkedin": "Visit my LinkedIn"
   },
