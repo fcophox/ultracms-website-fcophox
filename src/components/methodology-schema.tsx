@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, PenTool, BarChart3, CheckCircle2, ArrowRight, Lightbulb } from "lucide-react";
+import { Search, PenTool, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function MethodologySchema() {
@@ -45,11 +45,8 @@ export function MethodologySchema() {
 
   return (
     <section className="w-full mt-16 mb-24 relative">
-      <div className="flex flex-col items-center justify-center text-center mb-16">
-        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary shadow-[0_0_30px_rgba(var(--primary),0.2)]">
-          <Lightbulb className="w-8 h-8" />
-        </div>
-        <h2 className="text-2xl md:text-3xl font-light text-muted-foreground max-w-2xl mx-auto">
+      <div className="text-center mb-16">
+        <h2 className="text-2xl md:text-3xl font-light text-muted-foreground">
           {t('mainSubtitle')}
         </h2>
       </div>

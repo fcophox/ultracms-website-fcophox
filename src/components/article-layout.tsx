@@ -17,6 +17,8 @@ interface ArticleLayoutProps {
   backLabel: string;
   itemId?: string;
   tableName?: "articles" | "case_studies";
+  prevArticle?: { title: string; slug: string; href: string } | null;
+  nextArticle?: { title: string; slug: string; href: string } | null;
   children?: ReactNode;
 }
 
@@ -31,6 +33,8 @@ export function ArticleLayout({
   backLabel,
   itemId,
   tableName,
+  prevArticle,
+  nextArticle,
   children,
 }: ArticleLayoutProps) {
   return (
@@ -124,6 +128,25 @@ export function ArticleLayout({
         {/* Feedback Banner */}
         {itemId && tableName && (
           <ArticleFeedback itemId={itemId} tableName={tableName} />
+        )}
+
+        {/* Navigation */}
+        {(prevArticle || nextArticle) && (
+          <div className="w-full mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between gap-6">
+            {prevArticle ? (
+              <Link href={prevArticle.href} className="flex flex-col gap-2 group flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
+                <span className="text-sm font-medium text-muted uppercase tracking-wider">Anterior</span>
+                <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{prevArticle.title}</span>
+              </Link>
+            ) : <div className="flex-1" />}
+            
+            {nextArticle ? (
+              <Link href={nextArticle.href} className="flex flex-col gap-2 group text-right flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
+                <span className="text-sm font-medium text-muted uppercase tracking-wider">Siguiente</span>
+                <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{nextArticle.title}</span>
+              </Link>
+            ) : <div className="flex-1" />}
+          </div>
         )}
       </article>
     </main>

@@ -89,6 +89,32 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? article.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
     : "";
 
+  // Fetch Prev / Next articles
+  const currentPublishDate = rawArticle.published_at || rawArticle.created_at;
+  
+  // Next article (newer)
+  const { data: rawNextArticle } = await supabase
+    .from("articles")
+    .select("title, slug, title_en, slug_en")
+    .eq("status", "published")
+    .gt("published_at", currentPublishDate)
+    .order("published_at", { ascending: true })
+    .limit(1)
+    .single();
+
+  // Previous article (older)
+  const { data: rawPrevArticle } = await supabase
+    .from("articles")
+    .select("title, slug, title_en, slug_en")
+    .eq("status", "published")
+    .lt("published_at", currentPublishDate)
+    .order("published_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  const nextArticle = rawNextArticle ? mapToLocale(rawNextArticle, locale) : null;
+  const prevArticle = rawPrevArticle ? mapToLocale(rawPrevArticle, locale) : null;
+
   // Date formatter
   const formatDate = (dateStr?: string | null) => {
     if (!dateStr) return "";
@@ -116,6 +142,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       backLabel="Volver al Blog"
       itemId={article.id}
       tableName="articles"
+      prevArticle={prevArticle ? { title: prevArticle.title, slug: prevArticle.slug, href: `/blog/${prevArticle.slug}` } : null}
+      nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug, href: `/blog/${nextArticle.slug}` } : null}
     >
       <div 
         className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"

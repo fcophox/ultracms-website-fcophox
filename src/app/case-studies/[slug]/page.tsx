@@ -89,6 +89,32 @@ export default async function CaseStudyPage({ params }: PageProps) {
     ? caseStudy.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
     : "";
 
+  // Fetch Prev / Next cases
+  const currentPublishDate = rawCaseStudy.published_at || rawCaseStudy.created_at;
+  
+  // Next case (newer)
+  const { data: rawNextCase } = await supabase
+    .from("case_studies")
+    .select("title, slug, title_en, slug_en")
+    .eq("status", "published")
+    .gt("published_at", currentPublishDate)
+    .order("published_at", { ascending: true })
+    .limit(1)
+    .single();
+
+  // Previous case (older)
+  const { data: rawPrevCase } = await supabase
+    .from("case_studies")
+    .select("title, slug, title_en, slug_en")
+    .eq("status", "published")
+    .lt("published_at", currentPublishDate)
+    .order("published_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  const nextCase = rawNextCase ? mapToLocale(rawNextCase, locale) : null;
+  const prevCase = rawPrevCase ? mapToLocale(rawPrevCase, locale) : null;
+
   // Year formatter
   const formatYear = (dateStr?: string | null) => {
     if (!dateStr) return "";
@@ -112,6 +138,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
       backLabel="Volver al Portafolio"
       itemId={caseStudy.id}
       tableName="case_studies"
+      prevArticle={prevCase ? { title: prevCase.title, slug: prevCase.slug, href: `/case-studies/${prevCase.slug}` } : null}
+      nextArticle={nextCase ? { title: nextCase.title, slug: nextCase.slug, href: `/case-studies/${nextCase.slug}` } : null}
     >
       <div 
         className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"
