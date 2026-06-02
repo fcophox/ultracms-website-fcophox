@@ -118,7 +118,7 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12 md:mb-16 rounded-3xl border-none bg-surface overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col md:flex-row"
             >
-              <div className="w-full md:w-3/5 overflow-hidden relative min-h-[350px]">
+              <div className="w-full md:w-3/5 overflow-hidden relative h-48 md:h-auto md:min-h-[350px]">
                 {featuredCase.image_url ? (
                   <img
                     src={featuredCase.image_url}
