@@ -16,6 +16,25 @@ const colors = [
   { id: 'muted', bgClass: 'bg-muted' },
 ];
 
+const SIGNATURE_HTML = `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+  <tbody><tr>
+    <td width="60" height="60">
+      <img src="https://www.fcophox.com/brand/logotipo.svg" width="50" height="50" alt="FcoPhox" style="background:#09090b;display:block;border:0;outline:none;text-decoration:none;border-radius:50%" />
+    </td>
+    <td style="padding:0;vertical-align:middle;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
+      <div style="font-size:15px;line-height:10px;font-weight:800;color:#111111;margin:0">
+        Francisco Hormazábal
+      </div>
+      <div style="font-size:11px;line-height:16px;font-weight:500;color:#7b7b7b;margin:6px 0 8px 0">
+        UX Engineer &amp; Product Design Consultant
+      </div>
+      <div style="font-size:11px;line-height:10px;font-weight:700;margin:0">
+        <a href="https://fcophox.com" style="color:#7b61ff;text-decoration:none" rel="noopener" target="_blank">fcophox.com</a>
+      </div>
+    </td>
+  </tr>
+</tbody></table>`;
+
 export default function DesignSystemPage() {
   const t = useTranslations('DesignSystemPage');
 
@@ -68,7 +87,7 @@ export default function DesignSystemPage() {
         <section>
           <h2 className="text-2xl font-normal text-foreground mb-8">{t('typography')}</h2>
           <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
-            
+
             {/* Sans Serif */}
             <div className="flex-1 p-8 rounded-3xl bg-surface border border-border flex flex-col gap-8">
               <div>
@@ -138,18 +157,18 @@ export default function DesignSystemPage() {
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1 p-8 rounded-3xl bg-surface border border-border flex flex-col gap-6">
               <span className="text-sm text-muted font-mono uppercase tracking-wider block">Vista Previa (Copia esto visualmente)</span>
-              
+
               <div className="p-8 bg-white rounded-2xl border border-black/5 overflow-x-auto shadow-sm">
                 <table cellPadding={0} cellSpacing={0} border={0} style={{ borderCollapse: 'collapse' }}>
                   <tbody>
                     <tr>
                       <td width={60} height={60}>
-                        <img 
-                          src="https://supercms-website-fcophox.vercel.app/logotipo.svg" 
-                          width={50} 
-                          height={50} 
-                          alt="FcoPhox" 
-                          style={{ background: '#09090b', display: 'block', border: 0, outline: 'none', textDecoration: 'none', borderRadius: '50%' }} 
+                        <img
+                          src="https://www.fcophox.com/brand/logotipo.svg"
+                          width={50}
+                          height={50}
+                          alt="FcoPhox"
+                          style={{ background: '#09090b', display: 'block', border: 0, outline: 'none', textDecoration: 'none', borderRadius: '50%' }}
                         />
                       </td>
                       <td style={{ padding: 0, verticalAlign: 'middle', fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" }}>
@@ -171,51 +190,17 @@ export default function DesignSystemPage() {
                 Selecciona la firma completa desde la imagen hasta el link web, presiona <kbd className="px-2 py-1 bg-muted/10 rounded-md font-mono text-xs">Cmd+C</kbd> (o Ctrl+C) y pégala en los ajustes de firma de Gmail o tu cliente de correo.
               </p>
             </div>
-            
+
             <div className="flex-1 p-8 rounded-3xl bg-[#1e1e1e] border border-border flex flex-col gap-6">
               <span className="text-sm text-gray-400 font-mono uppercase tracking-wider block">Código HTML</span>
               <div className="bg-[#111111] p-6 rounded-2xl border border-white/5 overflow-x-auto">
                 <pre className="text-xs text-gray-300 font-mono whitespace-pre-wrap">
-{`<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
-  <tbody><tr>
-    <td width="60" height="60">
-      <img src="https://supercms-website-fcophox.vercel.app/logotipo.svg" width="50" height="50" alt="FcoPhox" style="background:#09090b;display:block;border:0;outline:none;text-decoration:none;border-radius:50%">
-    </td>
-    <td style="padding:0;vertical-align:middle;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
-      <div style="font-size:15px;line-height:10px;font-weight:800;color:#111111;margin:0">
-        Francisco Hormazábal
-      </div>
-      <div style="font-size:11px;line-height:16px;font-weight:500;color:#7b7b7b;margin:6px 0 8px 0">
-        UX Engineer &amp; Product Design Consultant
-      </div>
-      <div style="font-size:11px;line-height:10px;font-weight:700;margin:0">
-        <a href="https://fcophox.com" style="color:#7b61ff;text-decoration:none" rel="noopener" target="_blank">fcophox.com</a>
-      </div>
-    </td>
-  </tr>
-</tbody></table>`}
+                  {SIGNATURE_HTML}
                 </pre>
               </div>
               <button
                 onClick={(e) => {
-                  navigator.clipboard.writeText(\`<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
-  <tbody><tr>
-    <td width="60" height="60">
-      <img src="https://supercms-website-fcophox.vercel.app/logotipo.svg" width="50" height="50" alt="FcoPhox" style="background:#09090b;display:block;border:0;outline:none;text-decoration:none;border-radius:50%">
-    </td>
-    <td style="padding:0;vertical-align:middle;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
-      <div style="font-size:15px;line-height:10px;font-weight:800;color:#111111;margin:0">
-        Francisco Hormazábal
-      </div>
-      <div style="font-size:11px;line-height:16px;font-weight:500;color:#7b7b7b;margin:6px 0 8px 0">
-        UX Engineer &amp; Product Design Consultant
-      </div>
-      <div style="font-size:11px;line-height:10px;font-weight:700;margin:0">
-        <a href="https://fcophox.com" style="color:#7b61ff;text-decoration:none" rel="noopener" target="_blank">fcophox.com</a>
-      </div>
-    </td>
-  </tr>
-</tbody></table>\`);
+                  navigator.clipboard.writeText(SIGNATURE_HTML);
                   const btn = e.currentTarget;
                   const original = btn.innerText;
                   btn.innerText = '¡Copiado!';
