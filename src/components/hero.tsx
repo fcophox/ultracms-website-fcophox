@@ -40,7 +40,7 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center w-full">
         <div className="h-[140px] md:h-[180px] flex items-center justify-center mb-6 relative w-full">
           <AnimatePresence mode="wait">
             <motion.h1
@@ -49,7 +49,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
+              className="text-4xl md:text-6xl lg:text-6xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
             >
               {currentTitle.line1}
               <br />
@@ -60,7 +60,7 @@ export function Hero() {
           </AnimatePresence>
         </div>
 
-        <p className="text-lg md:text-xl text-muted max-w-2xl mb-10 leading-relaxed">
+        <p className="text-lg md:text-xl text-muted max-w-4xl mb-10 leading-relaxed">
           {t('subtitle')}
         </p>
 
