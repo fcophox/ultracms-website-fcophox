@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { ArticleFeedback } from "./article-feedback";
+import { useTranslations } from "next-intl";
 
 interface ArticleLayoutProps {
   title: string;
@@ -37,6 +38,8 @@ export function ArticleLayout({
   nextArticle,
   children,
 }: ArticleLayoutProps) {
+  const t = useTranslations('ArticleNav');
+
   return (
     <main className="w-full flex-1 flex flex-col items-center pt-8 pb-32">
       <article className="max-w-5xl mx-auto px-6 w-full">
@@ -135,14 +138,14 @@ export function ArticleLayout({
           <div className="w-full mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between gap-6">
             {prevArticle ? (
               <Link href={prevArticle.href} className="flex flex-col gap-2 group flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
-                <span className="text-sm font-medium text-muted uppercase tracking-wider">Anterior</span>
+                <span className="text-xs font-light text-muted uppercase tracking-wider">{t('prev')}</span>
                 <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{prevArticle.title}</span>
               </Link>
             ) : <div className="flex-1" />}
-            
+
             {nextArticle ? (
               <Link href={nextArticle.href} className="flex flex-col gap-2 group text-right flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
-                <span className="text-sm font-medium text-muted uppercase tracking-wider">Siguiente</span>
+                <span className="text-xs font-light text-muted uppercase tracking-wider">{t('next')}</span>
                 <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{nextArticle.title}</span>
               </Link>
             ) : <div className="flex-1" />}

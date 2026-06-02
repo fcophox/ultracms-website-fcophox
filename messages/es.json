@@ -275,5 +275,9 @@
     "blogTitle": "Blog",
     "methodologyTitle": "Metodología",
     "aboutTitle": "Acerca de"
+  },
+  "ArticleNav": {
+    "prev": "Anterior",
+    "next": "Siguiente"
   }
 }
