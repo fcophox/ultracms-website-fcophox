@@ -122,7 +122,7 @@ export default function DesignSystemPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted leading-relaxed">
-                    > This is a monospaced paragraph useful for technical notes or terminal outputs.
+                    &gt; This is a monospaced paragraph useful for technical notes or terminal outputs.
                   </p>
                   <div className="text-xs text-muted mt-3 font-sans font-mono uppercase">Text SM / Leading Relaxed</div>
                 </div>
