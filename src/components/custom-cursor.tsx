@@ -1,12 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsHovering(false);
+  }, [pathname]);
 
   useEffect(() => {
     // Only run on desktop devices where cursor is relevant
