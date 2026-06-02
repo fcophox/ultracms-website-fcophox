@@ -5,7 +5,7 @@ import { EvolutionTimeline } from "@/components/evolution-timeline";
 import { AreasColaboracion } from "@/components/areas-colaboracion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
