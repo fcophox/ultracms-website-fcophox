@@ -44,12 +44,13 @@ export function MethodologySchema() {
   ];
 
   return (
-    <section className="dark bg-background w-full mt-16 mb-24 relative p-8 md:p-16 rounded-[2.5rem] shadow-xl">
-      <div className="text-center mb-16">
-        <h2 className="text-2xl md:text-3xl font-light text-muted-foreground">
-          {t('mainSubtitle')}
-        </h2>
-      </div>
+    <section className="dark bg-background relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-24 mt-16">
+      <div className="max-w-6xl mx-auto px-6 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-2xl md:text-3xl font-light text-foreground">
+            {t('mainSubtitle')}
+          </h2>
+        </div>
 
       <div className="flex flex-col lg:flex-row gap-6 relative">
         {steps.map((step, index) => (
@@ -133,6 +134,7 @@ export function MethodologySchema() {
         </div>
       </motion.div>
 
+      </div>
     </section>
   );
 }
