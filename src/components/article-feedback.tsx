@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ThumbsUp } from "lucide-react";
+import { HandMetal, ThumbsUp } from "lucide-react";
 
 interface ArticleFeedbackProps {
   itemId: string;
@@ -70,7 +70,7 @@ export function ArticleFeedback({ itemId, tableName }: ArticleFeedbackProps) {
             <button
               onClick={handleLike}
               disabled={isLiking}
-              className="mt-4 flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-surface border border-border text-foreground font-medium hover:bg-secondary/10 hover:border-secondary hover:text-secondary transition-all disabled:opacity-50 group shadow-sm hover:shadow-md hover:shadow-secondary/20"
+              className="mt-4 flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-surface border border-border text-foreground font-medium hover:bg-primary/10 hover:border-primary hover:text-primary transition-all disabled:opacity-50 group shadow-sm hover:shadow-md hover:shadow-primary/20"
             >
               <ThumbsUp className={`w-5 h-5 ${isLiking ? 'animate-bounce' : 'group-hover:-translate-y-1 transition-transform'}`} />
               {isLiking ? 'Guardando...' : 'Sí, me pareció útil'}
@@ -83,8 +83,8 @@ export function ArticleFeedback({ itemId, tableName }: ArticleFeedbackProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center gap-4"
           >
-            <div className="w-20 h-20 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mb-2 shadow-[0_0_30px_rgba(var(--secondary),0.3)]">
-              <Heart className="w-10 h-10 fill-secondary" />
+            <div className="w-20 h-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-2 shadow-[0_0_30px_rgba(var(--primary),0.3)]">
+              <HandMetal className="w-10 h-10 stroke-primary stroke-2" />
             </div>
             <h3 className="text-3xl font-medium text-foreground">¡Gracias por tu feedback!</h3>
             <p className="text-muted text-lg">Me alegra saber que te ha sido de utilidad.</p>
