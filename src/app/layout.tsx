@@ -72,7 +72,7 @@ export default async function RootLayout({
       className={`${sora.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
+      <body className="min-h-full overflow-x-hidden flex flex-col bg-background text-foreground transition-colors duration-300">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"

@@ -20,7 +20,7 @@ export default function AboutPage() {
   const t = useTranslations('AboutPage');
 
   return (
-    <main className="w-full overflow-x-hidden flex-1 flex flex-col items-center justify-start pt-8 pb-32">
+    <main className="w-full flex-1 flex flex-col items-center justify-start pt-8 pb-32">
       <div className="max-w-6xl mx-auto px-6 w-full">
         {/* Top Link */}
         <motion.div
