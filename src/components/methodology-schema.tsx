@@ -59,10 +59,16 @@ export function MethodologySchema() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="flex-1 flex flex-col bg-surface rounded-3xl p-8 border-none relative z-10"
+            className="flex-1 flex flex-col bg-surface rounded-3xl p-8 border-none relative z-10 overflow-hidden"
           >
+            {/* Background SVG Header */}
+            <div 
+              className="absolute top-0 left-0 w-full h-48 bg-[url('/headercard.svg')] bg-top bg-repeat-x opacity-40 pointer-events-none"
+              style={{ backgroundSize: 'auto' }}
+            />
+
             {/* Header */}
-            <div className="flex flex-col mb-8">
+            <div className="flex flex-col mb-8 relative z-10">
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${step.bgLight}`}>
                 <step.icon className={`w-6 h-6 ${step.color}`} />
               </div>
