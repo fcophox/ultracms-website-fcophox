@@ -1,7 +1,26 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 export function Hero() {
   const t = useTranslations('Hero');
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const phrases = [
+    t('phrase1'),
+    t('phrase2'),
+    t('phrase3'),
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % phrases.length);
+    }, 4000); // Cambia cada 4 segundos
+    return () => clearInterval(timer);
+  }, [phrases.length]);
 
   return (
     <section className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20">
@@ -32,9 +51,20 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted max-w-2xl mb-10 leading-relaxed">
-          {t('subtitle')}
-        </p>
+        <div className="h-20 md:h-16 flex items-center justify-center mb-10 w-full">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={currentIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed text-center"
+            >
+              {phrases[currentIndex]}
+            </motion.p>
+          </AnimatePresence>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a
