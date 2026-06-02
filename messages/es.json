@@ -9,7 +9,7 @@
   "Hero": {
     "titles": [
       {
-        "line1": "Optimización de",
+        "line1": "Investigación y optimización de",
         "line2": "experiencias digitales"
       },
       {
@@ -138,15 +138,54 @@
     "outputLabel": "OUTPUT",
     "resultsTitle": "Resultado para el cliente",
     "step1Subtitle": "Entender el problema y definir la oportunidad correcta.",
-    "step1Items": ["Investigación de usuarios", "Análisis de datos y comportamiento", "Benchmark y exploración con AI", "Identificación de oportunidades", "Definición de hipótesis de producto"],
-    "step1Output": ["Problem framing", "Opportunity map", "Propuesta de valor", "Dirección estratégica"],
+    "step1Items": [
+      "Investigación de usuarios",
+      "Análisis de datos y comportamiento",
+      "Benchmark y exploración con AI",
+      "Identificación de oportunidades",
+      "Definición de hipótesis de producto"
+    ],
+    "step1Output": [
+      "Problem framing",
+      "Opportunity map",
+      "Propuesta de valor",
+      "Dirección estratégica"
+    ],
     "step2Subtitle": "Diseñar y construir un producto funcional.",
-    "step2Items": ["Arquitectura de información", "UX/UI Design (alta fidelidad)", "Design System y componentes", "Desarrollo asistido con AI", "Integración de APIs y lógica", "Construcción de MVP funcional"],
-    "step2Output": ["Prototipo funcional", "MVP operativo", "Interfaces listas", "Base técnica escalable"],
+    "step2Items": [
+      "Arquitectura de información",
+      "UX/UI Design (alta fidelidad)",
+      "Design System y componentes",
+      "Desarrollo asistido con AI",
+      "Integración de APIs y lógica",
+      "Construcción de MVP funcional"
+    ],
+    "step2Output": [
+      "Prototipo funcional",
+      "MVP operativo",
+      "Interfaces listas",
+      "Base técnica escalable"
+    ],
     "step3Subtitle": "Medir, optimizar y escalar con datos reales.",
-    "step3Items": ["Pruebas con usuarios reales", "Métricas de comportamiento", "CRO (Optimización de conversión)", "Iteración continua", "Roadmap evolutivo del producto"],
-    "step3Output": ["Insights de uso real", "Mejoras iterativas", "Roadmap evolutivo", "Producto listo para crecer"],
-    "results": ["Reducir tiempo de ideación a producto", "Validar ideas con MVP reales", "Integrar negocio + UX + tecnología", "Crear productos listos para escalar"]
+    "step3Items": [
+      "Pruebas con usuarios reales",
+      "Métricas de comportamiento",
+      "CRO (Optimización de conversión)",
+      "Iteración continua",
+      "Roadmap evolutivo del producto"
+    ],
+    "step3Output": [
+      "Insights de uso real",
+      "Mejoras iterativas",
+      "Roadmap evolutivo",
+      "Producto listo para crecer"
+    ],
+    "results": [
+      "Reducir tiempo de ideación a producto",
+      "Validar ideas con MVP reales",
+      "Integrar negocio + UX + tecnología",
+      "Crear productos listos para escalar"
+    ]
   },
   "CertificationsSection": {
     "title": "Estudios y certificaciones",
@@ -218,7 +257,15 @@
     "lblSelectTime": "Horario de reunión (15 mins)",
     "meetNote": "Reunión de contacto por Teams o Google Meet.",
     "meetFooter": "Será un espacio breve para entender tu necesidad y ver cómo puedo ayudarte.",
-    "days": ["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB"]
+    "days": [
+      "DOM",
+      "LUN",
+      "MAR",
+      "MIÉ",
+      "JUE",
+      "VIE",
+      "SÁB"
+    ]
   },
   "Metadata": {
     "defaultTitle": "fcoPhox | UX Engineer & Product Design Consultant",

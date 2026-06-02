@@ -9,7 +9,7 @@
   "Hero": {
     "titles": [
       {
-        "line1": "Optimization of",
+        "line1": "Research & Optimization of",
         "line2": "digital experiences"
       },
       {
@@ -138,15 +138,54 @@
     "outputLabel": "OUTPUT",
     "resultsTitle": "Result for the client",
     "step1Subtitle": "Understand the problem and define the right opportunity.",
-    "step1Items": ["User research", "Data and behavior analysis", "Benchmark and AI exploration", "Opportunity identification", "Product hypothesis definition"],
-    "step1Output": ["Problem framing", "Opportunity map", "Value proposition", "Strategic direction"],
+    "step1Items": [
+      "User research",
+      "Data and behavior analysis",
+      "Benchmark and AI exploration",
+      "Opportunity identification",
+      "Product hypothesis definition"
+    ],
+    "step1Output": [
+      "Problem framing",
+      "Opportunity map",
+      "Value proposition",
+      "Strategic direction"
+    ],
     "step2Subtitle": "Design and build a functional product.",
-    "step2Items": ["Information architecture", "UX/UI Design (high fidelity)", "Design System and components", "AI-assisted development", "API integration and logic", "Functional MVP construction"],
-    "step2Output": ["Functional prototype", "Operational MVP", "Ready interfaces", "Scalable technical base"],
+    "step2Items": [
+      "Information architecture",
+      "UX/UI Design (high fidelity)",
+      "Design System and components",
+      "AI-assisted development",
+      "API integration and logic",
+      "Functional MVP construction"
+    ],
+    "step2Output": [
+      "Functional prototype",
+      "Operational MVP",
+      "Ready interfaces",
+      "Scalable technical base"
+    ],
     "step3Subtitle": "Measure, optimize, and scale with real data.",
-    "step3Items": ["Tests with real users", "Behavior metrics", "CRO (Conversion Rate Optimization)", "Continuous iteration", "Evolutionary product roadmap"],
-    "step3Output": ["Real usage insights", "Iterative improvements", "Evolutionary roadmap", "Product ready to grow"],
-    "results": ["Reduce ideation-to-product time", "Validate ideas with real MVPs", "Integrate business + UX + tech", "Create products ready to scale"]
+    "step3Items": [
+      "Tests with real users",
+      "Behavior metrics",
+      "CRO (Conversion Rate Optimization)",
+      "Continuous iteration",
+      "Evolutionary product roadmap"
+    ],
+    "step3Output": [
+      "Real usage insights",
+      "Iterative improvements",
+      "Evolutionary roadmap",
+      "Product ready to grow"
+    ],
+    "results": [
+      "Reduce ideation-to-product time",
+      "Validate ideas with real MVPs",
+      "Integrate business + UX + tech",
+      "Create products ready to scale"
+    ]
   },
   "CertificationsSection": {
     "title": "Studies and certifications",
@@ -218,7 +257,15 @@
     "lblSelectTime": "Meeting time (15 mins)",
     "meetNote": "Contact meeting via Teams or Google Meet.",
     "meetFooter": "It will be a brief space to understand your needs and see how I can help.",
-    "days": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    "days": [
+      "SUN",
+      "MON",
+      "TUE",
+      "WED",
+      "THU",
+      "FRI",
+      "SAT"
+    ]
   },
   "Metadata": {
     "defaultTitle": "fcoPhox | UX Engineer & Product Design Consultant",
