@@ -1,14 +1,19 @@
 import { createClient } from "@/utils/supabase/server";
 import { CaseStudiesClient } from "@/components/case-studies-client";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { mapArrayToLocale } from "@/utils/locale-mapper";
+import { Metadata } from 'next';
 
 export const revalidate = 60; // Cache for 1 minute for great performance and SEO
 
-export const metadata = {
-  title: "Casos de Estudio | Francisco Hormazábal - UX Product Designer & Frontend Dev",
-  description: "Una selección de proyectos digitales donde aplico estrategia, diseño UX/UI e ingeniería frontend.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  return {
+    title: t('caseStudiesTitle'),
+    description: "Explora una selección de mis proyectos y casos de estudio donde he aplicado diseño, estrategia y código.",
+  };
+}
 
 export default async function CasosDeEstudioPage() {
   const supabase = await createClient();

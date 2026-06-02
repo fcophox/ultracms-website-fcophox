@@ -44,7 +44,7 @@ export function Hero() {
             {t('viewProjects')}
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/fcophox/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 rounded-full bg-surface text-foreground font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-border/50 border border-border"

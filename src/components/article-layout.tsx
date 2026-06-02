@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ReactNode } from "react";
+import { ArticleFeedback } from "./article-feedback";
 
 interface ArticleLayoutProps {
   title: string;
@@ -14,6 +15,8 @@ interface ArticleLayoutProps {
   imageUrl?: string | null;
   backHref: string;
   backLabel: string;
+  itemId?: string;
+  tableName?: "blog_articles" | "case_studies";
   children?: ReactNode;
 }
 
@@ -26,6 +29,8 @@ export function ArticleLayout({
   imageUrl,
   backHref,
   backLabel,
+  itemId,
+  tableName,
   children,
 }: ArticleLayoutProps) {
   return (
@@ -123,6 +128,11 @@ export function ArticleLayout({
             </>
           )}
         </motion.div>
+
+        {/* Feedback Banner */}
+        {itemId && tableName && (
+          <ArticleFeedback itemId={itemId} tableName={tableName} />
+        )}
       </article>
     </main>
   );

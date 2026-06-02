@@ -14,39 +14,46 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://fcophox.com'),
-  title: {
-    default: "Fcophox | UX Engineer & Product Design Consultant",
-    template: "%s | Fcophox",
-  },
-  description: "Portafolio de Fcophox, consultor especializado en UX/UI, diseño de producto e ingeniería Frontend para crear experiencias digitales con impacto real.",
-  openGraph: {
-    title: "Fcophox | UX Engineer & Product Design Consultant",
+import { getTranslations, getLocale } from 'next-intl/server';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://fcophox.com'),
+    title: {
+      default: t('defaultTitle'),
+      template: t('templateTitle'),
+    },
     description: "Portafolio de Fcophox, consultor especializado en UX/UI, diseño de producto e ingeniería Frontend para crear experiencias digitales con impacto real.",
-    url: "/",
-    siteName: "Fcophox",
-    locale: "es_ES",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Fcophox - UX Engineer & Product Design Consultant",
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Fcophox | UX Engineer & Product Design Consultant",
-    description: "Portafolio de Fcophox, consultor especializado en UX/UI, diseño de producto e ingeniería Frontend para crear experiencias digitales con impacto real.",
-    images: ["/og-image.jpg"],
-  },
-};
+    openGraph: {
+      title: t('defaultTitle'),
+      description: "Portafolio de Fcophox, consultor especializado en UX/UI, diseño de producto e ingeniería Frontend para crear experiencias digitales con impacto real.",
+      url: "/",
+      siteName: "fcoPhox",
+      locale: locale === 'es' ? 'es_ES' : 'en_US',
+      type: "website",
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "fcoPhox - UX Engineer & Product Design Consultant",
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t('defaultTitle'),
+      description: "Portafolio de Fcophox, consultor especializado en UX/UI, diseño de producto e ingeniería Frontend para crear experiencias digitales con impacto real.",
+      images: ["/og-image.jpg"],
+    },
+  };
+}
 
 import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/custom-cursor";

@@ -1,9 +1,14 @@
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Metodología",
-  description: "Conoce mi enfoque metodológico que combina UX con prácticas modernas de Product Discovery, Product Delivery y UX Engineering.",
-};
+import { getTranslations, getLocale } from 'next-intl/server';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  return {
+    title: t('methodologyTitle'),
+  };
+}
 
 export default function MethodologyLayout({
   children,

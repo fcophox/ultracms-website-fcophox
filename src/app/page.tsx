@@ -7,13 +7,20 @@ import { BentoSection } from "@/components/bento-section";
 import { ExperienceLogos } from "@/components/experience-logos";
 import { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
-import { getLocale } from "next-intl/server";
+import { getTranslations, getLocale } from 'next-intl/server';
 import { mapArrayToLocale } from "@/utils/locale-mapper";
 
-export const metadata: Metadata = {
-  title: "Inicio",
-  description: "Explora el portafolio de Fcophox, descubre mis proyectos recientes, metodologías y artículos sobre diseño y desarrollo web.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  
+  return {
+    title: {
+      absolute: t('homeTitle'),
+    },
+    description: "Explora el portafolio de Fcophox, descubre mis proyectos recientes, metodologías y artículos sobre diseño y desarrollo web.",
+  };
+}
 
 export const revalidate = 0;
 

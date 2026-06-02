@@ -203,5 +203,14 @@
     "meetNote": "Contact meeting via Teams or Google Meet.",
     "meetFooter": "It will be a brief space to understand your needs and see how I can help.",
     "days": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+  },
+  "Metadata": {
+    "defaultTitle": "fcoPhox | UX Engineer & Product Design Consultant",
+    "templateTitle": "%s | UX Engineer & Product Design Consultant - fcoPhox",
+    "homeTitle": "Home | UX Engineer & Product Design Consultant - fcoPhox",
+    "caseStudiesTitle": "Case Studies",
+    "blogTitle": "Blog",
+    "methodologyTitle": "Methodology",
+    "aboutTitle": "About"
   }
 }

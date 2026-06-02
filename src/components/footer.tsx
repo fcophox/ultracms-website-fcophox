@@ -8,20 +8,8 @@ export function Footer() {
 
   return (
     <footer className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 pb-8 relative overflow-hidden">
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
-          style={{ transform: "translate3d(0, 0, 0) scale(1.1)" }}
-        >
-          <source src="/movie/background.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
-      </div>
-      <div className="max-w-6xl mx-auto px-6 py-42 relative z-10">
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
           {/* Left section - Profile */}
           <div className="md:col-span-6 flex flex-col items-start">
@@ -73,7 +61,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com/in/fcophox" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted hover:text-foreground transition-colors">
+                <a href="https://www.linkedin.com/in/fcophox/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted hover:text-foreground transition-colors">
                   {t('linkedin')} <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </li>
