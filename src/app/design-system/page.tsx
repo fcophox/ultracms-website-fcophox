@@ -130,6 +130,8 @@ export default function DesignSystemPage() {
             </div>
 
           </div>
+        </section>
+
         {/* Email Signature */}
         <section className="mb-24">
           <h2 className="text-2xl font-normal text-foreground mb-8">Firma de Correo</h2>
