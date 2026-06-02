@@ -16,7 +16,7 @@ interface ArticleLayoutProps {
   backHref: string;
   backLabel: string;
   itemId?: string;
-  tableName?: "blog_articles" | "case_studies";
+  tableName?: "articles" | "case_studies";
   children?: ReactNode;
 }
 
