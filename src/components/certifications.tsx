@@ -132,7 +132,7 @@ export function CertificationsSection() {
       : certifications.filter((item) => item.category === activeTab);
 
   return (
-    <section className="w-full mt-32 mb-16">
+    <section className="dark bg-background w-full mt-32 mb-16 p-8 md:p-16 rounded-[2.5rem] shadow-xl">
       <div className="flex flex-col mb-10">
         <h2 className="text-3xl md:text-4xl font-light text-foreground mb-8">
           {t('title')}

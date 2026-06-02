@@ -44,7 +44,7 @@ export function MethodologySchema() {
   ];
 
   return (
-    <section className="w-full mt-16 mb-24 relative">
+    <section className="dark bg-background w-full mt-16 mb-24 relative p-8 md:p-16 rounded-[2.5rem] shadow-xl">
       <div className="text-center mb-16">
         <h2 className="text-2xl md:text-3xl font-light text-muted-foreground">
           {t('mainSubtitle')}
@@ -62,8 +62,8 @@ export function MethodologySchema() {
             className="flex-1 flex flex-col bg-surface rounded-3xl p-8 border-none relative z-10 overflow-hidden"
           >
             {/* Background SVG Header */}
-            <div 
-              className="absolute top-0 left-0 w-full h-48 bg-[url('/brand/headercard.svg')] bg-top bg-repeat-x opacity-60 pointer-events-none"
+            <div
+              className="absolute top-0 left-0 w-full h-full bg-[url('/brand/headercard.png')] bg-top bg-repeat-x opacity-60 pointer-events-none"
               style={{ backgroundSize: 'auto' }}
             />
 
@@ -118,7 +118,7 @@ export function MethodologySchema() {
         className="mt-16 md:mt-24 flex flex-col items-center justify-center w-full"
       >
         <h3 className="text-2xl font-light text-foreground mb-10">{t('resultsTitle')}</h3>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {(t.raw('results') as string[]).map((text, idx) => (
             <div key={idx} className="bg-surface rounded-3xl p-8 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-300">
