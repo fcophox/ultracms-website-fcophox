@@ -18,8 +18,8 @@ interface ArticleLayoutProps {
   backLabel: string;
   itemId?: string;
   tableName?: "articles" | "case_studies";
-  prevArticle?: { title: string; slug: string; href: string } | null;
-  nextArticle?: { title: string; slug: string; href: string } | null;
+  prevArticle?: { title: string; slug: string; href: string; imageUrl?: string } | null;
+  nextArticle?: { title: string; slug: string; href: string; imageUrl?: string } | null;
   children?: ReactNode;
 }
 
@@ -137,16 +137,34 @@ export function ArticleLayout({
         {(prevArticle || nextArticle) && (
           <div className="w-full mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between gap-6">
             {prevArticle ? (
-              <Link href={prevArticle.href} className="flex flex-col gap-2 group flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
-                <span className="text-xs font-light text-muted uppercase tracking-wider">{t('prev')}</span>
-                <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{prevArticle.title}</span>
+              <Link href={prevArticle.href} className="flex flex-row items-center gap-4 group flex-1 p-4 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
+                {prevArticle.imageUrl ? (
+                  <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-border/20">
+                    <img src={prevArticle.imageUrl} alt={prevArticle.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-xl shrink-0 bg-border/20" />
+                )}
+                <div className="flex flex-col gap-1 text-left">
+                  <span className="text-[10px] font-medium text-muted uppercase tracking-widest">{t('prev')}</span>
+                  <span className="text-sm md:text-base font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-snug">{prevArticle.title}</span>
+                </div>
               </Link>
             ) : <div className="flex-1" />}
 
             {nextArticle ? (
-              <Link href={nextArticle.href} className="flex flex-col gap-2 group text-right flex-1 p-6 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
-                <span className="text-xs font-light text-muted uppercase tracking-wider">{t('next')}</span>
-                <span className="text-xl font-light text-foreground group-hover:text-primary transition-colors line-clamp-2">{nextArticle.title}</span>
+              <Link href={nextArticle.href} className="flex flex-row items-center justify-end gap-4 group flex-1 p-4 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all">
+                <div className="flex flex-col gap-1 text-right">
+                  <span className="text-[10px] font-medium text-muted uppercase tracking-widest">{t('next')}</span>
+                  <span className="text-sm md:text-base font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-snug">{nextArticle.title}</span>
+                </div>
+                {nextArticle.imageUrl ? (
+                  <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-border/20">
+                    <img src={nextArticle.imageUrl} alt={nextArticle.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-xl shrink-0 bg-border/20" />
+                )}
               </Link>
             ) : <div className="flex-1" />}
           </div>

@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   // Next article (newer)
   const { data: rawNextArticle } = await supabase
     .from("articles")
-    .select("title, slug, title_en, slug_en")
+    .select("title, slug, title_en, slug_en, image_url")
     .eq("status", "published")
     .gt("published_at", currentPublishDate)
     .order("published_at", { ascending: true })
@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   // Previous article (older)
   const { data: rawPrevArticle } = await supabase
     .from("articles")
-    .select("title, slug, title_en, slug_en")
+    .select("title, slug, title_en, slug_en, image_url")
     .eq("status", "published")
     .lt("published_at", currentPublishDate)
     .order("published_at", { ascending: false })
@@ -142,8 +142,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       backLabel="Volver al Blog"
       itemId={article.id}
       tableName="articles"
-      prevArticle={prevArticle ? { title: prevArticle.title, slug: prevArticle.slug, href: `/blog/${prevArticle.slug}` } : null}
-      nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug, href: `/blog/${nextArticle.slug}` } : null}
+      prevArticle={prevArticle ? { title: prevArticle.title, slug: prevArticle.slug, href: `/blog/${prevArticle.slug}`, imageUrl: prevArticle.image_url } : null}
+      nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug, href: `/blog/${nextArticle.slug}`, imageUrl: nextArticle.image_url } : null}
     >
       <div 
         className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"

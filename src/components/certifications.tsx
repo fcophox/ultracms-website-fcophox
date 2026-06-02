@@ -62,7 +62,7 @@ const certifications = [
     year: "2007",
     institution: "Duoc UC",
     category: "Certificaciones",
-    logo: "/studies/Duoc.svg",
+    logo: "/studies/DuocUC.svg",
   },
   {
     title: "Product Discovery",
@@ -154,8 +154,8 @@ export function CertificationsSection() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`pb-4 text-sm font-medium transition-colors relative ${activeTab === tab
-                    ? "text-foreground"
-                    : "text-muted hover:text-foreground/80"
+                  ? "text-foreground"
+                  : "text-muted hover:text-foreground/80"
                   }`}
               >
                 {tab === "Todos" ? t('showAll') : translatedTab}

@@ -95,7 +95,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   // Next case (newer)
   const { data: rawNextCase } = await supabase
     .from("case_studies")
-    .select("title, slug, title_en, slug_en")
+    .select("title, slug, title_en, slug_en, image_url")
     .eq("status", "published")
     .gt("published_at", currentPublishDate)
     .order("published_at", { ascending: true })
@@ -105,7 +105,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   // Previous case (older)
   const { data: rawPrevCase } = await supabase
     .from("case_studies")
-    .select("title, slug, title_en, slug_en")
+    .select("title, slug, title_en, slug_en, image_url")
     .eq("status", "published")
     .lt("published_at", currentPublishDate)
     .order("published_at", { ascending: false })
@@ -138,8 +138,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
       backLabel="Volver al Portafolio"
       itemId={caseStudy.id}
       tableName="case_studies"
-      prevArticle={prevCase ? { title: prevCase.title, slug: prevCase.slug, href: `/case-studies/${prevCase.slug}` } : null}
-      nextArticle={nextCase ? { title: nextCase.title, slug: nextCase.slug, href: `/case-studies/${nextCase.slug}` } : null}
+      prevArticle={prevCase ? { title: prevCase.title, slug: prevCase.slug, href: `/case-studies/${prevCase.slug}`, imageUrl: prevCase.image_url } : null}
+      nextArticle={nextCase ? { title: nextCase.title, slug: nextCase.slug, href: `/case-studies/${nextCase.slug}`, imageUrl: nextCase.image_url } : null}
     >
       <div 
         className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"
