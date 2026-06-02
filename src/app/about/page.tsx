@@ -170,15 +170,12 @@ export default function AboutPage() {
                   <LinkedinIcon className="w-5 h-5 mr-2" />
                   {t('linkedin')}
                 </a>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#3F3F46] transition-colors"
+                <span
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium opacity-50 cursor-not-allowed select-none"
                 >
-                  <GithubIcon className="w-5 h-5 mr-2" />
-                  {t('github')}
-                </a>
+                  <Download className="w-5 h-5 mr-2" />
+                  Ver CV
+                </span>
               </div>
             </motion.div>
           </div>
