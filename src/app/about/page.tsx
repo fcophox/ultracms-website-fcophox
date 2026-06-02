@@ -20,7 +20,7 @@ export default function AboutPage() {
   const t = useTranslations('AboutPage');
 
   return (
-    <main className="w-full flex-1 flex flex-col items-center justify-start pt-8 pb-32">
+    <main className="w-full overflow-x-hidden flex-1 flex flex-col items-center justify-start pt-8 pb-32">
       <div className="max-w-6xl mx-auto px-6 w-full">
         {/* Top Link */}
         <motion.div
@@ -125,61 +125,63 @@ export default function AboutPage() {
         </div>
 
         {/* Biography Section */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-24 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="w-full lg:w-48 shrink-0"
-          >
-            <span className="text-xl font-medium text-muted">{t('bioLabel')}</span>
-          </motion.div>
+        <div className="dark bg-background w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-24 mb-24 md:mb-32">
+          <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full lg:w-48 shrink-0"
+            >
+              <span className="text-xl font-medium text-muted">{t('bioLabel')}</span>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex-1"
-          >
-            <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={32} height={32} />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex-1"
+            >
+              <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={32} height={32} />
+                </div>
+                <p className="text-xl md:text-2xl text-primary font-medium leading-snug pt-1">
+                  {t('bioBadge')}
+                </p>
               </div>
-              <p className="text-xl md:text-2xl text-primary font-medium leading-snug pt-1">
-                {t('bioBadge')}
-              </p>
-            </div>
 
-            <div className="space-y-6 text-lg text-muted">
-              <p className="text-foreground font-medium">
-                {t('bioP1')}
-              </p>
-              <p>
-                {t('bioP2')}
-              </p>
-            </div>
+              <div className="space-y-6 text-lg text-muted">
+                <p className="text-foreground font-medium">
+                  {t('bioP1')}
+                </p>
+                <p>
+                  {t('bioP2')}
+                </p>
+              </div>
 
-            <div className="flex flex-wrap gap-4 mt-12">
-              <a
-                href="https://www.linkedin.com/in/fcophox/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-              >
-                <LinkedinIcon className="w-5 h-5 mr-2" />
-                {t('linkedin')}
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#3F3F46] transition-colors"
-              >
-                <GithubIcon className="w-5 h-5 mr-2" />
-                {t('github')}
-              </a>
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap gap-4 mt-12">
+                <a
+                  href="https://www.linkedin.com/in/fcophox/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                >
+                  <LinkedinIcon className="w-5 h-5 mr-2" />
+                  {t('linkedin')}
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#3F3F46] transition-colors"
+                >
+                  <GithubIcon className="w-5 h-5 mr-2" />
+                  {t('github')}
+                </a>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
