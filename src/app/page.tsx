@@ -1,65 +1,80 @@
-import Image from "next/image";
+import { Hero } from "@/components/hero";
+import { ProjectCard } from "@/components/project-card";
+import { Banner } from "@/components/banner";
+import { Blog } from "@/components/blog";
+import { BentoSection } from "@/components/bento-section";
+// import { UxBento } from "@/components/ux-bento";
+import { ExperienceLogos } from "@/components/experience-logos";
+import { Metadata } from "next";
+import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "next-intl/server";
+import { mapArrayToLocale } from "@/utils/locale-mapper";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Inicio",
+  description: "Explora el portafolio de Fcophox, descubre mis proyectos recientes, metodologías y artículos sobre diseño y desarrollo web.",
+};
+
+export const revalidate = 0;
+
+export default async function Home() {
+  const supabase = await createClient();
+  const locale = await getLocale();
+
+  const { data: caseStudies } = await supabase
+    .from("case_studies")
+    .select("*")
+    .eq("status", "published")
+    .order("published_at", { ascending: false })
+    .limit(6);
+
+  const localizedCaseStudies = mapArrayToLocale(caseStudies || [], locale);
+
+  const mappedProjects = localizedCaseStudies.map((c, i) => {
+    const colorPalettes = [
+      ["#3b82f6", "#06b6d4"],
+      ["#8b5cf6", "#ec4899"],
+      ["#22c55e", "#14b8a6"],
+      ["#f97316", "#ef4444"],
+      ["#eab308", "#f97316"],
+      ["#ec4899", "#8b5cf6"]
+    ];
+    return {
+      id: c.id,
+      slug: c.slug,
+      tag: c.category || "Case Study",
+      title: c.title,
+      description: c.content ? c.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : "Explora este caso de estudio.",
+      tags: c.category ? c.category.split(',').map((t: string) => t.trim()) : [],
+      colors: colorPalettes[i % colorPalettes.length],
+      image_url: c.image_url || null,
+    };
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="min-h-screen flex flex-col relative bg-background transition-colors duration-300">
+      {/* Abstract Background Shapes */}
+      <div className="absolute top-0 left-1/2 w-full -translate-x-1/2 h-[600px] overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] rounded-full bg-secondary/20 blur-3xl" />
+      </div>
+
+      <Hero />
+
+      <ProjectCard projects={mappedProjects} />
+
+      <BentoSection />
+
+      <ExperienceLogos />
+
+      <Blog />
+
+      {/* <UxBento /> */}
+
+      <Banner />
+
+      {/* Decorative Grid */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5 mix-blend-overlay pointer-events-none" />
+    </main>
   );
 }

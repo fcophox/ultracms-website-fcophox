@@ -3,15 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "trap 'kill 0' EXIT; node scripts/sync-design.mjs & next dev",
+    "dev:design": "node scripts/sync-design.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.106.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/extension-image": "^3.23.6",
+    "@tiptap/pm": "^3.23.6",
+    "@tiptap/react": "^3.23.6",
+    "@tiptap/starter-kit": "^3.23.6",
+    "framer-motion": "^12.40.0",
+    "google-translate-api-x": "^10.7.3",
+    "lucide-react": "^1.16.0",
     "next": "16.2.6",
+    "next-intl": "^4.13.0",
+    "next-themes": "^0.4.6",
+    "parse5": "^8.0.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "resend": "^6.12.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
