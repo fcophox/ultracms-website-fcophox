@@ -76,27 +76,14 @@ export default function MethodologyPage() {
 
         {/* Intro Text Section */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-24">
-          {/* Left Column (Download CV) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex-1 flex lg:items-end"
-          >
-            <span
-              className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full border border-border/40 bg-surface/50 text-muted opacity-50 cursor-not-allowed text-sm font-medium w-fit select-none"
-            >
-              <Download size={16} />
-              {t('downloadCv')}
-            </span>
-          </motion.div>
+          {/* Left Column Spacer (Removed CV Button) */}
+          <div className="hidden lg:block flex-1" />
 
           {/* Right Column (Text) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
             className="flex-[1.5] flex flex-col gap-8"
           >
             <h2 className="text-3xl md:text-[2.5rem] font-light text-foreground leading-[1.2] tracking-tight">
