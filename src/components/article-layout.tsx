@@ -69,14 +69,6 @@ export function ArticleLayout({
             {title}
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-foreground/60 leading-relaxed max-w-3xl"
-          >
-            {description}
-          </motion.p>
         </header>
 
         {/* Hero Image Area */}
