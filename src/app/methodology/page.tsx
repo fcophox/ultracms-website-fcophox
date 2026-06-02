@@ -6,6 +6,7 @@ import { ArrowLeft, Download } from "lucide-react";
 
 import { CertificationsSection } from "@/components/certifications";
 import { MethodologySchema } from "@/components/methodology-schema";
+import { Banner } from "@/components/banner";
 import { useTranslations } from "next-intl";
 
 export default function MethodologyPage() {
@@ -117,6 +118,9 @@ export default function MethodologyPage() {
 
         {/* Certifications Section */}
         <CertificationsSection />
+        
+        {/* Banner */}
+        <Banner />
       </div>
     </main>
   );
