@@ -38,7 +38,7 @@
 
 ```
 ---tokens
-colors.background.light: "#f8fafc"
+colors.background.light: "#f0f0f0ff"
 colors.background.dark: "#101012"
 colors.foreground.light: "#0f172a"
 colors.foreground.dark: "#f8fafc"
@@ -51,7 +51,7 @@ colors.accent.dark: "#fbbf24"
 colors.muted.light: "#94a3b8"
 colors.muted.dark: "#64748b"
 colors.surface.light: "#ffffff"
-colors.surface.dark: "#19191B"
+colors.surface.dark: "#181A1E"
 colors.border.light: "#e2e8f0"
 colors.border.dark: "#303031"
 fonts.sans: "Sora, system-ui, sans-serif"

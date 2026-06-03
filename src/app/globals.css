@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -17,7 +16,7 @@
 }
 
 :root {
-  --background: #f8fafc;
+  --background: #f0f0f0ff;
   --foreground: #0f172a;
   --primary: #3b82f6;
   --secondary: #8b5cf6;
@@ -34,7 +33,7 @@
   --secondary: #a78bfa;
   --accent: #fbbf24;
   --muted: #64748b;
-  --surface: #19191B;
+  --surface: #181A1E;
   --border: #303031;
 }
 

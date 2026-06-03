@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
@@ -16,6 +16,17 @@ export function Navbar() {
   
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,8 +73,14 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`${forceDarkMode ? 'dark text-foreground' : 'text-foreground'} ${positionClass} top-0 w-full z-50 transition-all duration-300 border-b ${scrolled || isMenuOpen
+      <motion.header
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" },
+        }}
+        animate={hidden ? "hidden" : "visible"}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className={`${forceDarkMode ? 'dark text-foreground' : 'text-foreground'} ${positionClass} top-0 w-full z-50 transition-colors duration-300 border-b ${scrolled || isMenuOpen
             ? "bg-background border-border/40 shadow-sm"
             : "bg-transparent backdrop-blur-md border-transparent"
           }`}
@@ -117,7 +134,7 @@ export function Navbar() {
             </button>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       {/* Full Screen Mobile Menu Overlay */}
       <AnimatePresence>
