@@ -13,7 +13,7 @@ import { mapArrayToLocale } from "@/utils/locale-mapper";
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  
+
   return {
     title: {
       absolute: t('homeTitle'),

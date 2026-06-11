@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, MotionValue } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 export interface Project {
@@ -72,15 +72,15 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
           </div>
         </div>
 
-        <div className="space-y-0 pb-[1vh]">
+        <div className="space-y-0 pb-32">
           {projects.map((project, index) => (
             <ProjectCardItem
               key={index}
               project={project}
               index={index}
               total={projects.length}
+              activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
-              containerScrollYProgress={scrollYProgress}
             />
           ))}
         </div>
@@ -93,47 +93,55 @@ function ProjectCardItem({
   project,
   index,
   total,
+  activeIndex,
   setActiveIndex,
-  containerScrollYProgress,
 }: {
   project: Project;
   index: number;
   total: number;
+  activeIndex: number;
   setActiveIndex: (v: number) => void;
-  containerScrollYProgress: any;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const inView = useInView(cardRef, { margin: "-45% 0px -45% 0px" });
-  const isLast = index === total - 1;
-  const start = index / total;
-  const scale = useTransform(
-    containerScrollYProgress,
-    [start, 1],
-    [1, 1 - Math.min(total - index, 4) * 0.05]
-  );
+
+  // Calculate target scale based on activeIndex
+  // Each card behind the active card is progressively smaller by 4%
+  const targetScale = index <= activeIndex ? 1 - (activeIndex - index) * 0.1 : 1;
 
   useEffect(() => {
     if (inView) setActiveIndex(index);
   }, [inView, index, setActiveIndex]);
 
   return (
-    <Link
-      href={project.slug ? `/case-studies/${project.slug}` : `/case-studies`}
-      className="block no-underline sticky top-65 w-full mb-[8vh] cursor-none"
-      data-custom-cursor="true"
+    <div
+      ref={cardRef}
+      className="w-full mb-[8vh]"
       style={{
+        position: "sticky",
+        top: "288px", // matches sticky top-72 (18rem)
         zIndex: index,
-        paddingTop: isLast ? "0px" : `${index * 12}px`,
+        paddingTop: `${index * 12}px`,
       } as React.CSSProperties}
     >
-      <div ref={cardRef}>
+      <Link
+        href={project.slug ? `/case-studies/${project.slug}` : `/case-studies`}
+        className="block no-underline w-full cursor-none"
+        data-custom-cursor="true"
+      >
         <motion.div
           className="w-full rounded-3xl bg-surface border-none overflow-hidden flex flex-col md:flex-row shadow-2xl origin-top"
-          style={{ scale }}
+          animate={{
+            scale: targetScale,
+          }}
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+          transition={{
+            scale: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.8, delay: index * 0.1, ease: "easeOut" },
+            y: { duration: 0.8, delay: index * 0.1, ease: "easeOut" },
+          }}
         >
           <div className="w-full md:w-[50%] flex items-center justify-center p-6 md:p-10">
             <div className="relative w-full aspect-[29/20] rounded-xl overflow-hidden group border border-border/50">
@@ -142,7 +150,7 @@ function ProjectCardItem({
               </div>
               {project.image_url ? (
                 <div className="w-full h-full relative">
-                  <Image 
+                  <Image
                     src={project.image_url}
                     alt={project.title}
                     fill
@@ -192,7 +200,7 @@ function ProjectCardItem({
             </div>
           </div>
         </motion.div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
