@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sansation, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./tiptap-content.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeShortcut } from "@/components/theme-shortcut";
 

@@ -13,7 +13,7 @@ export function Navbar() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  
+
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -81,8 +81,8 @@ export function Navbar() {
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className={`${forceDarkMode ? 'dark text-foreground' : 'text-foreground'} ${positionClass} top-0 w-full z-50 transition-colors duration-300 border-b ${scrolled || isMenuOpen
-            ? "bg-background border-border/40 shadow-sm"
-            : "bg-transparent backdrop-blur-md border-transparent"
+          ? "bg-background border-border/40 shadow-sm"
+          : "bg-transparent backdrop-blur-md border-transparent"
           }`}
       >
         <nav className="relative w-full flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
@@ -100,10 +100,10 @@ export function Navbar() {
           {/* Desktop Centered Navigation Links */}
           <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
-                href={link.path} 
-                className={`text-xs font-medium transition-colors ${pathname === link.path || pathname?.startsWith(`${link.path}/`) ? 'text-foreground' : 'text-muted hover:text-foreground'}`}
+                href={link.path}
+                className={`text-sm font-base transition-colors ${pathname === link.path || pathname?.startsWith(`${link.path}/`) ? 'text-foreground' : 'text-muted hover:text-foreground'}`}
               >
                 {link.name}
               </Link>
@@ -111,7 +111,7 @@ export function Navbar() {
           </div>
 
           <div className="relative z-10 flex items-center gap-4 md:gap-6">
-            <button 
+            <button
               onClick={toggleLanguage}
               className="hidden sm:flex items-center gap-2 text-sm font-bold text-foreground hover:text-foreground/80 transition-colors"
             >
@@ -125,7 +125,7 @@ export function Navbar() {
             </Link>
 
             {/* Mobile Menu Toggle */}
-            <button 
+            <button
               className="lg:hidden p-2 text-foreground flex items-center justify-center"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
@@ -163,22 +163,22 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + navLinks.length * 0.1 }}
                 className="mt-8 flex flex-col items-center gap-6"
               >
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-2.5 px-8 py-4 rounded-full bg-foreground text-background transition-transform hover:scale-105"
                 >
                   <span className="text-lg font-bold">{t('contact')}</span>
                 </Link>
-                
-                <button 
+
+                <button
                   onClick={() => {
                     toggleLanguage();
                     setIsMenuOpen(false);

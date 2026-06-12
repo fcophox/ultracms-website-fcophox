@@ -1,5 +1,7 @@
 # fcoPhox Portfolio & Personal Website
 
+![fcoPhox Website Header](public/brand/image-RM.png)
+
 > A digital experience that blends strategy, aesthetics, and usability to connect people with the digital world.
 
 Welcome to the repository of my personal portfolio and blog! This project serves as a central hub for my UX/UI case studies, articles on technology and design, and an overview of my methodology as a **UX Engineer & Product Design Consultant**.

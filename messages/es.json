@@ -65,16 +65,16 @@
     "viewMore": "Ver más información"
   },
   "UxBento": {
-    "headerLabel": "POR QUÉ ELEGIRNOS",
-    "headerTitle": "Plataforma construida con diseño centrado en el usuario",
-    "card1Title": "Impacto Verificado & <br /> Resultados Medibles",
-    "card1Desc": "Accede a reportes detallados y análisis de usabilidad que validan tangencialmente las decisiones de producto.",
-    "card2Title": "Herramientas de Colaboración",
-    "card2Desc": "Planifica, estructura y comparte la arquitectura de información y flujos con todo tu equipo.",
-    "card3Title": "Insights Ambientales & Datos de UX",
-    "card3Desc": "Toma decisiones informadas con analítica diseñada para medir el impacto real de las interacciones.",
-    "card4Title": "Diseño de Interfaz <br /> Premium",
-    "card4Desc": "Explora el balance perfecto entre estética y funcionalidad."
+    "headerLabel": "Por qué tener un UX Engineer & Product Design Consultant en tu equipo",
+    "headerTitle": "Diseño experiencias digitales que conectan estrategia, interfaz e ingeniería",
+    "card1Title": "UX Estratégico & <br /> Producto Digital",
+    "card1Desc": "Convierto problemas complejos en decisiones claras de producto.",
+    "card2Title": "Prototipos Funcionales & <br /> MVPs",
+    "card2Desc": "Conecto diseño y front-end para validar ideas con usuarios, negocio y equipos técnicos.",
+    "card3Title": "Medición UX, CRO & <br /> Validación Continua",
+    "card3Desc": "Valido experiencias con datos, pruebas y mejora continua.",
+    "card4Title": "IA aplicada a <br /> Experiencias Digitales",
+    "card4Desc": "Integro IA para acelerar diseño, prototipado y automatización."
   },
   "ExperienceLogos": {
     "title": "Experiencia respaldada por el conocimiento",

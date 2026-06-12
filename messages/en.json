@@ -65,16 +65,16 @@
     "viewMore": "View more information"
   },
   "UxBento": {
-    "headerLabel": "WHY CHOOSE US",
-    "headerTitle": "Platform built with user-centered design",
-    "card1Title": "Verified Impact & <br /> Measurable Results",
-    "card1Desc": "Access detailed reports and usability analyses that tangibly validate product decisions.",
-    "card2Title": "Collaboration Tools",
-    "card2Desc": "Plan, structure, and share information architecture and flows with your entire team.",
-    "card3Title": "Environmental Insights & UX Data",
-    "card3Desc": "Make informed decisions with analytics designed to measure the real impact of interactions.",
-    "card4Title": "Premium Interface <br /> Design",
-    "card4Desc": "Explore the perfect balance between aesthetics and functionality."
+    "headerLabel": "Why have a UX Engineer & Product Design Consultant on your team",
+    "headerTitle": "I design digital experiences that connect strategy, interface, and engineering",
+    "card1Title": "Strategic UX & <br /> Digital Product",
+    "card1Desc": "I turn complex problems into clear product decisions.",
+    "card2Title": "Functional Prototypes & <br /> MVPs",
+    "card2Desc": "I connect design and front-end to validate ideas with users, business, and technical teams.",
+    "card3Title": "UX Measurement, CRO & <br /> Continuous Validation",
+    "card3Desc": "I validate experiences with data, testing, and continuous improvement.",
+    "card4Title": "AI applied to <br /> Digital Experiences",
+    "card4Desc": "I integrate AI to accelerate design, prototyping, and automation."
   },
   "ExperienceLogos": {
     "title": "Experience backed by knowledge",

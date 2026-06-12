@@ -7,7 +7,13 @@ const ROOT = resolve(__dirname, "..");
 const DESIGN_MD = resolve(ROOT, "DESIGN.MD");
 const GLOBALS_CSS = resolve(ROOT, "src/app/globals.css");
 
-const CSS_TEMPLATE = `@import "tailwindcss";
+const CSS_TEMPLATE = `/*
+ * ARCHIVO GENERADO por scripts/sync-design.mjs a partir de DESIGN.MD.
+ * NO editar a mano: cualquier cambio se sobrescribe en el siguiente \`npm run dev\`.
+ * Tokens de diseño -> editar DESIGN.MD.
+ * Estilos de artículos (Tiptap/CMS) -> src/app/tiptap-content.css.
+ */
+@import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
 

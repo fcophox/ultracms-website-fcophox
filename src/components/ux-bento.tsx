@@ -48,11 +48,11 @@ export function UxBento() {
                 <div className="absolute inset-0 z-0 opacity-30 transition-opacity duration-700 group-hover:opacity-50 pointer-events-none">
                   <Image src="/methodology/bg-card-1.svg" alt="Background" fill className="object-cover" />
                 </div>
-                <h3 
+                <h3
                   className="relative z-10 text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4"
                   dangerouslySetInnerHTML={{ __html: t('card1Title') }}
                 />
-                <p className="relative z-10 text-sm text-muted">
+                <p className="relative z-10 text-md text-muted">
                   {t('card1Desc')}
                 </p>
               </motion.div>
@@ -68,10 +68,11 @@ export function UxBento() {
                 <div className="absolute inset-0 z-0 opacity-30 transition-opacity duration-700 group-hover:opacity-50 pointer-events-none">
                   <Image src="/methodology/bg-card-3.svg" alt="Background" fill className="object-cover" />
                 </div>
-                <h3 className="relative z-10 text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
-                  {t('card2Title')}
-                </h3>
-                <p className="relative z-10 text-sm text-muted">
+                <h3
+                  className="relative z-10 text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4"
+                  dangerouslySetInnerHTML={{ __html: t('card2Title') }}
+                />
+                <p className="relative z-10 text-md text-muted">
                   {t('card2Desc')}
                 </p>
               </motion.div>
@@ -92,11 +93,12 @@ export function UxBento() {
               {/* Abstract fluid background effect representing the flower */}
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/30 via-surface/10 to-transparent opacity-60 blur-2xl group-hover:opacity-80 transition-opacity duration-700 pointer-events-none z-0" />
 
-              <div className="relative z-10 max-w-sm mt-auto pt-24">
-                <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-3">
-                  {t('card3Title')}
-                </h3>
-                <p className="text-sm text-muted">
+              <div className="relative z-10 max-w-md mt-auto pt-24">
+                <h3
+                  className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-3"
+                  dangerouslySetInnerHTML={{ __html: t('card3Title') }}
+                />
+                <p className="text-md text-muted">
                   {t('card3Desc')}
                 </p>
               </div>
@@ -118,25 +120,18 @@ export function UxBento() {
             {/* Background gradient/image simulation */}
             <div className="absolute inset-0 bg-gradient-to-b from-background via-surface to-primary/10 opacity-80 z-0" />
 
-            {/* Abstract elements mimicking the trees/landscape */}
-            <div className="absolute bottom-10 left-0 w-full h-1/3 flex items-end justify-around px-4 opacity-50 blur-[2px]">
-              <div className="w-12 h-24 rounded-full bg-secondary/30" />
-              <div className="w-20 h-32 rounded-full bg-primary/20" />
-              <div className="w-16 h-20 rounded-full bg-secondary/20" />
-            </div>
-
             {/* Content overlay */}
             <div className="relative z-10 p-8 flex flex-col h-full">
-              <Link href="#" className="w-10 h-10 rounded-full bg-foreground/10 dark:bg-[#1A1A1E] border-none flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-colors self-start mb-auto">
+              {/* <Link href="#" className="w-10 h-10 rounded-full bg-foreground/10 dark:bg-[#1A1A1E] border-none flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-colors self-start mb-auto">
                 <ArrowUpRight size={18} />
-              </Link>
+              </Link> */}
 
               <div className="mt-auto">
-                <h3 
+                <h3
                   className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-2"
                   dangerouslySetInnerHTML={{ __html: t('card4Title') }}
                 />
-                <p className="text-sm text-muted">
+                <p className="text-md text-muted">
                   {t('card4Desc')}
                 </p>
               </div>

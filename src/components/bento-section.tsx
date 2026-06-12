@@ -177,37 +177,37 @@ export function BentoSection() {
               </p>
             </div>
 
-            <div className="z-10 mt-auto bg-foreground/5 dark:bg-[#1A1A1E] border-none rounded-2xl md:p-8">
+            <div className="z-10 mt-auto bg-background/25 border border-border/50 rounded-2xl p-5 md:p-8 w-full">
               {/* Tabs */}
-              <div className="flex flex-wrap items-center gap-3 mb-8">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-6">
                 <button
                   onClick={() => setActiveTab(0)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 0 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${activeTab === 0 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
                 >
-                  <Lightbulb size={16} /> {t('tab1')}
+                  <Lightbulb size={14} className="md:w-4 md:h-4" /> {t('tab1')}
                 </button>
                 <button
                   onClick={() => setActiveTab(1)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 1 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${activeTab === 1 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
                 >
-                  <Zap size={16} /> {t('tab2')}
+                  <Zap size={14} className="md:w-4 md:h-4" /> {t('tab2')}
                 </button>
                 <button
                   onClick={() => setActiveTab(2)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 2 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${activeTab === 2 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
                 >
-                  <LineChart size={16} /> {t('tab3')}
+                  <LineChart size={14} className="md:w-4 md:h-4" /> {t('tab3')}
                 </button>
                 <button
                   onClick={() => setActiveTab(3)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 3 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${activeTab === 3 ? 'bg-primary/10 border border-primary text-primary shadow-[0_0_10px_rgba(var(--primary),0.2)]' : 'bg-surface border border-border text-muted hover:border-primary/50'}`}
                 >
-                  <Send size={16} /> {t('tab4')}
+                  <Send size={14} className="md:w-4 md:h-4" /> {t('tab4')}
                 </button>
               </div>
 
-              <div className="mb-8">
-                <p className="text-foreground font-medium text-lg">
+              <div className="mb-6">
+                <p className="text-foreground font-medium text-base md:text-lg">
                   {activeTab === 0 && t('tab1Desc')}
                   {activeTab === 1 && t('tab2Desc')}
                   {activeTab === 2 && t('tab3Desc')}

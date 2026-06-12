@@ -2,8 +2,8 @@ import { Hero } from "@/components/hero";
 import { ProjectCard } from "@/components/project-card";
 import { Banner } from "@/components/banner";
 import { Blog } from "@/components/blog";
-import { BentoSection } from "@/components/bento-section";
-// import { UxBento } from "@/components/ux-bento";
+// import { BentoSection } from "@/components/bento-section";
+import { UxBento } from "@/components/ux-bento";
 import { ExperienceLogos } from "@/components/experience-logos";
 import { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
@@ -65,21 +65,13 @@ export default async function Home() {
         <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-3xl" />
         <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] rounded-full bg-secondary/20 blur-3xl" />
       </div>
-
       <Hero />
-
       <ProjectCard projects={mappedProjects} />
-
-      <BentoSection />
-
+      <UxBento />
+      {/* <BentoSection /> */}
       <ExperienceLogos />
-
       <Blog />
-
-      {/* <UxBento /> */}
-
       <Banner />
-
       {/* Decorative Grid */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5 mix-blend-overlay pointer-events-none" />
     </main>
