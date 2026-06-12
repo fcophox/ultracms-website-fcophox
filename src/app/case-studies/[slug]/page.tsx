@@ -142,7 +142,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
       nextArticle={nextCase ? { title: nextCase.title, slug: nextCase.slug, href: `/case-studies/${nextCase.slug}`, imageUrl: nextCase.image_url } : null}
     >
       <div 
-        className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"
+        className="tiptap-content max-w-none"
         dangerouslySetInnerHTML={{ __html: caseStudy.content }} 
       />
     </ArticleLayout>

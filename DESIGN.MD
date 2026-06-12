@@ -93,7 +93,7 @@ animations.slow: "500ms"
 | primary    | `#3b82f6`  | `#60a5fa`  | Acción principal |
 | secondary  | `#8b5cf6`  | `#a78bfa`  | Acción secundaria|
 | accent     | `#f59e0b`  | `#fbbf24`  | Énfasis          |
-| muted      | `#94a3b8`  | `#64748b`  | Texto secundario |
+| muted      | `#94a3b8`  | `#b0b0b0`  | Texto secundario |
 
 ## Tipografía
 

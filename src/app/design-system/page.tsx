@@ -92,7 +92,7 @@ export default function DesignSystemPage() {
             <div className="flex-1 p-8 rounded-3xl bg-surface border border-border flex flex-col gap-8">
               <div>
                 <span className="text-sm text-muted font-mono uppercase tracking-wider mb-4 block">{t('typographySans')}</span>
-                <div className="text-4xl font-light mb-2 text-foreground tracking-tight">Sora</div>
+                <div className="text-4xl font-light mb-2 text-foreground tracking-tight">Sansation</div>
                 <div className="text-sm text-muted font-light tracking-wide">Aa Bb Cc Dd Ee Ff Gg 0123456789</div>
               </div>
               <div className="h-px w-full bg-border" />

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Sora, Geist_Mono } from "next/font/google";
+import { Sansation, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeShortcut } from "@/components/theme-shortcut";
 
-const sora = Sora({
+const sansation = Sansation({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -69,7 +70,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${sora.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sansation.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full overflow-x-hidden flex flex-col bg-background text-foreground transition-colors duration-300">

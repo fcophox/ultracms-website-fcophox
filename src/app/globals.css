@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -43,4 +42,155 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/*
+ * Estilos del contenido enriquecido (Tiptap / CMS).
+ *
+ * IMPORTANTE: esta clase la comparten el editor (rich-text-editor.tsx) y las
+ * páginas públicas (blog, case-studies, article-layout) para garantizar WYSIWYG.
+ * No depende del plugin @tailwindcss/typography (prose) a propósito: ese plugin
+ * se quedaba sin registrar cada cierto tiempo y rompía los estilos. Estas reglas
+ * son autocontenidas y usan los design tokens del proyecto.
+ */
+.tiptap-content {
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.tiptap-content > :first-child {
+  margin-top: 0;
+}
+
+.tiptap-content > :last-child {
+  margin-bottom: 0;
+}
+
+.tiptap-content p {
+  margin: 1.25em 0;
+}
+
+.tiptap-content h1,
+.tiptap-content h2,
+.tiptap-content h3 {
+  color: var(--foreground);
+  font-weight: 300;
+  line-height: 1.2;
+  scroll-margin-top: 6rem;
+}
+
+.tiptap-content h1 {
+  font-size: 2.25em;
+  margin: 1.2em 0 0.6em;
+}
+
+.tiptap-content h2 {
+  font-size: 1.75em;
+  margin: 1.4em 0 0.6em;
+}
+
+.tiptap-content h3 {
+  font-size: 1.35em;
+  font-weight: 400;
+  margin: 1.4em 0 0.5em;
+}
+
+.tiptap-content strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.tiptap-content em {
+  font-style: italic;
+}
+
+.tiptap-content s {
+  text-decoration: line-through;
+}
+
+.tiptap-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tiptap-content a:hover {
+  opacity: 0.8;
+}
+
+.tiptap-content ul,
+.tiptap-content ol {
+  margin: 1.25em 0;
+  padding-left: 1.6em;
+}
+
+.tiptap-content ul {
+  list-style: disc;
+}
+
+.tiptap-content ol {
+  list-style: decimal;
+}
+
+.tiptap-content li {
+  margin: 0.4em 0;
+}
+
+.tiptap-content li::marker {
+  color: var(--muted);
+}
+
+.tiptap-content blockquote {
+  border-left: 3px solid var(--primary);
+  margin: 1.5em 0;
+  padding-left: 1.25em;
+  font-style: italic;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+.tiptap-content code {
+  background: color-mix(in srgb, var(--muted) 20%, transparent);
+  border-radius: 0.3em;
+  padding: 0.15em 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.tiptap-content pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1em 1.25em;
+  margin: 1.5em 0;
+  overflow-x: auto;
+}
+
+.tiptap-content pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875em;
+}
+
+.tiptap-content img {
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  margin: 1.75em 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.tiptap-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+
+/* Placeholder cuando el editor está vacío */
+.tiptap-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

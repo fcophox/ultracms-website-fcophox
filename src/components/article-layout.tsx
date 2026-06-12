@@ -101,7 +101,7 @@ export function ArticleLayout({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="prose prose-lg dark:prose-invert prose-headings:font-light prose-p:leading-relaxed prose-img:rounded-2xl prose-img:shadow-sm max-w-3xl mx-auto"
+          className="tiptap-content max-w-3xl mx-auto"
         >
           {children || (
             <>

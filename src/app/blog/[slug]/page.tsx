@@ -146,7 +146,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug, href: `/blog/${nextArticle.slug}`, imageUrl: nextArticle.image_url } : null}
     >
       <div 
-        className="tiptap-content prose prose-lg dark:prose-invert max-w-none text-foreground/80"
+        className="tiptap-content max-w-none"
         dangerouslySetInnerHTML={{ __html: article.content }} 
       />
     </ArticleLayout>

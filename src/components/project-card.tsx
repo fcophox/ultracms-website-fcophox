@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useScroll, useTransform, useInView, MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 export interface Project {
@@ -20,12 +19,6 @@ export interface Project {
 
 export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
   const t = useTranslations('ProjectCard');
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-  const [activeIndex, setActiveIndex] = useState(0);
 
   // If there are no projects, don't render the section
   if (!projects || projects.length === 0) {
@@ -33,8 +26,8 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
   }
 
   return (
-    <section ref={containerRef} className="w-full relative z-10 bg-background overflow-visible">
-      <div className="max-w-6xl mx-auto px-6 mb-16 md:mb-24 sticky top-20 z-0">
+    <section className="w-full relative z-10 bg-background overflow-visible">
+      <div className="max-w-6xl mx-auto px-6 mb-16 md:mb-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-background py-12 -ml-4 pl-4 rounded-r-xl">
           <div>
             <p className="text-xs text-muted tracking-widest uppercase mb-2">
@@ -57,30 +50,13 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-1 relative pb-24">
-        <div className="hidden xl:block absolute -left-20 top-0 bottom-0 w-4">
-          <div className="sticky top-[45vh] flex flex-col gap-3">
-            {projects.map((_, i) => (
-              <div
-                key={i}
-                className={`transition-all duration-500 rounded-full ${activeIndex === i
-                  ? "h-8 w-2 bg-primary"
-                  : "h-2 w-2 bg-foreground/20"
-                  }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-0 pb-32">
+      <div className="max-w-6xl mx-auto px-6 relative pb-24">
+        <div className="space-y-12 pb-32">
           {projects.map((project, index) => (
             <ProjectCardItem
               key={index}
               project={project}
               index={index}
-              total={projects.length}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
             />
           ))}
         </div>
@@ -92,38 +68,12 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
 function ProjectCardItem({
   project,
   index,
-  total,
-  activeIndex,
-  setActiveIndex,
 }: {
   project: Project;
   index: number;
-  total: number;
-  activeIndex: number;
-  setActiveIndex: (v: number) => void;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(cardRef, { margin: "-45% 0px -45% 0px" });
-
-  // Calculate target scale based on activeIndex
-  // Each card behind the active card is progressively smaller by 4%
-  const targetScale = index <= activeIndex ? 1 - (activeIndex - index) * 0.1 : 1;
-
-  useEffect(() => {
-    if (inView) setActiveIndex(index);
-  }, [inView, index, setActiveIndex]);
-
   return (
-    <div
-      ref={cardRef}
-      className="w-full mb-[8vh]"
-      style={{
-        position: "sticky",
-        top: "288px", // matches sticky top-72 (18rem)
-        zIndex: index,
-        paddingTop: `${index * 12}px`,
-      } as React.CSSProperties}
-    >
+    <div className="w-full">
       <Link
         href={project.slug ? `/case-studies/${project.slug}` : `/case-studies`}
         className="block no-underline w-full cursor-none"
@@ -131,16 +81,12 @@ function ProjectCardItem({
       >
         <motion.div
           className="w-full rounded-3xl bg-surface border-none overflow-hidden flex flex-col md:flex-row shadow-2xl origin-top"
-          animate={{
-            scale: targetScale,
-          }}
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{
-            scale: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.8, delay: index * 0.1, ease: "easeOut" },
-            y: { duration: 0.8, delay: index * 0.1, ease: "easeOut" },
+            opacity: { duration: 0.6, ease: "easeOut" },
+            y: { duration: 0.6, ease: "easeOut" },
           }}
         >
           <div className="w-full md:w-[50%] flex items-center justify-center p-6 md:p-10">

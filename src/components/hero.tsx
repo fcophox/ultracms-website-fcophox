@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function Hero() {
   const t = useTranslations('Hero');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
 
   const titles = t.raw('titles') as { line1: string; line2: string }[];
 
@@ -24,12 +25,20 @@ export function Hero() {
     <section className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20">
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        {/* Immediate gradient placeholder so the section is never blank while the video loads */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/20"
+          aria-hidden
+        />
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover blur-3xl opacity-40 scale-110"
+          preload="auto"
+          onLoadedData={() => setVideoReady(true)}
+          onCanPlay={() => setVideoReady(true)}
+          className={`w-full h-full object-cover blur-3xl scale-110 transition-opacity duration-1000 ease-out ${videoReady ? "opacity-40" : "opacity-0"}`}
           style={{ transform: "translate3d(0, 0, 0) scale(1.1)" }} // Force GPU acceleration for better blur performance
         >
           <source src="/movie/background.mp4" type="video/mp4" />
@@ -49,7 +58,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="text-4xl md:text-6xl lg:text-6xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
+              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
             >
               {currentTitle.line1}
               <br />

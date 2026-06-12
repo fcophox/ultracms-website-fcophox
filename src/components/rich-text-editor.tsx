@@ -35,7 +35,7 @@ export function RichTextEditor({ content, onChange, placeholder = "Escribe algo 
     content,
     editorProps: {
       attributes: {
-        class: 'prose prose-sm dark:prose-invert max-w-none prose-mirror focus:outline-none w-full h-full min-h-[400px] text-foreground/80 text-[15px] leading-relaxed',
+        class: 'tiptap-content max-w-none focus:outline-none w-full h-full min-h-[400px]',
       },
     },
     onUpdate: ({ editor }) => {

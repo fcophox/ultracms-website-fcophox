@@ -1,0 +1,19 @@
+{
+  // Tailwind CSS v4 uses CSS-first directives (@import, @theme, @variant,
+  // @plugin, @apply, @custom-variant). VSCode's built-in CSS language server
+  // does not know them and flags them as "Unknown at rule", which can lead to
+  // formatters / fix-on-save stripping the lines. Two safeguards:
+
+  // 1) Treat CSS as the Tailwind dialect so the Tailwind CSS IntelliSense
+  //    extension (bradlc.vscode-tailwindcss) handles it and recognizes the
+  //    directives instead of the built-in validator.
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // 2) Silence unknown-at-rule diagnostics on the built-in validators as well,
+  //    in case CSS is still parsed by them.
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
+}
