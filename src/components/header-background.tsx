@@ -16,13 +16,13 @@ export function HeaderBackground() {
   }
 
   return (
-    <div className="absolute top-0 left-0 right-0 w-full h-[600px] overflow-hidden pointer-events-none z-0">
+    <div className="absolute top-0 left-0 right-0 w-full h-[600px] overflow-hidden pointer-events-none z-0 opacity-0 dark:opacity-100 transition-opacity duration-300">
       <Image
         src="/brand/background-page.png"
         alt="Page Header Background"
         fill
         priority
-        className="object-cover object-top opacity-80 dark:opacity-40"
+        className="object-cover object-top opacity-40"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
     </div>
