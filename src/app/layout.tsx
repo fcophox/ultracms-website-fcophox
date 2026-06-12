@@ -59,6 +59,7 @@ import { getMessages } from 'next-intl/server';
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/custom-cursor";
+import { HeaderBackground } from "@/components/header-background";
 
 export default async function RootLayout({
   children,
@@ -74,7 +75,7 @@ export default async function RootLayout({
       className={`${sansation.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full overflow-x-hidden flex flex-col bg-background text-foreground transition-colors duration-300">
+      <body className="min-h-full overflow-x-hidden relative flex flex-col bg-background text-foreground transition-colors duration-300">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
@@ -83,8 +84,9 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <CustomCursor />
+            <HeaderBackground />
             <Navbar />
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col relative z-10">
               {children}
             </div>
             <Footer />
