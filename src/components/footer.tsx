@@ -1,10 +1,21 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
   const t = useTranslations('Footer');
+  const pathname = usePathname();
+  
+  const isDashboard = pathname?.startsWith('/dashboard');
+  const isLogin = pathname === '/login';
+
+  if (isDashboard || isLogin) {
+    return null;
+  }
 
   return (
     <footer className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 pb-8 relative overflow-hidden">

@@ -32,6 +32,7 @@ export default function ClientsPage() {
       .from("contact_messages")
       .select("*")
       .eq("is_archived", isArchived)
+      .neq("message_type", "resource_unlock")
       .order("created_at", { ascending: false });
 
     if (error) {

@@ -14,10 +14,17 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const isDashboard = pathname?.startsWith('/dashboard');
+  const isLogin = pathname === '/login';
+
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
+
+  if (isDashboard || isLogin) {
+    return null;
+  }
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;

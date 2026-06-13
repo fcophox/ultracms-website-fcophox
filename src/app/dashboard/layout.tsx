@@ -39,6 +39,7 @@ export default function DashboardLayout({
     { name: "Servicios", href: "/dashboard/services" },
     { name: "Clientes", href: "/dashboard/clients" },
     { name: "Calendario", href: "/dashboard/calendar" },
+    { name: "Recursos", href: "/dashboard/resources" },
   ];
 
   const getPageTitle = (path: string) => {
@@ -48,6 +49,7 @@ export default function DashboardLayout({
     if (path === "/dashboard/services") return "Services";
     if (path === "/dashboard/clients") return "Clients";
     if (path === "/dashboard/calendar") return "Calendar";
+    if (path === "/dashboard/resources") return "Recursos";
     return "";
   };
 

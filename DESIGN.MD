@@ -54,7 +54,7 @@ colors.surface.light: "#ffffff"
 colors.surface.dark: "#181A1E"
 colors.border.light: "#e2e8f0"
 colors.border.dark: "#303031"
-fonts.sans: "Sora, system-ui, sans-serif"
+fonts.sans: "Sansation, system-ui, sans-serif"
 fonts.mono: "Geist Mono, Fira Code, monospace"
 spacing.xs: "0.25rem"
 spacing.sm: "0.5rem"
@@ -99,7 +99,7 @@ animations.slow: "500ms"
 
 | Rol   | Font Stack                          |
 |-------|-------------------------------------|
-| Sans  | `Sora, system-ui, sans-serif`       |
+| Sans  | `Sansation, system-ui, sans-serif`  |
 | Mono  | `Geist Mono, Fira Code, monospace`  |
 
 ## Espaciado

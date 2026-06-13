@@ -62,8 +62,8 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="w-full min-h-screen flex flex-col pt-8 pb-32 bg-background text-foreground">
-      <div className="max-w-6xl mx-auto px-6 w-full">
+    <main className="w-full flex-1 flex flex-col pt-8 pb-32">
+      <div className="max-w-6xl mx-auto px-6 w-full relative z-10">
 
         {/* Top Link */}
         <motion.div
