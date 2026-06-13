@@ -89,15 +89,15 @@ export function PromptLibrary() {
   return (
     <section className="w-full max-w-6xl mx-auto px-6 relative z-10 py-16 border-t border-border/40 mt-12">
       {/* Global Resource Selector Tabs */}
-      <div className="flex justify-center mb-16">
-        <div className="inline-flex bg-surface/40 p-1.5 rounded-2xl border border-border/60 backdrop-blur-xl relative">
+      <div className="flex justify-center mb-16 px-4 sm:px-0">
+        <div className="flex flex-col sm:inline-flex sm:flex-row w-full sm:w-auto bg-surface/40 p-1.5 rounded-2xl border border-border/60 backdrop-blur-xl relative gap-1.5 sm:gap-0">
           <button
             onClick={() => {
               setActiveLibrary("ux");
               setActiveStage("all");
               setSearchQuery("");
             }}
-            className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 relative z-10 flex items-center gap-2 ${
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-medium transition-all duration-300 relative z-10 flex items-center justify-center sm:justify-start gap-2 w-full sm:w-auto ${
               activeLibrary === "ux" ? "text-background font-semibold" : "text-muted hover:text-foreground"
             }`}
           >
@@ -118,7 +118,7 @@ export function PromptLibrary() {
               setActiveStage("all");
               setSearchQuery("");
             }}
-            className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 relative z-10 flex items-center gap-2 ${
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-medium transition-all duration-300 relative z-10 flex items-center justify-center sm:justify-start gap-2 w-full sm:w-auto ${
               activeLibrary === "vibe" ? "text-background font-semibold" : "text-muted hover:text-foreground"
             }`}
           >
@@ -209,10 +209,10 @@ export function PromptLibrary() {
 
             <div>
               <h4 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3">Filtrar por etapa</h4>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-3 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <button
                   onClick={() => setActiveStage("all")}
-                  className={`w-full px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 border text-left flex items-center justify-between ${activeStage === "all"
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 border text-center flex items-center justify-center lg:justify-between flex-shrink-0 whitespace-nowrap ${activeStage === "all"
                     ? "bg-foreground text-background border-background shadow-sm font-semibold"
                     : "bg-background hover:bg-surface/80 text-muted border-background"
                     }`}
@@ -225,13 +225,13 @@ export function PromptLibrary() {
                     <button
                       key={stage.title}
                       onClick={() => setActiveStage(stage.title)}
-                      className={`w-full px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 flex items-center gap-2.5 border text-left ${activeStage === stage.title
+                      className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 flex items-center gap-2.5 border text-left flex-shrink-0 whitespace-nowrap ${activeStage === stage.title
                         ? "bg-foreground text-background border-background shadow-sm font-semibold"
                         : "bg-background hover:bg-surface/80 text-muted border-background"
                         }`}
                     >
                       {getStageIcon(stage.icon)}
-                      <span className="truncate">{shortTitle}</span>
+                      <span>{shortTitle}</span>
                     </button>
                   );
                 })}

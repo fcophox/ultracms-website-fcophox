@@ -133,7 +133,7 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
   return (
     <section className="w-full min-h-[70vh] flex items-center relative z-10 py-12">
 
-      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
         {/* Left Column: Text Content */}
         <div className="lg:col-span-7 flex flex-col justify-center text-left">
           <motion.div
@@ -170,14 +170,14 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="w-full max-w-md bg-surface/40 backdrop-blur-xl border border-border/80 rounded-2xl p-8 shadow-2xl relative overflow-hidden"
+            className="w-full max-w-md bg-surface/40 backdrop-blur-xl border border-border/80 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
           >
             <div className="relative z-10">
               <h2 className="text-xl font-medium text-foreground mb-2">Código de acceso</h2>
               <p className="text-sm text-muted mb-8">Por favor, escribe el código de 4 dígitos para continuar.</p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="flex justify-between gap-3">
+                <div className="flex justify-between gap-2 sm:gap-3">
                   {code.map((digit, index) => (
                     <input
                       key={index}
@@ -192,7 +192,7 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
                       onChange={(e) => handleChange(e.target.value, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
                       onPaste={handlePaste}
-                      className="w-16 h-16 md:w-20 md:h-20 text-center text-3xl font-semibold bg-surface border-2 border-border/60 focus:border-primary/80 focus:ring-1 focus:ring-primary/45 rounded-xl transition-all duration-200 outline-none text-foreground"
+                      className="w-12 h-12 min-[360px]:w-14 min-[360px]:h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-center text-2xl sm:text-3xl font-semibold bg-surface border-2 border-border/60 focus:border-primary/80 focus:ring-1 focus:ring-primary/45 rounded-xl transition-all duration-200 outline-none text-foreground"
                       disabled={loading || status === "success"}
                     />
                   ))}
