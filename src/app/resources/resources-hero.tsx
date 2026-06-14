@@ -2,7 +2,9 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ShieldAlert, KeyRound, Loader2, ArrowRight } from "lucide-react";
+import { Check, ShieldAlert, KeyRound, Loader2, ArrowRight, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { createClient } from "@/utils/supabase/client";
 
@@ -17,6 +19,7 @@ async function sha256(message: string): Promise<string> {
 }
 
 export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
+  const t = useTranslations('ResourcesPage');
   const [code, setCode] = useState<string[]>(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -131,9 +134,21 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
   };
 
   return (
-    <section className="w-full min-h-[70vh] flex items-center relative z-10 py-12">
+    <section className="w-full min-h-[70vh] flex flex-col justify-center relative z-10 py-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
+        {/* Top Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <Link href="/" className="inline-flex items-center text-sm font-medium text-muted hover:text-foreground transition-colors font-sans">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t('backHome')}
+          </Link>
+        </motion.div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
         {/* Left Column: Text Content */}
         <div className="lg:col-span-7 flex flex-col justify-center text-left">
           <motion.div
@@ -258,6 +273,7 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
           </motion.div>
         </div>
       </div>
+    </div>
       {/* Decorative Grid */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 dark:opacity-[0.03] mix-blend-overlay pointer-events-none" />
     </section>

@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Check, Lock, Search, Compass, Layout, Sparkles, HelpCircle, FileCheck, Award, MessageSquare, Terminal } from "lucide-react";
+import { Copy, Check, Lock, Search, Compass, Layout, Sparkles, HelpCircle, FileCheck, Award, MessageSquare, Terminal, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { promptStages, vibeCodingStages } from "./prompts-data";
 import { createClient } from "@/utils/supabase/client";
 
 export function PromptLibrary() {
+  const t = useTranslations('ResourcesPage');
   const [unlocked, setUnlocked] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("resources_unlocked") === "true";
@@ -87,7 +90,19 @@ export function PromptLibrary() {
   const totalFilteredCount = filteredStages.reduce((acc, stage) => acc + stage.prompts.length, 0);
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-6 relative z-10 py-16 border-t border-border/40 mt-12">
+    <section className="w-full max-w-6xl mx-auto px-6 relative z-10 pt-0 pb-16">
+      {/* Top Link */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+      >
+        <Link href="/" className="inline-flex items-center text-sm font-medium text-muted hover:text-foreground transition-colors font-sans">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          {t('backHome')}
+        </Link>
+      </motion.div>
+
       {/* Global Resource Selector Tabs */}
       <div className="flex justify-center mb-16 px-4 sm:px-0">
         <div className="flex flex-col sm:inline-flex sm:flex-row w-full sm:w-auto bg-surface/40 p-1.5 rounded-2xl border border-border/60 backdrop-blur-xl relative gap-1.5 sm:gap-0">

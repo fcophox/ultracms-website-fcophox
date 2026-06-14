@@ -299,5 +299,8 @@
       "accent": "Accent",
       "muted": "Muted"
     }
+  },
+  "ResourcesPage": {
+    "backHome": "Volver al Inicio"
   }
 }
