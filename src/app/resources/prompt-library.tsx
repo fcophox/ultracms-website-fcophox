@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { promptStages, vibeCodingStages } from "./prompts-data";
 import { createClient } from "@/utils/supabase/client";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export function PromptLibrary() {
   const t = useTranslations('ResourcesPage');
@@ -37,6 +38,12 @@ export function PromptLibrary() {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
+
+    // Evento anónimo en GA4 (complementa el registro en Supabase).
+    sendGAEvent("event", "prompt_copy", {
+      prompt_title: title,
+      prompt_library: activeLibrary,
+    });
 
     try {
       const supabase = createClient();

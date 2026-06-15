@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { createClient } from "@/utils/supabase/client";
+import { sendGAEvent } from "@next/third-parties/google";
 
 // SHA-256 hash of "8291"
 const CODE_HASH = "1c753160f146c373c539040c119db2a019d58f51f226f1e009763326e8a7c302";
@@ -110,6 +111,8 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
               is_archived: false
             }
           ]);
+
+        sendGAEvent("event", "resource_unlock");
 
         setStatus("success");
         localStorage.setItem("resources_unlocked", "true");
