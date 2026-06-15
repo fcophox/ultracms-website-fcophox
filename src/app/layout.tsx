@@ -5,6 +5,9 @@ import "./tiptap-content.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeShortcut } from "@/components/theme-shortcut";
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
+
 const sansation = Sansation({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -91,6 +94,7 @@ export default async function RootLayout({
             </div>
             <Footer />
             <ThemeShortcut />
+            <GoogleAnalytics gaId="G-N30VCBN4MR" />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
