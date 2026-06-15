@@ -5,7 +5,9 @@ import "./tiptap-content.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeShortcut } from "@/components/theme-shortcut";
 
+import { Suspense } from 'react'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalyticsPageview } from "@/components/google-analytics-pageview";
 
 
 const sansation = Sansation({
@@ -95,6 +97,9 @@ export default async function RootLayout({
             <Footer />
             <ThemeShortcut />
             <GoogleAnalytics gaId="G-N30VCBN4MR" />
+            <Suspense fallback={null}>
+              <GoogleAnalyticsPageview />
+            </Suspense>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
