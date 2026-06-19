@@ -30,7 +30,7 @@
     "visitLinkedin": "Visita mi LinkedIn"
   },
   "ProjectCard": {
-    "since": "Desde 2018",
+    "since": "Casos de estudio",
     "title": "Selección de casos de estudio desde el 2018 hasta ahora",
     "viewAll": "Ver todos"
   },
@@ -75,6 +75,19 @@
     "card3Desc": "Valido experiencias con datos, pruebas y mejora continua.",
     "card4Title": "IA aplicada a <br /> Experiencias Digitales",
     "card4Desc": "Integro IA para acelerar diseño, prototipado y automatización."
+  },
+  "ServicesSection": {
+    "badge": "Capacidades",
+    "title": "Ayudo a empresas y startups a definir, diseñar y construir productos digitales.",
+    "description": "Acompaño cada paso del proceso con un enfoque estratégico, técnico y centrado en la usabilidad. Mi enfoque combina consultoría estratégica, diseño UX/UI avanzado y desarrollo frontend (UX Engineering). Esto permite entregar prototipos realistas, validar ideas rápidamente y construir código consistente y escalable.",
+    "service1Title": "Investigación y Estrategia UX",
+    "service1Desc": "Entendimiento profundo del usuario y negocio para definir el rumbo del producto, mapear flujos de interacción y asegurar la viabilidad del concepto.",
+    "service2Title": "Diseño UX/UI y Prototipado",
+    "service2Desc": "Creación de interfaces limpias, intuitivas y prototipos interactivos de alta fidelidad que se ven y sienten reales para validar ideas rápidamente.",
+    "service3Title": "UX Engineering y Frontend",
+    "service3Desc": "Desarrollo de interfaces front-end de alto nivel y construcción de sistemas de diseño estructurados que conectan diseño y código sin fricciones.",
+    "service4Title": "Integración de IA e Innovación",
+    "service4Desc": "Optimización de flujos y automatización de procesos mediante el uso estratégico de modelos de inteligencia artificial aplicados a la experiencia."
   },
   "ExperienceLogos": {
     "title": "Experiencia respaldada por el conocimiento",

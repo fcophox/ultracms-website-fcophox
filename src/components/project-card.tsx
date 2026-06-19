@@ -30,9 +30,9 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
       <div className="max-w-6xl mx-auto px-6 mb-16 md:mb-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-background py-12 -ml-4 pl-4 rounded-r-xl">
           <div>
-            <p className="text-xs text-muted tracking-widest uppercase mb-2">
+            <span className="inline-block bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-muted uppercase mb-4">
               {t('since')}
-            </p>
+            </span>
             <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
               {t('title')}
             </h2>

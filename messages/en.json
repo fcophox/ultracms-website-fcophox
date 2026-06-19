@@ -30,7 +30,7 @@
     "visitLinkedin": "Visit my LinkedIn"
   },
   "ProjectCard": {
-    "since": "Since 2018",
+    "since": "Case Studies",
     "title": "Selection of case studies from 2018 to present",
     "viewAll": "View all"
   },
@@ -75,6 +75,19 @@
     "card3Desc": "I validate experiences with data, testing, and continuous improvement.",
     "card4Title": "AI applied to <br /> Digital Experiences",
     "card4Desc": "I integrate AI to accelerate design, prototyping, and automation."
+  },
+  "ServicesSection": {
+    "badge": "Capabilities",
+    "title": "I help startups and businesses define, design, and build digital products.",
+    "description": "I guide you through every step of the process with a strategic, technical, and user-centered approach. My approach combines strategic consulting, advanced UX/UI design, and frontend development (UX Engineering). This enables delivering realistic prototypes, validating ideas quickly, and building consistent, scalable code.",
+    "service1Title": "UX Research & Strategy",
+    "service1Desc": "Understanding users and business goals to align direction, structure information, and establish the right product path.",
+    "service2Title": "UX/UI Design & Prototyping",
+    "service2Desc": "Creating clean, intuitive interfaces and high-fidelity interactive prototypes to validate ideas before engineering.",
+    "service3Title": "UX Engineering & Development",
+    "service3Desc": "Writing high-quality front-end code and building solid design systems to bridge the gap between design and engineering.",
+    "service4Title": "AI Integration & Innovation",
+    "service4Desc": "Optimizing workflows and user interfaces by leveraging artificial intelligence for advanced, efficient interactions."
   },
   "ExperienceLogos": {
     "title": "Experience backed by knowledge",

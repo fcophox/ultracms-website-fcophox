@@ -4,6 +4,7 @@ import { Banner } from "@/components/banner";
 import { Blog } from "@/components/blog";
 // import { BentoSection } from "@/components/bento-section";
 import { UxBento } from "@/components/ux-bento";
+import { ServicesSection } from "@/components/services-section";
 import { ExperienceLogos } from "@/components/experience-logos";
 import { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
@@ -68,6 +69,7 @@ export default async function Home() {
       <Hero />
       <ProjectCard projects={mappedProjects} />
       <UxBento />
+      <ServicesSection />
       {/* <BentoSection /> */}
       <ExperienceLogos />
       <Blog />

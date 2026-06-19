@@ -15,8 +15,13 @@ export default async function DashboardPage() {
     .from("case_studies")
     .select("*", { count: "exact", head: true });
 
+  const { count: servicesCount, error: servicesCountError } = await supabase
+    .from("services")
+    .select("*", { count: "exact", head: true });
+
   if (articlesCountError) console.error("Error fetching articles count:", articlesCountError);
   if (caseStudiesCountError) console.error("Error fetching case studies count:", caseStudiesCountError);
+  if (servicesCountError) console.error("Error fetching services count:", servicesCountError);
 
   // Fetch top articles by likes
   const { data: topArticles, error: topArticlesError } = await supabase
@@ -63,7 +68,7 @@ export default async function DashboardPage() {
           </div>
           <div className="p-6 flex flex-col justify-between h-[120px]">
             <span className="text-xs font-medium text-muted">Total Services</span>
-            <span className="text-[28px] font-semibold text-foreground">0</span>
+            <span className="text-[28px] font-semibold text-foreground">{servicesCount ?? 0}</span>
           </div>
         </div>
       </div>
