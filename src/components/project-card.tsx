@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { RevealImage } from "./reveal-image";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -183,7 +183,7 @@ function ProjectCardItem({ project }: { project: Project }) {
               </div>
               {project.image_url ? (
                 <div className="w-full h-full relative">
-                  <Image
+                  <RevealImage
                     src={project.image_url}
                     alt={project.title}
                     fill

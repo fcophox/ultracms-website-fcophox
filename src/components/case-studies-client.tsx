@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { RevealImage } from "./reveal-image";
 
 export interface CaseStudy {
   id: string | number;
@@ -120,10 +121,12 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
             >
               <div className="w-full md:w-3/5 overflow-hidden relative h-48 md:h-auto md:min-h-[350px]">
                 {featuredCase.image_url ? (
-                  <img
+                  <RevealImage
                     src={featuredCase.image_url}
                     alt={featuredCase.title}
+                    useImgTag={true}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    wrapperClassName="absolute inset-0 w-full h-full"
                   />
                 ) : (
                   <div className={`w-full h-full absolute inset-0 bg-gradient-to-br ${getGradient(0)} group-hover:scale-105 transition-transform duration-500`} />
@@ -162,10 +165,12 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                 >
                   <div className="overflow-hidden relative h-48 w-full">
                     {c.image_url ? (
-                      <img
+                      <RevealImage
                         src={c.image_url}
                         alt={c.title}
+                        useImgTag={true}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        wrapperClassName="w-full h-full"
                       />
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${getGradient(index + 1)} group-hover:scale-105 transition-transform duration-500`} />

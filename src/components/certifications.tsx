@@ -9,66 +9,11 @@ type Category = "Todos" | "Certificaciones" | "Diplomados" | "Cursos & Bootcamps
 
 const certifications = [
   {
-    title: "Programa Avanzado en CRO, UX & Analytics",
-    year: "2021",
-    institution: "Unir",
-    category: "Certificaciones",
-    logo: "/studies/Unir.svg",
-  },
-  {
-    title: "Certificación UX-PM (3 niveles)",
-    year: "2018",
-    institution: "Ayer Viernes – UX Alliance",
-    category: "Certificaciones",
-    logo: "/studies/UXAlliance.svg",
-  },
-  {
     title: "Diplomado en Data-Driven Design",
     year: "2022",
     institution: "Universidad del Desarrollo",
     category: "Diplomados",
-    logo: "/studies/UDD.svg",
-  },
-  {
-    title: "Diplomado en ResearchOps",
-    year: "2020",
-    institution: "Aprende UX",
-    category: "Diplomados",
-    logo: "/studies/AprendeUX.svg",
-  },
-  {
-    title: "Diplomado en Discovery UX",
-    year: "2020",
-    institution: "Aprende UX",
-    category: "Diplomados",
-    logo: "/studies/AprendeUX.svg",
-  },
-  {
-    title: "Diplomado en UX Design",
-    year: "2019",
-    institution: "Universidad Finis Terrae",
-    category: "Diplomados",
-    logo: "/studies/Finisterrae.svg",
-  },
-  {
-    title: "Diplomado en Gestión y Desarrollo de Proyectos Digitales",
-    year: "2014",
-    institution: "Pontificia Universidad Católica",
-    category: "Diplomados",
-    logo: "/studies/Puc.svg",
-  },
-  {
-    title: "Diseño Gráfico",
-    year: "2007",
-    institution: "Duoc UC",
-    category: "Certificaciones",
-    logo: "/studies/DuocUC.svg",
-  },
-  {
-    title: "Product Discovery",
-    year: "2022",
-    institution: "EDTeam",
-    category: "Cursos & Bootcamps",
+    logo: "/studies/udd.svg",
   },
   {
     title: "Product Manager",
@@ -77,16 +22,24 @@ const certifications = [
     category: "Cursos & Bootcamps",
   },
   {
+    title: "Certificación UX-PM (3 niveles)",
+    year: "2018",
+    institution: "Ayer Viernes – UX Alliance",
+    category: "Certificaciones",
+    logo: "/studies/uxalliance.svg",
+  },
+  {
     title: "Accesibilidad Web",
     year: "2021",
     institution: "Aprende UX",
     category: "Cursos & Bootcamps",
   },
   {
-    title: "Creación y gestión de Design Systems",
-    year: "2021",
-    institution: "Domestika",
-    category: "Cursos & Bootcamps",
+    title: "Diplomado en ResearchOps",
+    year: "2020",
+    institution: "Aprende UX",
+    category: "Diplomados",
+    logo: "/studies/aprendeux.svg",
   },
   {
     title: "Agile y Scrum",
@@ -95,17 +48,50 @@ const certifications = [
     category: "Cursos & Bootcamps",
   },
   {
+    title: "Diplomado en UX Design",
+    year: "2019",
+    institution: "Universidad Finis Terrae",
+    category: "Diplomados",
+    logo: "/studies/uft.svg",
+  },
+  {
+    title: "Product Discovery",
+    year: "2022",
+    institution: "EDTeam",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "Diseño Gráfico",
+    year: "2007",
+    institution: "Duoc UC",
+    category: "Certificaciones",
+    logo: "/studies/duoc.svg",
+  },
+  {
+    title: "Creación y gestión de Design Systems",
+    year: "2021",
+    institution: "Domestika",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "Programa Avanzado en CRO, UX & Analytics",
+    year: "2021",
+    institution: "Unir",
+    category: "Certificaciones",
+    logo: "/studies/unir.svg",
+  },
+  {
     title: "Bootcamp Service Design",
     year: "2021",
     institution: "MEDU Escuela de Innovación",
     category: "Cursos & Bootcamps",
   },
   {
-    title: "Machine Learning en Contexto UX",
+    title: "Diplomado en Discovery UX",
     year: "2020",
     institution: "Aprende UX",
-    category: "Cursos & Bootcamps",
-    logo: "/studies/AprendeUX.svg",
+    category: "Diplomados",
+    logo: "/studies/aprendeux.svg",
   },
   {
     title: "Arquitectura de la Información",
@@ -113,7 +99,55 @@ const certifications = [
     institution: "Universidad de Chile",
     category: "Cursos & Bootcamps",
   },
+  {
+    title: "Diplomado en Gestión y Desarrollo de Proyectos Digitales",
+    year: "2014",
+    institution: "Pontificia Universidad Católica",
+    category: "Diplomados",
+    logo: "/studies/uc.svg",
+  },
+  {
+    title: "Machine Learning en Contexto UX",
+    year: "2020",
+    institution: "Aprende UX",
+    category: "Cursos & Bootcamps",
+    logo: "/studies/aprendeux.svg",
+  },
 ];
+
+const getCategoryLabel = (category: string) => {
+  if (category === "Certificaciones") return "Certificación";
+  if (category === "Diplomados") return "Diplomado";
+  return "Curso / Bootcamp";
+};
+
+const getCardClassName = (item: typeof certifications[0], index: number) => {
+  const base = "flex flex-col p-6 rounded-3xl bg-surface border-none hover:bg-surface/80 transition-colors mb-4 break-inside-avoid w-full";
+  
+  if (item.logo) {
+    const heights = [
+      "min-h-[220px] md:min-h-[230px]",
+      "min-h-[260px] md:min-h-[275px]",
+      "min-h-[240px] md:min-h-[250px]",
+      "min-h-[280px] md:min-h-[295px]"
+    ];
+    const offsets = ["", "md:mt-4", "", "md:mt-2"];
+    const height = heights[index % heights.length];
+    const offset = offsets[index % offsets.length];
+    return `${base} ${height} ${offset}`;
+  } else {
+    const heights = [
+      "min-h-[145px] md:min-h-[155px]",
+      "min-h-[175px] md:min-h-[190px]",
+      "min-h-[160px] md:min-h-[170px]",
+      "min-h-[190px] md:min-h-[205px]"
+    ];
+    const offsets = ["", "", "md:mt-3", ""];
+    const height = heights[index % heights.length];
+    const offset = offsets[index % offsets.length];
+    return `${base} ${height} ${offset}`;
+  }
+};
 
 export function CertificationsSection() {
   const [activeTab, setActiveTab] = useState<Category>("Todos");
@@ -184,19 +218,33 @@ export function CertificationsSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, delay: index * 0.05 }}
-              className={`flex flex-col p-6 rounded-3xl bg-surface border-none hover:bg-surface/80 transition-colors mb-4 break-inside-avoid ${item.logo ? 'min-h-[220px]' : 'h-fit'}`}
+              className={getCardClassName(item, index)}
             >
-              {/* Logo Area */}
-              {item.logo && (
-                <div className="w-32 h-12 mb-6 flex items-center relative">
-                  <Image
-                    src={item.logo}
-                    alt={item.institution}
-                    fill
-                    className="object-contain object-left"
-                  />
-                </div>
-              )}
+              {/* Top Row: Logo or Category Tag */}
+              <div className="flex items-center justify-between mb-6 w-full gap-2">
+                {item.logo ? (
+                  <div className="w-28 h-10 flex items-center relative">
+                    <Image
+                      src={item.logo}
+                      alt={item.institution}
+                      fill
+                      className="object-contain object-left"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-10 flex items-center">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-muted/50 border border-border/20 px-2.5 py-1 rounded-full bg-surface/50">
+                      {getCategoryLabel(item.category)}
+                    </span>
+                  </div>
+                )}
+
+                {item.logo && (
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted/50 border border-border/20 px-2.5 py-1 rounded-full bg-surface/50">
+                    {getCategoryLabel(item.category)}
+                  </span>
+                )}
+              </div>
 
               {/* Content */}
               <div className="mt-auto flex flex-col gap-4">

@@ -7,17 +7,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 const logos = [
-  { name: "AprendeUX", path: "/studies/AprendeUX.svg" },
-  { name: "AyerViernes", path: "/studies/Ayerviernes.svg" },
-  { name: "Coursera", path: "/studies/Coursera.svg" },
-  { name: "DuocUC", path: "/studies/DuocUC.svg" },
-  { name: "FinisTerrae", path: "/studies/Finisterrae.svg" },
-  { name: "Google", path: "/studies/Google.svg" },
-  { name: "Microsoft", path: "/studies/Microsoft.svg" },
-  { name: "PUC", path: "/studies/Puc.svg" },
-  { name: "UDD", path: "/studies/UDD.svg" },
-  { name: "UXAlliance", path: "/studies/UXAlliance.svg" },
-  { name: "UNIR", path: "/studies/Unir.svg" }
+  { name: "UDD", path: "/studies/udd.svg" },
+  { name: "FinisTerrae", path: "/studies/uft.svg" },
+  { name: "AyerViernes", path: "/studies/ayerviernes.svg" },
+  { name: "AprendeUX", path: "/studies/aprendeux.svg" },
+  { name: "DuocUC", path: "/studies/duoc.svg" },
+  { name: "UXAlliance", path: "/studies/uxalliance.svg" },
+  { name: "PUC", path: "/studies/uc.svg" },
+  { name: "UNIR", path: "/studies/unir.svg" }
 ];
 
 export function ExperienceLogos() {
@@ -26,9 +23,9 @@ export function ExperienceLogos() {
   return (
     <section className="dark text-foreground w-full relative z-10 bg-background overflow-hidden py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -40,7 +37,7 @@ export function ExperienceLogos() {
         </motion.div>
 
         {/* Logos Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-y-16 items-center mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16 items-center mb-16 max-w-4xl">
           {logos.map((logo, index) => (
             <motion.div
               key={logo.name}
@@ -51,11 +48,11 @@ export function ExperienceLogos() {
               className="flex items-center justify-start opacity-50 hover:opacity-100 transition-opacity"
             >
               <div className="relative w-32 h-12">
-                <Image 
-                  src={logo.path} 
-                  alt={logo.name} 
-                  fill 
-                  className="object-contain object-left" 
+                <Image
+                  src={logo.path}
+                  alt={logo.name}
+                  fill
+                  className="object-contain object-left"
                 />
               </div>
             </motion.div>
@@ -69,8 +66,8 @@ export function ExperienceLogos() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Link 
-            href="/methodology" 
+          <Link
+            href="/methodology"
             className="inline-flex items-center gap-2 text-foreground font-medium hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1"
           >
             {t('viewStudies')} <ArrowUpRight size={16} />

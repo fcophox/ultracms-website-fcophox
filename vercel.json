@@ -1,0 +1,24 @@
+{
+    "rewrites": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "cms.fcophox.com"
+                }
+            ],
+            "destination": "/cms/:path*"
+        },
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "resources.fcophox.com"
+                }
+            ],
+            "destination": "/resources/:path*"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
-import Image from "next/image";
+import { RevealImage } from "./reveal-image";
 import { getTranslations, getLocale } from "next-intl/server";
 import { mapArrayToLocale } from "@/utils/locale-mapper";
 
@@ -65,7 +65,7 @@ export async function Blog() {
             >
               {article.image_url ? (
                 <div className="relative w-full h-48">
-                  <Image
+                  <RevealImage
                     src={article.image_url}
                     alt={article.title}
                     fill

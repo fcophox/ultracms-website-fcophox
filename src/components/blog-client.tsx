@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { RevealImage } from "./reveal-image";
 
 export interface Article {
   id: string | number;
@@ -125,10 +126,12 @@ export function BlogClient({ articles }: BlogClientProps) {
             >
               <div className="w-full md:w-3/5 overflow-hidden relative h-48 md:h-auto md:min-h-[350px]">
                 {featuredArticle.image_url ? (
-                  <img
+                  <RevealImage
                     src={featuredArticle.image_url}
                     alt={featuredArticle.title}
+                    useImgTag={true}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    wrapperClassName="absolute inset-0 w-full h-full"
                   />
                 ) : (
                   <div className={`w-full h-full absolute inset-0 bg-gradient-to-br ${getGradient(0)} group-hover:scale-105 transition-transform duration-500`} />
@@ -167,10 +170,12 @@ export function BlogClient({ articles }: BlogClientProps) {
                 >
                   <div className="overflow-hidden relative h-48 w-full">
                     {article.image_url ? (
-                      <img
+                      <RevealImage
                         src={article.image_url}
                         alt={article.title}
+                        useImgTag={true}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        wrapperClassName="w-full h-full"
                       />
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${getGradient(index + 1)} group-hover:scale-105 transition-transform duration-500`} />
