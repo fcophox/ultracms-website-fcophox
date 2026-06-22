@@ -156,14 +156,18 @@ export default function ServicesPage() {
             {services.map((service) => (
               <div key={service.id} className="grid grid-cols-[60px_1fr_180px_160px_120px] items-center gap-4 px-6 py-4 hover:bg-surface/30 transition-colors">
                 {/* Portada */}
-                <div className="w-10 h-10 rounded overflow-hidden relative border border-border bg-background">
-                  <Image 
-                    src={service.image_url || fallbackImage} 
-                    alt={service.title} 
-                    fill 
-                    className="object-cover" 
-                    sizes="40px" 
-                  />
+                <div className="w-10 h-10 rounded overflow-hidden relative border border-border bg-background flex items-center justify-center">
+                  {service.image_url ? (
+                    <Image 
+                      src={service.image_url} 
+                      alt={service.title} 
+                      fill 
+                      className="object-cover" 
+                      sizes="40px" 
+                    />
+                  ) : (
+                    <Wrench className="w-5 h-5 text-muted/60" />
+                  )}
                 </div>
 
                 {/* Título & Slug */}

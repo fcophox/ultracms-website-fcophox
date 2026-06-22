@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
+import { FileText, Briefcase } from "lucide-react";
 
 export const revalidate = 0; // Disable caching for the admin dashboard so it's always real-time
 
@@ -93,14 +94,20 @@ export default async function DashboardPage() {
             ) : (
               sortedTopContent.map((item, index) => (
                 <div key={index} className="grid grid-cols-[40px_1fr_120px_80px] items-center gap-4 px-6 py-4 hover:bg-surface/30 transition-colors">
-                  <div className="w-10 h-10 rounded overflow-hidden relative border border-border">
-                    <Image 
-                      src={item.image_url || fallbackImage} 
-                      alt={item.title} 
-                      fill 
-                      className="object-cover" 
-                      sizes="40px" 
-                    />
+                  <div className="w-10 h-10 rounded overflow-hidden relative border border-border bg-background flex items-center justify-center">
+                    {item.image_url ? (
+                      <Image 
+                        src={item.image_url} 
+                        alt={item.title} 
+                        fill 
+                        className="object-cover" 
+                        sizes="40px" 
+                      />
+                    ) : item.categoryType === "Article" ? (
+                      <FileText className="w-5 h-5 text-muted/60" />
+                    ) : (
+                      <Briefcase className="w-5 h-5 text-muted/60" />
+                    )}
                   </div>
                   <div className="text-[13px] text-foreground/90 font-medium truncate pr-4">
                     {item.title}

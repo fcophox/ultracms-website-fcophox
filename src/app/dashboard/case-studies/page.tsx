@@ -79,14 +79,18 @@ export default async function CaseStudiesPage() {
             {cases.map((c) => (
               <div key={c.id} className="grid grid-cols-[60px_1fr_150px_140px_80px_150px] items-center gap-4 px-6 py-4 hover:bg-surface/30 transition-colors">
                 {/* Portada */}
-                <div className="w-10 h-10 rounded overflow-hidden relative border border-border">
-                  <Image 
-                    src={c.image_url || fallbackImage} 
-                    alt={c.title} 
-                    fill 
-                    className="object-cover" 
-                    sizes="40px" 
-                  />
+                <div className="w-10 h-10 rounded overflow-hidden relative border border-border bg-background flex items-center justify-center">
+                  {c.image_url ? (
+                    <Image 
+                      src={c.image_url} 
+                      alt={c.title} 
+                      fill 
+                      className="object-cover" 
+                      sizes="40px" 
+                    />
+                  ) : (
+                    <Briefcase className="w-5 h-5 text-muted/60" />
+                  )}
                 </div>
 
                 {/* Título & Fecha */}

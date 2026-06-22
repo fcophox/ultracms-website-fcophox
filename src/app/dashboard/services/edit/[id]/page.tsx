@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Camera, Calendar, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Camera, Calendar, Loader2, CheckCircle2, AlertCircle, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { createClient } from "@/utils/supabase/client";
+import { generateSlug, generateEnglishSlug } from "@/utils/slugify";
 
 export default function EditServicePage(props: { params: Promise<{ id: string }> }) {
   const params = use(props.params);
@@ -83,6 +84,8 @@ export default function EditServicePage(props: { params: Promise<{ id: string }>
   const [titleEn, setTitleEn] = useState("");
   const [slugEn, setSlugEn] = useState("");
   const [contentEn, setContentEn] = useState("");
+  const [isGeneratingSlug, setIsGeneratingSlug] = useState(false);
+  const slugTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     async function loadService() {
@@ -121,6 +124,31 @@ export default function EditServicePage(props: { params: Promise<{ id: string }>
     loadService();
   }, [id, supabase]);
 
+  // Auto-generate slug from title (always in English)
+  const handleTitleChange = (value: string) => {
+    setTitle(value);
+    if (slugTimerRef.current) clearTimeout(slugTimerRef.current);
+    if (!value.trim()) {
+      setSlug("");
+      return;
+    }
+    setIsGeneratingSlug(true);
+    slugTimerRef.current = setTimeout(async () => {
+      const englishSlug = await generateEnglishSlug(value);
+      setSlug(englishSlug);
+      setIsGeneratingSlug(false);
+    }, 600);
+  };
+
+  const handleTitleEnChange = (value: string) => {
+    setTitleEn(value);
+    if (!value.trim()) {
+      setSlugEn("");
+      return;
+    }
+    setSlugEn(generateSlug(value));
+  };
+
   const handleSave = async () => {
     if (!title) {
       setModalConfig({
@@ -142,7 +170,7 @@ export default function EditServicePage(props: { params: Promise<{ id: string }>
           content,
           category,
           published_at: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
-          image_url: imageUrl,
+          image_url: imageUrl || null,
           title_en: titleEn,
           slug_en: slugEn,
           content_en: contentEn,
@@ -289,17 +317,23 @@ export default function EditServicePage(props: { params: Promise<{ id: string }>
                 type="text"
                 placeholder={currentLanguage === 'es' ? "Título del Servicio..." : "Service Title..."}
                 value={currentLanguage === 'es' ? title : titleEn}
-                onChange={(e) => currentLanguage === 'es' ? setTitle(e.target.value) : setTitleEn(e.target.value)}
+                onChange={(e) => currentLanguage === 'es' ? handleTitleChange(e.target.value) : handleTitleEnChange(e.target.value)}
                 className="w-full bg-transparent text-3xl font-medium text-foreground/80 placeholder:text-muted/50 focus:outline-none"
               />
               <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold text-muted tracking-wider">Slug {currentLanguage === 'en' && '(English)'}</label>
+                <div className="flex items-center gap-2">
+                  <label className="text-[11px] font-bold text-muted tracking-wider">Slug {currentLanguage === 'en' && '(English)'}</label>
+                  {isGeneratingSlug && currentLanguage === 'es' && (
+                    <span className="text-[10px] text-primary flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Traduciendo...</span>
+                  )}
+                  <span className="text-[10px] text-muted/50 ml-auto">Auto-generado en inglés</span>
+                </div>
                 <input
                   type="text"
                   value={currentLanguage === 'es' ? slug : slugEn}
-                  onChange={(e) => currentLanguage === 'es' ? setSlug(e.target.value) : setSlugEn(e.target.value)}
-                  className="h-12 rounded-lg bg-background border border-transparent px-4 flex items-center text-muted/80 font-mono text-[13px] focus:outline-none"
-                  placeholder={currentLanguage === 'es' ? "url-amigable" : "friendly-url"}
+                  readOnly
+                  className="h-12 rounded-lg bg-background border border-transparent px-4 flex items-center text-muted/80 font-mono text-[13px] focus:outline-none cursor-default"
+                  placeholder={currentLanguage === 'es' ? "se-genera-automaticamente" : "auto-generated"}
                 />
               </div>
             </div>
@@ -340,13 +374,23 @@ export default function EditServicePage(props: { params: Promise<{ id: string }>
                   {imageUrl ? (
                     <div className="relative group rounded-xl overflow-hidden border border-border h-[140px]">
                       <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
-                      <label
-                        htmlFor="service-image-upload"
-                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 text-xs font-semibold text-white"
-                      >
-                        <Camera className="w-4 h-4" />
-                        Cambiar Imagen
-                      </label>
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-all duration-200">
+                        <label
+                          htmlFor="service-image-upload"
+                          className="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-white hover:text-primary transition-colors"
+                        >
+                          <Camera className="w-4 h-4" />
+                          Cambiar
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setImageUrl("")}
+                          className="flex items-center gap-1.5 text-xs font-semibold text-white hover:text-red-500 transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                          Eliminar
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <label

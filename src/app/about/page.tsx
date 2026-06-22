@@ -5,6 +5,7 @@ import { EvolutionTimeline } from "@/components/evolution-timeline";
 import { AreasColaboracion } from "@/components/areas-colaboracion";
 import Link from "next/link";
 import Image from "next/image";
+import { RevealImage } from "@/components/reveal-image";
 import { ArrowLeft, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -49,20 +50,16 @@ export default function AboutPage() {
         </motion.div>
 
         {/* Hero Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="w-full relative aspect-[21/9] rounded-[2rem] overflow-hidden mb-24"
-        >
-          <Image
+        <div className="w-full relative aspect-[21/9] rounded-[2rem] overflow-hidden mb-24">
+          <RevealImage
             src="/about/desk.png"
             alt="Workspace"
             fill
             className="object-cover"
             priority
+            delayMs={200}
           />
-        </motion.div>
+        </div>
 
         {/* Story Section */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 items-center mb-24 md:mb-32">
@@ -79,36 +76,26 @@ export default function AboutPage() {
               {t('storyDesc')}
             </p>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden"
-          >
-            <Image
+          <div className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden">
+            <RevealImage
               src="/about/cowork.png"
               alt="Sticky notes on window"
               fill
               className="object-cover"
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Experience Section */}
         <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-24 items-center mb-24 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden"
-          >
-            <Image
+          <div className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden">
+            <RevealImage
               src="/about/coffeeshop.png"
               alt="Laptop and coffee"
               fill
               className="object-cover"
             />
-          </motion.div>
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

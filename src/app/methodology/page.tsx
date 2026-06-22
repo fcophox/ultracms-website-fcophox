@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
+import { RevealImage } from "@/components/reveal-image";
 
 import { CertificationsSection } from "@/components/certifications";
 import { MethodologySchema } from "@/components/methodology-schema";
@@ -42,37 +43,38 @@ export default function MethodologyPage() {
         </motion.div>
 
         {/* 3 Images Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
           {/* Image 1 */}
-          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative group">
-            <img
-              src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
-              alt="Retro computer"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative">
+            <RevealImage
+              src="/about/desk.png"
+              alt="Workspace"
+              fill
+              className="object-cover"
+              delayMs={100}
             />
           </div>
           {/* Image 2 */}
-          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative group">
-            <img
-              src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80"
-              alt="Sketching wireframes"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative">
+            <RevealImage
+              src="/about/cowork.png"
+              alt="Coworking"
+              fill
+              className="object-cover"
+              delayMs={250}
             />
           </div>
           {/* Image 3 */}
-          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative group">
-            <img
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-              alt="Team working"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <div className="w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-surface relative">
+            <RevealImage
+              src="/about/coffeeshop.png"
+              alt="Coffeeshop"
+              fill
+              className="object-cover"
+              delayMs={400}
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Intro Text Section */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-24">

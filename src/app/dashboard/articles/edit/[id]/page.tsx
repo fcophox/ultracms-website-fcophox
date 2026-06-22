@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -9,11 +9,13 @@ import {
   Calendar,
   Loader2,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Trash2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { createClient } from "@/utils/supabase/client";
+import { generateSlug, generateEnglishSlug } from "@/utils/slugify";
 
 export default function EditArticlePage(props: { params: Promise<{ id: string }> }) {
   const params = use(props.params);
@@ -42,11 +44,14 @@ export default function EditArticlePage(props: { params: Promise<{ id: string }>
   const [imageUrl, setImageUrl] = useState("");
   const [tags, setTags] = useState("");
   const [hasPdf, setHasPdf] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   // English Form State
   const [titleEn, setTitleEn] = useState("");
   const [slugEn, setSlugEn] = useState("");
   const [contentEn, setContentEn] = useState("");
+  const [isGeneratingSlug, setIsGeneratingSlug] = useState(false);
+  const slugTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     async function loadInitialData() {
@@ -87,6 +92,55 @@ export default function EditArticlePage(props: { params: Promise<{ id: string }>
     loadInitialData();
   }, [id, supabase]);
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setIsUploading(true);
+    try {
+      const file = files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const { error } = await supabase.storage
+        .from('article-images')
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+      if (error) throw error;
+      const { data: { publicUrl } } = supabase.storage
+        .from('article-images')
+        .getPublicUrl(fileName);
+      setImageUrl(publicUrl);
+    } catch (error: any) {
+      console.error("Error uploading image:", error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // Auto-generate slug from title (always in English)
+  const handleTitleChange = (value: string) => {
+    setTitle(value);
+    // Debounce the slug generation
+    if (slugTimerRef.current) clearTimeout(slugTimerRef.current);
+    if (!value.trim()) {
+      setSlug("");
+      return;
+    }
+    setIsGeneratingSlug(true);
+    slugTimerRef.current = setTimeout(async () => {
+      const englishSlug = await generateEnglishSlug(value);
+      setSlug(englishSlug);
+      setIsGeneratingSlug(false);
+    }, 600);
+  };
+
+  const handleTitleEnChange = (value: string) => {
+    setTitleEn(value);
+    if (!value.trim()) {
+      setSlugEn("");
+      return;
+    }
+    setSlugEn(generateSlug(value));
+  };
+
   const handleSave = async (status: "draft" | "published") => {
     setIsSaving(true);
     try {
@@ -99,7 +153,7 @@ export default function EditArticlePage(props: { params: Promise<{ id: string }>
           category,
           status,
           published_at: publishedAt ? new Date(publishedAt).toISOString() : null,
-          image_url: imageUrl,
+          image_url: imageUrl || null,
           tags: tags ? tags.split(',').map(t => t.trim()).filter(Boolean) : [],
           download_url: hasPdf ? "yes" : null,
           title_en: titleEn,
@@ -248,17 +302,23 @@ export default function EditArticlePage(props: { params: Promise<{ id: string }>
                 type="text"
                 placeholder={currentLanguage === 'es' ? "Título del Artículo..." : "Article Title..."}
                 value={currentLanguage === 'es' ? title : titleEn}
-                onChange={(e) => currentLanguage === 'es' ? setTitle(e.target.value) : setTitleEn(e.target.value)}
+                onChange={(e) => currentLanguage === 'es' ? handleTitleChange(e.target.value) : handleTitleEnChange(e.target.value)}
                 className="w-full bg-transparent text-3xl font-medium text-foreground/80 placeholder:text-muted/50 focus:outline-none"
               />
               <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold text-muted tracking-wider">Slug {currentLanguage === 'en' && '(English)'}</label>
+                <div className="flex items-center gap-2">
+                  <label className="text-[11px] font-bold text-muted tracking-wider">Slug {currentLanguage === 'en' && '(English)'}</label>
+                  {isGeneratingSlug && currentLanguage === 'es' && (
+                    <span className="text-[10px] text-primary flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Traduciendo...</span>
+                  )}
+                  <span className="text-[10px] text-muted/50 ml-auto">Auto-generado en inglés</span>
+                </div>
                 <input
                   type="text"
                   value={currentLanguage === 'es' ? slug : slugEn}
-                  onChange={(e) => currentLanguage === 'es' ? setSlug(e.target.value) : setSlugEn(e.target.value)}
-                  className="h-12 rounded-lg bg-background border border-transparent px-4 flex items-center text-muted/80 font-mono text-[13px] focus:outline-none"
-                  placeholder={currentLanguage === 'es' ? "url-amigable" : "friendly-url"}
+                  readOnly
+                  className="h-12 rounded-lg bg-background border border-transparent px-4 flex items-center text-muted/80 font-mono text-[13px] focus:outline-none cursor-default"
+                  placeholder={currentLanguage === 'es' ? "se-genera-automaticamente" : "auto-generated"}
                 />
               </div>
             </div>
@@ -288,19 +348,63 @@ export default function EditArticlePage(props: { params: Promise<{ id: string }>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-semibold text-foreground/90">Cover Image URL</label>
+                  <label className="text-xs font-semibold text-foreground/90">Subir Imagen</label>
                   <input
-                    type="text"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    placeholder="https://..."
-                    className="h-[46px] rounded-lg bg-background border border-transparent px-4 text-foreground text-[13px] placeholder:text-muted/60 focus:outline-none focus:border-border transition-colors"
+                    type="file"
+                    id="article-image-upload"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
                   />
-                  {imageUrl && (
-                    <div className="mt-2 h-[140px] rounded-xl overflow-hidden relative border border-border">
-                      <img src={imageUrl} alt="Cover Preview" className="w-full h-full object-cover" />
+                  {imageUrl ? (
+                    <div className="relative group rounded-xl overflow-hidden border border-border h-[140px]">
+                      <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-all duration-200">
+                        <label
+                          htmlFor="article-image-upload"
+                          className="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-white hover:text-primary transition-colors"
+                        >
+                          <Camera className="w-4 h-4" />
+                          Cambiar
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setImageUrl("")}
+                          className="flex items-center gap-1.5 text-xs font-semibold text-white hover:text-red-500 transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                          Eliminar
+                        </button>
+                      </div>
                     </div>
+                  ) : (
+                    <label
+                      htmlFor="article-image-upload"
+                      className="h-[140px] rounded-xl border-2 border-dashed border-border/80 hover:border-border bg-background transition-colors flex flex-col items-center justify-center gap-3 cursor-pointer"
+                    >
+                      {isUploading ? (
+                        <>
+                          <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                          <span className="text-[13px] text-muted font-medium">Subiendo imagen...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Camera className="w-6 h-6 text-muted/80" strokeWidth={1.5} />
+                          <span className="text-[13px] text-muted font-medium">Click para subir una imagen</span>
+                        </>
+                      )}
+                    </label>
                   )}
+                  <div className="mt-2">
+                    <label className="text-[10px] font-bold text-muted uppercase tracking-wider">O URL de la imagen</label>
+                    <input
+                      type="text"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      placeholder="https://..."
+                      className="h-[36px] w-full rounded-lg bg-background border border-transparent px-3 text-foreground text-[11px] placeholder:text-muted/60 focus:outline-none focus:border-border transition-colors mt-1"
+                    />
+                  </div>
                 </div>
               </div>
 
