@@ -1,5 +1,5 @@
 {
-    "rewrites": [
+    "redirects": [
         {
             "source": "/:path*",
             "has": [
@@ -8,7 +8,8 @@
                     "value": "cms.fcophox.com"
                 }
             ],
-            "destination": "/cms/:path*"
+            "destination": "https://www.fcophox.com/login/:path*",
+            "permanent": true
         },
         {
             "source": "/:path*",
@@ -18,7 +19,8 @@
                     "value": "resources.fcophox.com"
                 }
             ],
-            "destination": "/resources/:path*"
+            "destination": "https://www.fcophox.com/resources/:path*",
+            "permanent": true
         }
     ]
 }
