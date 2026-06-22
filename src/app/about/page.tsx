@@ -124,9 +124,11 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
-        {/* Biography Section */}
-        <div className="dark bg-background w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-24 mb-24 md:mb-32">
-          <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-24">
+      </div>
+
+      {/* Biography Section */}
+      <div className="dark bg-background w-full py-24 mb-24 md:mb-32">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-24 w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -180,7 +182,6 @@ export default function AboutPage() {
             </motion.div>
           </div>
         </div>
-      </div>
 
       <EvolutionTimeline />
       <AreasColaboracion />
