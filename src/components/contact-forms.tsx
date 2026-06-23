@@ -399,6 +399,11 @@ export function MeetingForm() {
   ];
 
   useEffect(() => {
+    // Inicializar el día seleccionado al día de hoy
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    setSelectedDate(today);
+
     const fetchSettings = async () => {
       const { data, error } = await supabase
         .from("availability_settings")
@@ -437,7 +442,7 @@ export function MeetingForm() {
       daysArray.push({
         jsDate: date,
         dateString: date.getDate().toString(),
-        dayHeader: i < 7 ? headers[i] : '',
+        dayHeader: i < 7 ? headers[dayIndex] : '',
         isAvailable: !isPast && !isRestricted,
         dayIndex
       });
@@ -552,11 +557,6 @@ export function MeetingForm() {
               const today = new Date();
               today.setHours(0, 0, 0, 0);
               const isToday = today.getTime() === d.jsDate.getTime();
-              // Auto-select today on first render if nothing is selected
-              if (isToday && !selectedDate) {
-                // Defer state update to avoid rendering issues
-                setTimeout(() => setSelectedDate(d.jsDate), 0);
-              }
               const isSelected = selectedDate?.getTime() === d.jsDate.getTime();
 
               return (
