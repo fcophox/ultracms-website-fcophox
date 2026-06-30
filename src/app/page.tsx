@@ -6,6 +6,7 @@ import { Blog } from "@/components/blog";
 import { UxBento } from "@/components/ux-bento";
 import { ServicesSection } from "@/components/services-section";
 import { ExperienceLogos } from "@/components/experience-logos";
+import { ToolsSection } from "@/components/tools-section";
 import { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
 import { getTranslations, getLocale } from 'next-intl/server';
@@ -72,6 +73,7 @@ export default async function Home() {
       <ServicesSection />
       {/* <BentoSection /> */}
       <ExperienceLogos />
+      <ToolsSection />
       <Blog />
       <Banner />
       {/* Decorative Grid */}

@@ -99,6 +99,15 @@
     "defaultCategory": "Tecnología",
     "readFull": "Leer artículo completo..."
   },
+  "Tools": {
+    "badge": "Herramientas & Experimentos",
+    "title": "Soluciones digitales creadas desde la experiencia, el diseño y el código.",
+    "description": "Un espacio donde reúno productos, herramientas y experimentos funcionales que nacen de necesidades reales: personales, profesionales o detectadas durante procesos de diseño de producto.",
+    "button": "Conocer herramientas",
+    "cardBadge": "Kōsei — Beta Pública",
+    "cardTitle": "Kōsei: Mapas visuales rápidos y ordenados",
+    "cardDesc": "Una herramienta web para crear sitemaps y diagramas de flujo de forma extremadamente ágil, ideal para estructurar ideas rápido."
+  },
   "Banner": {
     "title": "Estemos en contacto",
     "subtitle": "¿Interesado en colaborar? Estamos listos para impulsar tu próximo proyecto tecnológico.",

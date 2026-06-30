@@ -99,6 +99,15 @@
     "defaultCategory": "Technology",
     "readFull": "Read full article..."
   },
+  "Tools": {
+    "badge": "Tools & Experiments",
+    "title": "Digital solutions built from experience, design, and code.",
+    "description": "A space where I gather functional products, tools, and experiments born from real needs: personal, professional, or discovered during product design processes.",
+    "button": "Explore tools",
+    "cardBadge": "Kōsei — Public Beta",
+    "cardTitle": "Kōsei: Fast and organized visual maps",
+    "cardDesc": "A web tool for creating sitemaps and flowcharts in an extremely agile way, ideal for structuring ideas fast."
+  },
   "Banner": {
     "title": "Let's get in touch",
     "subtitle": "Interested in collaborating? We are ready to boost your next tech project.",
