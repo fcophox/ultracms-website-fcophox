@@ -81,7 +81,7 @@ export function RevealImage({
 
   const showReveal = isLoaded && isInView;
 
-  // The sliding curtain overlay style (slides UP to reveal from bottom to top)
+  // The sliding curtain overlay style (slides DOWN to reveal from top to bottom)
   const overlayStyle: React.CSSProperties = {
     position: "absolute",
     top: 0,
@@ -93,7 +93,7 @@ export function RevealImage({
     transitionDuration: `${durationMs}ms`,
     transitionDelay: `${delayMs}ms`,
     transitionTimingFunction: "cubic-bezier(0.77, 0, 0.175, 1)",
-    transform: showReveal ? "translateY(-100%)" : "translateY(0%)",
+    transform: showReveal ? "translateY(100%)" : "translateY(0%)",
     zIndex: 10,
     pointerEvents: "none",
   };
@@ -103,7 +103,7 @@ export function RevealImage({
     ...style,
     transition: `transform ${durationMs + 200}ms cubic-bezier(0.25, 1, 0.5, 1)`,
     transitionDelay: `${delayMs}ms`,
-    transform: showReveal ? "scale(1)" : "scale(1.08)",
+    transform: showReveal ? undefined : "scale(1.08)",
   };
 
   return (

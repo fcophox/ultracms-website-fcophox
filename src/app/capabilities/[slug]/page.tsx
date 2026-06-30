@@ -10,6 +10,7 @@ import { ArticleLayout } from "@/components/article-layout";
 import { servicesData } from "@/data/services-data";
 import { ScrollProgressLine } from "@/components/scroll-progress-line";
 import { AudienceCarousel } from "@/components/audience-carousel";
+import { MotionDiv, MotionH1, MotionP, MotionSpan } from "@/components/motion-wrapper";
 
 export const revalidate = 60; // Cache pages for 1 minute
 
@@ -95,21 +96,40 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </Link>
 
             <div className="flex flex-col gap-4">
-              <span className="self-start bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-muted uppercase">
+              <MotionSpan
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="self-start bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-muted uppercase"
+              >
                 {data.badge}
-              </span>
-              <h1 className="text-3xl md:text-6xl font-light text-foreground leading-tight tracking-tight">
+              </MotionSpan>
+              <MotionH1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-6xl font-light text-foreground leading-tight tracking-tight"
+              >
                 {data.title}
-              </h1>
-              <p className="text-base md:text-xl text-muted font-light max-w-3xl leading-relaxed mt-2">
+              </MotionH1>
+              <MotionP
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-base md:text-xl text-muted font-light max-w-3xl leading-relaxed mt-2"
+              >
                 {data.shortDesc}
-              </p>
+              </MotionP>
             </div>
           </div>
 
           {/* Hero Image */}
           {data.imageUrl && (
-            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-[2rem] overflow-hidden border border-border/40 bg-surface shadow-lg mb-10 md:mb-16">
+            <MotionDiv
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-[2rem] overflow-hidden border border-border/40 bg-surface shadow-lg mb-10 md:mb-16"
+            >
               <Image
                 src={data.imageUrl}
                 alt={data.title}
@@ -118,31 +138,48 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 sizes="100vw"
                 priority
               />
-            </div>
+            </MotionDiv>
           )}
 
           {/* Core Content */}
-          <div className="max-w-3xl mx-auto mb-14 md:mb-20">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="max-w-3xl mx-auto mb-14 md:mb-20"
+          >
             {/* Description */}
             <div className="mb-10 md:mb-12">
               <h2 className="text-2xl font-light text-foreground tracking-tight mb-4">
-                {isEs ? "Descripción del servicio" : "Service Description"}
+                {isEs ? "Descripción de la capacidad" : "Capability Description"}
               </h2>
               <p className="text-muted leading-relaxed text-base md:text-lg whitespace-pre-line">
                 {data.longDesc}
               </p>
             </div>
-
-          </div>
+          </MotionDiv>
 
           {/* Audience Cards — Para quién es */}
-          <AudienceCarousel
-            cards={data.audienceCards}
-            title={isEs ? "¿Para quién es este servicio?" : "Who is this service for?"}
-          />
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <AudienceCarousel
+              cards={data.audienceCards}
+              title={isEs ? "¿Para quién es este servicio?" : "Who is this service for?"}
+            />
+          </MotionDiv>
 
           {/* Why & What — Two columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-14 md:mb-20">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-42"
+          >
             <div>
               <h3 className="text-xl md:text-2xl font-light text-foreground tracking-tight mb-4">
                 {isEs ? "¿Por qué lo necesitarías?" : "Why would you need it?"}
@@ -159,11 +196,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 {data.whatYouGet}
               </p>
             </div>
-          </div>
+          </MotionDiv>
 
           {/* Roadmap / Process — Visual Timeline */}
-          <div className="mb-16 md:mb-24">
-            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-6">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="mb-18 md:mb-48"
+          >
+            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-20">
               {isEs ? "Actividades basado en la metdología" : "Activities based on the methodology"}
             </h2>
 
@@ -207,10 +250,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </MotionDiv>
 
           {/* Pricing Plans Grid */}
-          <div className="mb-16 md:mb-24">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="mb-16 md:mb-24"
+          >
             <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight mb-6 md:mb-8 tracking-tight text-center">
               {labels.plans}
             </h2>
@@ -257,10 +306,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 );
               })}
             </div>
-          </div>
+          </MotionDiv>
 
           {/* Conditions & Assumptions */}
-          <div className="max-w-4xl mx-auto">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto"
+          >
             <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-6">
               {labels.conditions}
             </h2>
@@ -274,7 +329,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionDiv>
 
           {/* Prev / Next Capabilities */}
           {(() => {
