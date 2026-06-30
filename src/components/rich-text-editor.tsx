@@ -55,7 +55,7 @@ export function RichTextEditor({ content, onChange, placeholder = "Escribe algo 
   };
 
   return (
-    <div className="flex-1 rounded-xl border border-border bg-surface flex flex-col min-h-[500px]">
+    <div className="flex-1 rounded-xl border border-border bg-surface flex flex-col h-[500px]">
       {/* Toolbar */}
       <div className="h-14 border-b border-border flex items-center px-4 gap-1 overflow-x-auto shrink-0">
         <div className="flex items-center gap-1 pr-4 border-r border-border">
