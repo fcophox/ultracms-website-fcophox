@@ -31,7 +31,7 @@ export function ToolsSection() {
               {t('description')}
             </p>
             <a
-              href="https://kosei.fcophox.com/"
+              href="https://kosei.fcophox.com/?utm_source=fcophox.com&utm_medium=referral&utm_campaign=portfolio"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/95 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 group"
@@ -50,7 +50,7 @@ export function ToolsSection() {
             className="lg:col-span-7"
           >
             <a
-              href="https://kosei.fcophox.com/"
+              href="https://kosei.fcophox.com/?utm_source=fcophox.com&utm_medium=referral&utm_campaign=portfolio"
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-3xl border border-border/40 bg-surface/50 hover:bg-surface overflow-hidden hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl cursor-none"
