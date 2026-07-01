@@ -27,7 +27,7 @@ export function Footer() {
             <div className="flex items-center gap-4 mb-10">
               <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-border/50">
                 <Image
-                  src="/brand/francisco-avatar.png"
+                  src="/brand/francisco-avatar.png?v=2"
                   alt="Francisco"
                   width={48}
                   height={48}

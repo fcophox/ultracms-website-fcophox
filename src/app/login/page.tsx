@@ -141,7 +141,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800 relative">
               <Image
-                src="/brand/francisco-avatar.png"
+                src="/brand/francisco-avatar.png?v=2"
                 alt="Francisco Hormazabal"
                 fill
                 className="object-cover"

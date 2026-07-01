@@ -96,7 +96,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-3 relative z-10 group" onClick={() => setIsMenuOpen(false)}>
             <div className="w-11 h-11 rounded-full bg-[#1A1A1E] border border-border/10 flex items-center justify-center shrink-0 overflow-hidden relative">
               <Image src="/brand/logotipo.svg" alt="Logo" width={44} height={44} className="object-cover absolute transition-opacity duration-300 group-hover:opacity-0" />
-              <Image src="/brand/francisco-avatar.png" alt="Avatar" width={44} height={44} className="object-cover absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+              <Image src="/brand/francisco-avatar.png?v=2" alt="Avatar" width={44} height={44} className="object-cover absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
             </div>
             <div className="flex flex-col justify-center hidden sm:flex">
               <span className="font-bold text-[15px] text-foreground leading-tight">Francisco Hormazábal</span>

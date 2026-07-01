@@ -155,7 +155,7 @@ export function MessageForm() {
       <div className="flex items-center gap-4 bg-surface/50 p-4 rounded-2xl border border-border/10 mt-2">
         <div className="relative shrink-0">
           <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border/20">
-            <Image src="/brand/francisco-avatar.png" alt="Francisco" fill className="object-cover" />
+            <Image src="/brand/francisco-avatar.png?v=2" alt="Francisco" fill className="object-cover" />
           </div>
           <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#111113] z-10 flex items-center justify-center">
             <div className="absolute w-full h-full bg-green-500 rounded-full animate-ping opacity-75" />
@@ -366,7 +366,7 @@ export function ConsultingForm() {
       <div className="flex items-center gap-4 bg-surface/50 p-4 rounded-2xl border border-border/10">
         <div className="relative shrink-0">
           <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border/20">
-            <Image src="/brand/francisco-avatar.png" alt="Francisco" fill className="object-cover" />
+            <Image src="/brand/francisco-avatar.png?v=2" alt="Francisco" fill className="object-cover" />
           </div>
           <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#111113] z-10 flex items-center justify-center">
             <div className="absolute w-full h-full bg-green-500 rounded-full animate-ping opacity-75" />
@@ -638,7 +638,7 @@ export function MeetingForm() {
       <div className="flex items-center gap-4 bg-surface/50 p-4 rounded-2xl border border-border/10 mt-2">
         <div className="relative shrink-0">
           <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border/20">
-            <Image src="/brand/francisco-avatar.png" alt="Francisco" fill className="object-cover" />
+            <Image src="/brand/francisco-avatar.png?v=2" alt="Francisco" fill className="object-cover" />
           </div>
           <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#111113] z-10 flex items-center justify-center">
             <div className="absolute w-full h-full bg-green-500 rounded-full animate-ping opacity-75" />
