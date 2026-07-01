@@ -16,23 +16,11 @@ const certifications = [
     logo: "/studies/udd.svg",
   },
   {
-    title: "Product Manager",
-    year: "2022",
-    institution: "EDTeam",
-    category: "Cursos & Bootcamps",
-  },
-  {
     title: "Certificación UX-PM (3 niveles)",
     year: "2018",
     institution: "Ayer Viernes – UX Alliance",
     category: "Certificaciones",
     logo: "/studies/uxalliance.svg",
-  },
-  {
-    title: "Accesibilidad Web",
-    year: "2021",
-    institution: "Aprende UX",
-    category: "Cursos & Bootcamps",
   },
   {
     title: "Diplomado en ResearchOps",
@@ -41,7 +29,6 @@ const certifications = [
     category: "Diplomados",
     logo: "/studies/aprendeux.svg",
   },
-
   {
     title: "Diplomado en UX Design",
     year: "2019",
@@ -50,31 +37,18 @@ const certifications = [
     logo: "/studies/uft.svg",
   },
   {
-    title: "Product Discovery",
-    year: "2022",
-    institution: "EDTeam",
-    category: "Cursos & Bootcamps",
-  },
-  {
     title: "Diseño Gráfico",
     year: "2007",
     institution: "Duoc UC",
     category: "Certificaciones",
     logo: "/studies/duoc.svg",
   },
-
   {
     title: "Programa Avanzado en CRO, UX & Analytics",
     year: "2021",
     institution: "Unir",
     category: "Certificaciones",
     logo: "/studies/unir.svg",
-  },
-  {
-    title: "Bootcamp Service Design",
-    year: "2021",
-    institution: "MEDU Escuela de Innovación",
-    category: "Cursos & Bootcamps",
   },
   {
     title: "Diplomado en Discovery UX",
@@ -84,24 +58,61 @@ const certifications = [
     logo: "/studies/aprendeux.svg",
   },
   {
-    title: "Arquitectura de la Información",
-    year: "2019",
-    institution: "Universidad de Chile",
-    category: "Cursos & Bootcamps",
-  },
-  {
     title: "Diplomado en Gestión y Desarrollo de Proyectos Digitales",
     year: "2014",
     institution: "Pontificia Universidad Católica",
     category: "Diplomados",
     logo: "/studies/uc.svg",
   },
+  // Cursos & Bootcamps
   {
-    title: "Machine Learning en Contexto UX",
+    title: "UX Research with AI course",
+    year: "2024",
+    institution: "AyerViernes",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "Design UX Essentials",
+    year: "2023",
+    institution: "Esc. Postgrado y Edu. Continua FCFM",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "CRO Course",
+    year: "2022",
+    institution: "Conviértete & Webpositer Academy",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "Product Design Course",
+    year: "2021",
+    institution: "Sol Mesz",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "UX Writing Bootcamp",
+    year: "2021",
+    institution: "DesignCore",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "CX: Customer Experience",
+    year: "2020",
+    institution: "MEDU Escuela de Innovación",
+    category: "Cursos & Bootcamps",
+  },
+  {
+    title: "Machine Learning in the UX context",
     year: "2020",
     institution: "Aprende UX",
     category: "Cursos & Bootcamps",
     logo: "/studies/aprendeux.svg",
+  },
+  {
+    title: "Information Architecture",
+    year: "2019",
+    institution: "Universidad de Chile",
+    category: "Cursos & Bootcamps",
   },
 ];
 
