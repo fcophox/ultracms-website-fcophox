@@ -4,6 +4,12 @@ import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { ArrowRight } from "lucide-react";
+
+const LinkedinIcon = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+);
+
 export function Hero() {
   const t = useTranslations('Hero');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -76,16 +82,18 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a
             href="/case-studies"
-            className="px-8 py-3 rounded-full bg-foreground text-background font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-foreground/20 dark:shadow-foreground/5"
+            className="px-8 py-3 rounded-full bg-foreground text-background font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-foreground/20 dark:shadow-foreground/5 flex items-center justify-center gap-2"
           >
             {t('viewProjects')}
+            <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="https://www.linkedin.com/in/fcophox/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-full bg-surface text-foreground font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-border/50 border border-border"
+            className="px-8 py-3 rounded-full bg-surface text-foreground font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-border/50 border border-border flex items-center justify-center gap-2"
           >
+            <LinkedinIcon className="w-4 h-4 text-[#0A66C2]" />
             {t('visitLinkedin')}
           </a>
         </div>
