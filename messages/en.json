@@ -324,5 +324,114 @@
   },
   "ResourcesPage": {
     "backHome": "Back to Home"
+  },
+  "CvPage": {
+    "backHome": "Back to Home",
+    "printPdf": "Print / Save PDF",
+    "role": "UX Engineer & Product Design Consultant",
+    "tag1": "UX Strategy",
+    "tag2": "AI",
+    "tag3": "Product Design",
+    "tag4": "CRO",
+    "tag5": "Data",
+    "profileTitle": "Professional Profile",
+    "profileP1": "Product Designer & UX Leader with over 14 years of experience designing and scaling digital products.",
+    "profileP2": "I specialize in combining UX, Product Strategy, and Artificial Intelligence to create high-impact solutions. My focus is on improving conversion, reducing friction, and aligning user experience with business goals.",
+    "profileP3": "I operate as a Full Stack Experience Builder, connecting design, technology, and artificial intelligence.",
+    "impactTitle": "Impact & Achievements",
+    "impactItems": [
+      "UX Strategy across multiple industries",
+      "AI integration in UX processes",
+      "Conversion Rate Optimization (CRO)",
+      "UX Leadership (11+ designers)",
+      "End-to-end digital product development",
+      "User Experience Research",
+      "Information Architecture and Usability"
+    ],
+    "experienceTitle": "Work Experience",
+    "jobs": [
+      {
+        "title": "UX Manager / Head of UX",
+        "company": "CleverIT Group — 2023 – Present",
+        "tasks": [
+          "UX team leadership across multiple digital products",
+          "Definition of UX strategy aligned with business goals",
+          "Application of AI in product design processes",
+          "Usability and user experience optimization"
+        ]
+      },
+      {
+        "title": "Senior Product Designer",
+        "company": "CleverIT Group — 2021 – 2023",
+        "tasks": [
+          "Digital product design across diverse industries",
+          "Application of UX Research and product strategy",
+          "Close collaboration with development teams"
+        ]
+      },
+      {
+        "title": "Product Designer UX",
+        "company": "Experis for Falabella — 2021",
+        "tasks": [
+          "Design of complex UX solutions for logistics",
+          "Optimization of critical operational flows"
+        ]
+      },
+      {
+        "title": "UX/UI Designer",
+        "company": "Acid Labs — 2020 – 2021",
+        "tasks": [
+          "UX research and high-fidelity interface (UI) design",
+          "Launch of insurance platforms and marketplaces"
+        ]
+      },
+      {
+        "title": "UX Lead & UX Coordinator",
+        "company": "Zenta Group — 2018 – 2020",
+        "tasks": [
+          "Creation and progressive scaling of the UX department",
+          "Definition of working methodologies and unified UX processes"
+        ]
+      }
+    ],
+    "contactTitle": "Contact",
+    "skillsTitle": "Skills",
+    "skills": [
+      "UX Strategy",
+      "Product Design",
+      "AI applied to UX",
+      "CRO",
+      "UX Research",
+      "Design Systems",
+      "React / Next.js",
+      "Leadership"
+    ],
+    "toolsTitle": "Tools",
+    "tools": [
+      "Figma",
+      "React",
+      "Next.js",
+      "Tailwind",
+      "ChatGPT",
+      "Webflow",
+      "Framer",
+      "Google Analytics"
+    ],
+    "educationTitle": "Education",
+    "education": [
+      {
+        "title": "Postgraduate Diploma in Data-Driven Design",
+        "institution": "Universidad del Desarrollo"
+      },
+      {
+        "title": "UX-PM Certification",
+        "institution": "UX Alliance"
+      },
+      {
+        "title": "Postgraduate Diploma in UX Design",
+        "institution": "Universidad Finis Terrae"
+      }
+    ],
+    "keywordsTitle": "Keywords"
   }
 }

@@ -324,5 +324,114 @@
   },
   "ResourcesPage": {
     "backHome": "Volver al Inicio"
+  },
+  "CvPage": {
+    "backHome": "Volver al inicio",
+    "printPdf": "Imprimir / Guardar PDF",
+    "role": "UX Engineer & Product Design Consultant",
+    "tag1": "Estrategia UX",
+    "tag2": "IA",
+    "tag3": "Diseño de Producto",
+    "tag4": "CRO",
+    "tag5": "Data",
+    "profileTitle": "Perfil Profesional",
+    "profileP1": "Product Designer & UX Leader con más de 14 años de experiencia diseñando y escalando productos digitales.",
+    "profileP2": "Me especializo en combinar UX, Estrategia de Producto e Inteligencia Artificial para crear soluciones de alto impacto. Mi enfoque se centra en mejorar la conversión, reducir fricción y alinear la experiencia de usuario con los objetivos de negocio.",
+    "profileP3": "Opero como un Full Stack Experience Builder, conector entre diseño, tecnología e inteligencia artificial.",
+    "impactTitle": "Impacto & Logros",
+    "impactItems": [
+      "Estrategia UX en múltiples industrias",
+      "Integración de IA en procesos UX",
+      "Optimización de conversión (CRO)",
+      "Liderazgo UX (11+ diseñadores)",
+      "Desarrollo end-to-end de productos digitales",
+      "Investigación en Experiencia de usuario",
+      "Arquitectura de Información y Usabilidad"
+    ],
+    "experienceTitle": "Experiencia Laboral",
+    "jobs": [
+      {
+        "title": "UX Manager / Head of UX",
+        "company": "CleverIT Group — 2023 – Presente",
+        "tasks": [
+          "Liderazgo de equipo UX en múltiples productos digitales",
+          "Definición de estrategia UX alineada a negocio",
+          "Aplicación de IA en procesos de diseño de producto",
+          "Mejora de usabilidad y experiencia de usuario"
+        ]
+      },
+      {
+        "title": "Senior Product Designer",
+        "company": "CleverIT Group — 2021 – 2023",
+        "tasks": [
+          "Diseño de productos digitales en diversas industrias",
+          "Aplicación de UX Research y estrategia de producto",
+          "Colaboración estrecha con equipos de desarrollo"
+        ]
+      },
+      {
+        "title": "Product Designer UX",
+        "company": "Experis para Falabella — 2021",
+        "tasks": [
+          "Diseño de soluciones de UX complejas para logística",
+          "Optimización de flujos operacionales críticos"
+        ]
+      },
+      {
+        "title": "UX/UI Designer",
+        "company": "Acid Labs — 2020 – 2021",
+        "tasks": [
+          "Investigación UX y diseño de interfaces (UI) de alta fidelidad",
+          "Lanzamiento de plataformas de seguros y marketplaces"
+        ]
+      },
+      {
+        "title": "UX Lead & Coordinador UX",
+        "company": "Zenta Group — 2018 – 2020",
+        "tasks": [
+          "Creación y escalamiento progresivo del área de UX",
+          "Definición de metodologías de trabajo y procesos UX unificados"
+        ]
+      }
+    ],
+    "contactTitle": "Contacto",
+    "skillsTitle": "Skills",
+    "skills": [
+      "Estrategia UX",
+      "Diseño de Producto",
+      "IA aplicada a UX",
+      "CRO",
+      "UX Research",
+      "Design Systems",
+      "React / Next.js",
+      "Liderazgo"
+    ],
+    "toolsTitle": "Herramientas",
+    "tools": [
+      "Figma",
+      "React",
+      "Next.js",
+      "Tailwind",
+      "ChatGPT",
+      "Webflow",
+      "Framer",
+      "Google Analytics"
+    ],
+    "educationTitle": "Educación",
+    "education": [
+      {
+        "title": "Diplomado Diseño Basado en Datos",
+        "institution": "Universidad del Desarrollo"
+      },
+      {
+        "title": "Certificación UX-PM",
+        "institution": "UX Alliance"
+      },
+      {
+        "title": "Diplomado UX Design",
+        "institution": "Universidad Finis Terrae"
+      }
+    ],
+    "keywordsTitle": "Keywords"
   }
 }
