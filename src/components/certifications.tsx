@@ -41,12 +41,7 @@ const certifications = [
     category: "Diplomados",
     logo: "/studies/aprendeux.svg",
   },
-  {
-    title: "Agile y Scrum",
-    year: "2021",
-    institution: "Aprende UX",
-    category: "Cursos & Bootcamps",
-  },
+
   {
     title: "Diplomado en UX Design",
     year: "2019",
@@ -67,12 +62,7 @@ const certifications = [
     category: "Certificaciones",
     logo: "/studies/duoc.svg",
   },
-  {
-    title: "Creación y gestión de Design Systems",
-    year: "2021",
-    institution: "Domestika",
-    category: "Cursos & Bootcamps",
-  },
+
   {
     title: "Programa Avanzado en CRO, UX & Analytics",
     year: "2021",
