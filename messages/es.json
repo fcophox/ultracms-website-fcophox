@@ -433,5 +433,12 @@
       }
     ],
     "keywordsTitle": "Keywords"
+  },
+  "NotFound": {
+    "title": "404",
+    "subtitle": "Página no encontrada",
+    "description": "Lo sentimos, la página que buscas no existe, ha sido movida o nunca existió en este universo digital.",
+    "goHome": "Ir al Inicio",
+    "viewProjects": "Ver Proyectos"
   }
 }

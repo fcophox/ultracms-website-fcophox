@@ -433,5 +433,12 @@
       }
     ],
     "keywordsTitle": "Keywords"
+  },
+  "NotFound": {
+    "title": "404",
+    "subtitle": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist, has been moved, or never existed in this digital universe.",
+    "goHome": "Go to Home",
+    "viewProjects": "View Projects"
   }
 }
