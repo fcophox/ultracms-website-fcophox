@@ -9,29 +9,45 @@ export function ToolsSection() {
   const t = useTranslations('Tools');
 
   return (
-    <section className="w-full px-6 py-24 z-10 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className="w-full px-6 py-24 lg:py-32 z-10 relative flex items-center min-h-[70vh] bg-surface/20 overflow-hidden">
+      {/* Desktop & Mobile Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/tanzo/bg-tanzo.png"
+        className="absolute inset-0 w-full h-full object-cover object-center md:object-right opacity-90 z-0 pointer-events-none"
+      >
+        <source src="/tanzo/bg-tanzo.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/100 to-transparent lg:w-2/3 pointer-events-none"></div>
+      <div className="absolute inset-x-0 top-0 h-32 md:h-48 z-0 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
+      <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 z-0 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column: Copy & Call-to-action */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex flex-col items-start"
+            className="lg:col-span-5 flex flex-col items-start w-[85%] lg:w-full relative z-10"
           >
-            <span className="inline-block bg-secondary/10 text-secondary border border-secondary/20 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-6">
+            <span className="inline-block bg-[#dfb281]/10 text-[#dfb281] border border-[#dfb281]/20 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-6">
               {t('badge')}
             </span>
-            <h2 className="text-[clamp(1.8rem,4vw,2.5rem)] font-light text-foreground leading-tight tracking-tight mb-6">
-              {t('title')}
-            </h2>
+            <h2
+              className="text-[clamp(1.8rem,4vw,2.5rem)] font-light text-foreground leading-tight tracking-tight mb-6"
+              dangerouslySetInnerHTML={{ __html: t.raw('title') }}
+            />
             <p className="text-muted text-base md:text-lg font-light leading-relaxed mb-8">
               {t('description')}
             </p>
             <a
-              href="https://kosei.fcophox.com/?utm_source=fcophox.com&utm_medium=referral&utm_campaign=portfolio"
+              href="https://tanzo.fcophox.com/?utm_source=fcophox.com&utm_medium=referral&utm_campaign=portfolio"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/95 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 group"
@@ -41,45 +57,14 @@ export function ToolsSection() {
             </a>
           </motion.div>
 
-          {/* Right Column: Premium Tool Card */}
-          <motion.div 
+          {/* Right Column: Tanzo Logo */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-7"
+            className="absolute right-[-40px] top-1/2 -translate-y-1/2 lg:static lg:translate-y-0 lg:col-span-7 flex justify-center lg:justify-end items-center min-h-[300px] pointer-events-none lg:pointer-events-auto z-10"
           >
-            <a
-              href="https://kosei.fcophox.com/?utm_source=fcophox.com&utm_medium=referral&utm_campaign=portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-3xl border border-border/40 bg-surface/50 hover:bg-surface overflow-hidden hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-2xl cursor-none"
-              data-custom-cursor="true"
-            >
-              <div className="relative w-full aspect-[16/10] bg-surface">
-                <RevealImage
-                  src="/brand/kosei_preview.png"
-                  alt="Kōsei Preview"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs text-muted">2026</span>
-                  <span className="text-xs font-semibold text-primary bg-primary/10 px-3.5 py-1 rounded-full ml-auto">
-                    {t('cardBadge')}
-                  </span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-light text-foreground leading-tight mb-3 transition-colors group-hover:text-primary">
-                  {t('cardTitle')}
-                </h3>
-                <p className="text-sm md:text-base text-muted leading-relaxed">
-                  {t('cardDesc')}
-                </p>
-              </div>
-            </a>
           </motion.div>
 
         </div>
