@@ -549,3 +549,17 @@ export const vibeCodingStages: PromptStage[] = [
     ]
   }
 ];
+
+export const masterclassStages: PromptStage[] = [
+  {
+    title: "🎯 MasterClass — Prompts y Ejercicios",
+    icon: "lightbulb",
+    prompts: [
+      {
+        id: 201,
+        title: "Prompt de Bienvenida",
+        template: "¡Hola! Estoy listo para aplicar lo aprendido en la MasterClass. Mi proyecto trata sobre [describe tu proyecto]. ¿Por dónde me recomiendas empezar basándote en la metodología enseñada?"
+      }
+    ]
+  }
+];

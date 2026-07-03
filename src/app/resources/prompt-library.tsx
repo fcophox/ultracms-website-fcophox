@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Check, Lock, Search, Compass, Layout, Sparkles, HelpCircle, FileCheck, Award, MessageSquare, Terminal, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { promptStages, vibeCodingStages } from "./prompts-data";
+import { promptStages, vibeCodingStages, masterclassStages } from "./prompts-data";
 import { createClient } from "@/utils/supabase/client";
 import { sendGAEvent } from "@next/third-parties/google";
 
@@ -17,7 +17,7 @@ export function PromptLibrary() {
     }
     return false;
   });
-  const [activeLibrary, setActiveLibrary] = useState<"ux" | "vibe">("ux");
+  const [activeLibrary, setActiveLibrary] = useState<"ux" | "vibe" | "masterclass">("ux");
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const [activeStage, setActiveStage] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -76,7 +76,7 @@ export function PromptLibrary() {
     }
   };
 
-  const currentStages = activeLibrary === "ux" ? promptStages : vibeCodingStages;
+  const currentStages = activeLibrary === "ux" ? promptStages : activeLibrary === "vibe" ? vibeCodingStages : masterclassStages;
 
   // Filter prompts by active stage and search query
   const filteredStages = currentStages.map(stage => {
@@ -154,6 +154,27 @@ export function PromptLibrary() {
               />
             )}
           </button>
+
+          <button
+            onClick={() => {
+              setActiveLibrary("masterclass");
+              setActiveStage("all");
+              setSearchQuery("");
+            }}
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-medium transition-all duration-300 relative z-10 flex items-center justify-center sm:justify-start gap-2 w-full sm:w-auto ${
+              activeLibrary === "masterclass" ? "text-background font-semibold" : "text-muted hover:text-foreground"
+            }`}
+          >
+            <Award className="w-4 h-4" />
+            🎓 MasterClass
+            {activeLibrary === "masterclass" && (
+              <motion.div
+                layoutId="activeLibraryTab"
+                className="absolute inset-0 bg-foreground rounded-xl -z-10"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+          </button>
         </div>
       </div>
 
@@ -183,7 +204,7 @@ export function PromptLibrary() {
                 <strong>Cómo usarlos:</strong> copia el prompt, reemplaza el texto entre <span className="text-foreground">[corchetes]</span> con tu contexto, y pégalo en tu herramienta de IA. Mientras más contexto des, mejor el resultado.
               </p>
             </motion.div>
-          ) : (
+          ) : activeLibrary === "vibe" ? (
             <motion.div
               key="vibe-header"
               initial={{ opacity: 0, y: 10 }}
@@ -206,13 +227,37 @@ export function PromptLibrary() {
                 <strong>Cómo usarlos:</strong> copia el prompt, reemplaza el texto entre <span className="text-foreground">[corchetes]</span> con tu contexto, y pégalo en tu herramienta de IA. <strong className="text-foreground/90 font-medium">Regla de oro del vibe coding:</strong> pide una cosa a la vez y revisa antes de seguir.
               </p>
             </motion.div>
+          ) : (
+            <motion.div
+              key="masterclass-header"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-left max-w-3xl"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium mb-3 border border-blue-500/20">
+                <FileCheck className="w-3.5 h-3.5" />
+                Material y Recursos
+              </span>
+              <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
+                🎓 MasterClass: <em>Diseña, prototipa, lanza</em>
+              </h2>
+              <p className="text-lg text-muted leading-relaxed font-light mb-2">
+                Recursos descargables y prompts complementarios.
+              </p>
+              <p className="text-sm text-muted/80 leading-relaxed">
+                <strong>Archivos en PDF:</strong> Encuentra las guías y atajos en la sección de recursos abajo de los prompts.
+              </p>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
 
       {/* Main Split Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left Column: Sidebar Filters & Search */}
+      {activeLibrary !== "masterclass" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Column: Sidebar Filters & Search */}
         <div className="lg:col-span-3 space-y-6">
           <div className="rounded-2xl sticky top-24 space-y-6">
             <div>
@@ -346,7 +391,45 @@ export function PromptLibrary() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+      )}
+
+      {/* PDF List for MasterClass */}
+      {activeLibrary === "masterclass" && (
+        <div className="mt-16 border-t border-border/20 pt-12">
+          <h3 className="text-2xl font-medium text-foreground mb-8 flex items-center gap-2">
+            <FileCheck className="w-6 h-6 text-primary" />
+            Recursos en PDF
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Atajos de Terminal", file: "PDF-01-Atajos-de-Terminal.pdf" },
+              { title: "Guía Git y GitHub", file: "PDF-02-Guia-Git-GitHub-Terminal.pdf" },
+              { title: "Banco de Prompts", file: "PDF-03-Banco-de-Prompts-y-Templates.pdf" },
+              { title: "Deploy Supabase Vercel", file: "PDF-04-Deploy-Supabase-Vercel.pdf" },
+            ].map((pdf, idx) => (
+              <a
+                key={idx}
+                href={`/masterclass/mc-dpl/${pdf.file}`}
+                download
+                className="group bg-surface/40 hover:bg-surface/60 border border-border/40 hover:border-border transition-all duration-300 rounded-2xl p-6 flex flex-col items-start gap-4 relative overflow-hidden"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                  <FileCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-base font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                    {pdf.title}
+                  </h4>
+                  <p className="text-xs text-muted font-medium">Descargar PDF</p>
+                </div>
+                {/* Ambient light inside card on hover */}
+                <div className="absolute -right-10 -bottom-10 w-24 h-24 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-all duration-500 pointer-events-none" />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
