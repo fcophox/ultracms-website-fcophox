@@ -407,6 +407,7 @@ export function PromptLibrary() {
               { title: "Guía Git y GitHub", file: "PDF-02-Guia-Git-GitHub-Terminal.pdf" },
               { title: "Banco de Prompts", file: "PDF-03-Banco-de-Prompts-y-Templates.pdf" },
               { title: "Deploy Supabase Vercel", file: "PDF-04-Deploy-Supabase-Vercel.pdf" },
+              { title: "Presentación MasterClass", file: "PDF-05-Presentacion-Masterclass.pdf" },
             ].map((pdf, idx) => (
               <a
                 key={idx}
