@@ -52,7 +52,7 @@ export default function AboutPage() {
         {/* Hero Image */}
         <div className="w-full relative aspect-[21/9] rounded-[2rem] overflow-hidden mb-24">
           <RevealImage
-            src="/about/desk.png"
+            src="/about/desktop.png"
             alt="Workspace"
             fill
             className="object-cover"
@@ -61,55 +61,7 @@ export default function AboutPage() {
           />
         </div>
 
-        {/* Story Section */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 items-center mb-24 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex-1"
-          >
-            <h2 className="text-3xl md:text-4xl font-normal text-foreground leading-tight mb-6">
-              {t('storyTitle')}
-            </h2>
-            <p className="text-lg md:text-xl text-muted font-medium">
-              {t('storyDesc')}
-            </p>
-          </motion.div>
-          <div className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden">
-            <RevealImage
-              src="/about/cowork.png"
-              alt="Sticky notes on window"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
 
-        {/* Experience Section */}
-        <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-24 items-center mb-24 md:mb-32">
-          <div className="flex-1 w-full relative aspect-[21/9] rounded-3xl overflow-hidden">
-            <RevealImage
-              src="/about/coffeeshop.png"
-              alt="Laptop and coffee"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex-1"
-          >
-            <h2 className="text-3xl md:text-4xl font-normal text-foreground leading-tight mb-6">
-              {t('expTitle')}
-            </h2>
-            <p className="text-lg md:text-xl text-muted font-medium">
-              {t('expDesc')}
-            </p>
-          </motion.div>
-        </div>
 
       </div>
 
@@ -133,7 +85,7 @@ export default function AboutPage() {
             >
               <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={32} height={32} />
+                  <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={56} height={56} className="w-full h-full object-contain p-1" />
                 </div>
                 <p className="text-xl md:text-2xl text-primary font-medium leading-snug pt-1">
                   {t('bioBadge')}

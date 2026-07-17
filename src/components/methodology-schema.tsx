@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Search, PenTool, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ProfileRadarChart } from "@/components/profile-radar-chart";
 
 export function MethodologySchema() {
   const t = useTranslations('MethodologySchema');
@@ -52,87 +53,107 @@ export function MethodologySchema() {
           </h2>
         </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 relative">
-        {steps.map((step, index) => (
-          <motion.div
-            key={step.number}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.2 }}
-            className="flex-1 flex flex-col bg-surface rounded-3xl p-8 border-none relative z-10 overflow-hidden"
-          >
-            {/* Background SVG Header */}
-            <div
-              className="absolute top-0 left-0 w-full h-full bg-[url('/brand/headercard.png')] bg-top bg-repeat-x opacity-60 pointer-events-none"
-              style={{ backgroundSize: 'auto' }}
-            />
+        <div className="flex flex-col lg:flex-row gap-6 relative">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2 }}
+              className="flex-1 flex flex-col bg-background rounded-3xl p-8 border-none relative z-10 overflow-hidden"
+            >
+              {/* Background SVG Header */}
+              <div
+                className="absolute top-0 left-0 w-full h-full bg-[url('/brand/headercard.png')] bg-top bg-repeat-x opacity-60 pointer-events-none"
+                style={{ backgroundSize: 'auto' }}
+              />
 
-            {/* Header */}
-            <div className="flex flex-col mb-8 relative z-10">
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${step.bgLight}`}>
-                <step.icon className={`w-6 h-6 ${step.color}`} />
+              {/* Header */}
+              <div className="flex flex-col mb-8 relative z-10">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${step.bgLight}`}>
+                  <step.icon className={`w-6 h-6 ${step.color}`} />
+                </div>
+                <h3 className={`text-xl font-medium tracking-wide mb-2 ${step.color}`}>
+                  {step.title}
+                </h3>
+                <p className="text-sm font-light text-muted leading-relaxed">
+                  {step.subtitle}
+                </p>
               </div>
-              <h3 className={`text-xl font-medium tracking-wide mb-2 ${step.color}`}>
-                {step.title}
-              </h3>
-              <p className="text-sm font-light text-muted leading-relaxed">
-                {step.subtitle}
-              </p>
-            </div>
 
-            {/* List */}
-            <div className="flex-1 mb-8">
-              <ul className="space-y-4">
-                {step.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-foreground/90">
-                    <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${step.color} opacity-70`} />
-                    <span className="leading-tight">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Output */}
-            <div className="mt-auto pt-6 border-t border-border/10">
-              <div className="text-[9px] font-semibold text-muted tracking-widest mb-3 uppercase">
-                {t('outputLabel')}
+              {/* List */}
+              <div className="flex-1 mb-8">
+                <ul className="space-y-4">
+                  {step.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-foreground/90">
+                      <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${step.color} opacity-70`} />
+                      <span className="leading-tight">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex flex-wrap gap-2 text-xs text-muted">
-                {step.output.map((out, i) => (
-                  <span key={i} className="px-3 py-1.5 rounded-full bg-background/60 border-none whitespace-nowrap">
-                    {out}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
 
-      {/* Resultados para el cliente */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.6 }}
-        className="mt-16 md:mt-24 flex flex-col items-center justify-center w-full"
-      >
-        <h3 className="text-2xl font-light text-foreground mb-10">{t('resultsTitle')}</h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-          {(t.raw('results') as string[]).map((text, idx) => (
-            <div key={idx} className="bg-surface rounded-3xl p-8 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                <CheckCircle2 className="w-6 h-6 text-primary" />
+              {/* Output */}
+              <div className="mt-auto pt-6 border-t border-border/10">
+                <div className="text-[9px] font-semibold text-muted tracking-widest mb-3 uppercase">
+                  {t('outputLabel')}
+                </div>
+                <div className="flex flex-wrap gap-2 text-xs text-muted">
+                  {step.output.map((out, i) => (
+                    <span key={i} className="px-3 py-1.5 rounded-full bg-background/60 border-none whitespace-nowrap">
+                      {out}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <span className="text-foreground/90 font-medium text-[15px] leading-snug">
-                {text}
-              </span>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </motion.div>
+
+        {/* El Valor del UX Engineer & Resultados */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-24 flex flex-col w-full"
+        >
+          <h3 className="text-3xl md:text-4xl font-light text-foreground mb-4 text-left">
+            El valor del UX Engineer
+          </h3>
+
+          <p className="text-muted text-[15px] md:text-base leading-relaxed mb-12 text-left max-w-4xl">
+            Mientras que los perfiles tradicionales se especializan en un extremo del espectro, el <strong>UX Engineer</strong> actúa como puente. <br className="hidden md:block" />
+            Cobertura equilibrada e integradora entre diseño, tecnología, estrategia, analítica y entrega end-to-end.
+          </p>
+
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full items-start">
+
+            {/* Left: Chart */}
+            <div className="flex-1 w-full">
+              <ProfileRadarChart />
+            </div>
+
+            {/* Right: Results */}
+            <div className="w-full lg:w-[450px] flex flex-col gap-4">
+              <h4 className="text-2xl font-normal text-foreground mb-4 text-left">{t('resultsTitle')}</h4>
+              <div className="flex flex-col gap-4 w-full">
+                {(t.raw('results') as string[]).map((text, idx) => (
+                  <div key={idx} className="bg-surface rounded-2xl p-6 flex items-center gap-4 hover:scale-[1.02] transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                    </div>
+                    <span className="text-foreground/90 font-medium text-[15px] leading-snug">
+                      {text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
 
       </div>
     </section>

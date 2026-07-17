@@ -15,6 +15,8 @@ const CSS_TEMPLATE = `/*
  */
 @import "tailwindcss";
 
+
+
 @variant dark (&:where(.dark, .dark *));
 
 @theme inline {
