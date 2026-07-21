@@ -52,7 +52,7 @@ export default function AboutPage() {
         {/* Hero Image */}
         <div className="w-full relative aspect-[21/9] rounded-[2rem] overflow-hidden mb-24">
           <RevealImage
-            src="/about/desktop.png"
+            src="/about/desktop1.png"
             alt="Workspace"
             fill
             className="object-cover"
@@ -111,12 +111,13 @@ export default function AboutPage() {
                   <LinkedinIcon className="w-5 h-5 mr-2" />
                   {t('linkedin')}
                 </a>
-                <span
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium opacity-50 cursor-not-allowed select-none"
+                <Link
+                  href="/cv"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#27272A]/80 transition-colors"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Ver CV
-                </span>
+                </Link>
               </div>
             </motion.div>
           </div>

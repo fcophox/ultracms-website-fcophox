@@ -126,6 +126,7 @@
     "methodology": "Methodology",
     "caseStudies": "Case Studies",
     "blog": "Blog",
+    "logs": "Changelog",
     "socialNetworks": "Social networks",
     "behance": "Behance",
     "github": "GitHub",
@@ -297,11 +298,21 @@
     "caseStudiesTitle": "Case Studies",
     "blogTitle": "Blog",
     "methodologyTitle": "Methodology",
-    "aboutTitle": "About"
+    "aboutTitle": "About",
+    "logsTitle": "Changelog"
   },
   "ArticleNav": {
     "prev": "Previous",
     "next": "Next"
+  },
+  "LogsPage": {
+    "backHome": "Back to Home",
+    "title": "Changelog",
+    "subtitle": "A log of the new versions and improvements I ship on this site.",
+    "empty": "No updates logged yet.",
+    "typeFeature": "New",
+    "typeImprovement": "Improvement",
+    "typeFix": "Fix"
   },
   "DesignSystemPage": {
     "backHome": "Back to Home",

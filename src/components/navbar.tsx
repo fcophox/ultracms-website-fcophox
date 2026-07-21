@@ -87,7 +87,7 @@ export function Navbar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className={`${forceDarkMode ? 'dark text-foreground' : 'text-foreground'} ${positionClass} top-0 w-full z-50 transition-colors duration-300 border-b ${scrolled || isMenuOpen
+        className={`site-navbar ${forceDarkMode ? 'dark text-foreground' : 'text-foreground'} ${positionClass} top-0 w-full z-50 transition-colors duration-300 border-b ${scrolled || isMenuOpen
           ? "bg-background border-border/40 shadow-sm"
           : "bg-transparent backdrop-blur-md border-transparent"
           }`}

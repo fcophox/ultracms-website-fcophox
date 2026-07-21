@@ -126,6 +126,7 @@
     "methodology": "Metodología",
     "caseStudies": "Casos de Estudio",
     "blog": "Blog",
+    "logs": "Novedades",
     "socialNetworks": "Redes sociales",
     "behance": "Behance",
     "github": "GitHub",
@@ -297,11 +298,21 @@
     "caseStudiesTitle": "Casos de Estudio",
     "blogTitle": "Blog",
     "methodologyTitle": "Metodología",
-    "aboutTitle": "Acerca de"
+    "aboutTitle": "Acerca de",
+    "logsTitle": "Novedades"
   },
   "ArticleNav": {
     "prev": "Anterior",
     "next": "Siguiente"
+  },
+  "LogsPage": {
+    "backHome": "Volver al Inicio",
+    "title": "Novedades",
+    "subtitle": "Registro de las nuevas versiones y mejoras que voy publicando en el sitio.",
+    "empty": "Todavía no hay novedades registradas.",
+    "typeFeature": "Nuevo",
+    "typeImprovement": "Mejora",
+    "typeFix": "Corrección"
   },
   "DesignSystemPage": {
     "backHome": "Volver al Inicio",

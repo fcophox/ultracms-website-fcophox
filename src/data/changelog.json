@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2026-07-17",
+    "type": "improvement",
+    "title": "Radar chart de UX Engineer y ajustes de metodología",
+    "summary": "Se mejoró el radar chart de habilidades en la sección de metodología y se reordenó el layout para que se lea mejor."
+  },
+  {
+    "date": "2026-07-06",
+    "type": "feature",
+    "title": "Nueva sección de Masterclass",
+    "summary": "Se agregó una pestaña de Masterclass con la presentación y los materiales disponibles para descargar en PDF."
+  },
+  {
+    "date": "2026-07-03",
+    "type": "improvement",
+    "title": "Rediseño visual de la sección de herramientas",
+    "summary": "Nuevo fondo y logo flotante en la sección de herramientas para darle más presencia visual."
+  },
+  {
+    "date": "2026-07-01",
+    "type": "feature",
+    "title": "Página de CV descargable",
+    "summary": "Nueva página /cv con versión localizada (ES/EN), optimizada para lectores ATS y lista para imprimir en PDF."
+  },
+  {
+    "date": "2026-07-01",
+    "type": "feature",
+    "title": "Página 404 personalizada",
+    "summary": "Se reemplazó la página de error genérica por una versión propia con micro-animaciones y soporte multi-idioma."
+  },
+  {
+    "date": "2026-07-01",
+    "type": "fix",
+    "title": "Ajustes menores de contenido e imágenes",
+    "summary": "Certificaciones actualizadas, tracking UTM en el enlace de Kōsei, e íconos y detalles visuales pulidos en el Hero."
+  },
+  {
+    "date": "2026-06-30",
+    "type": "feature",
+    "title": "Sección de herramientas y animaciones de entrada",
+    "summary": "Se sumó la sección que muestra Kōsei, con animaciones de entrada en Capacidades y transiciones más suaves en el carrusel."
+  },
+  {
+    "date": "2026-06-23",
+    "type": "improvement",
+    "title": "CMS del dashboard más flexible",
+    "summary": "Traducción automática de slugs, nuevas acciones de página, subida de portada y placeholders de íconos para el contenido del dashboard."
+  },
+  {
+    "date": "2026-06-22",
+    "type": "fix",
+    "title": "Pulido visual: logos, scroll y certificaciones",
+    "summary": "Efecto de revelado en imágenes, certificaciones en formato masonry, y corrección de scroll horizontal en la página Sobre mí."
+  },
+  {
+    "date": "2026-06-19",
+    "type": "feature",
+    "title": "Rediseño de Capacidades y casos de estudio",
+    "summary": "La sección de Servicios ahora es Capacidades, con textos renovados y un efecto de apilado al hacer scroll en los casos de estudio."
+  }
+]

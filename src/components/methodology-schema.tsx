@@ -61,7 +61,7 @@ export function MethodologySchema() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="flex-1 flex flex-col bg-background rounded-3xl p-8 border-none relative z-10 overflow-hidden"
+              className="flex-1 flex flex-col bg-surface rounded-3xl p-8 border-none relative z-10 overflow-hidden"
             >
               {/* Background SVG Header */}
               <div

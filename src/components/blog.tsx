@@ -39,8 +39,8 @@ export async function Blog() {
   };
 
   return (
-    <section className="w-full px-6 py-24 z-10 relative">
-      <div className="max-w-6xl mx-auto">
+    <section className="w-full py-24 z-10 relative">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-end justify-between mb-12">
           <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px]">
             {t('title')}

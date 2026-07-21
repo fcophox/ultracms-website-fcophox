@@ -9,7 +9,7 @@ export function ToolsSection() {
   const t = useTranslations('Tools');
 
   return (
-    <section className="w-full px-6 py-24 lg:py-32 z-10 relative flex items-center min-h-[70vh] bg-surface/20 overflow-hidden">
+    <section className="dark w-full py-24 lg:py-32 z-10 relative flex items-center min-h-[70vh] bg-surface/20 overflow-hidden text-foreground">
       {/* Desktop & Mobile Video Background */}
       <video
         autoPlay
@@ -25,7 +25,7 @@ export function ToolsSection() {
       <div className="absolute inset-x-0 top-0 h-32 md:h-48 z-0 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
       <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 z-0 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
 
-      <div className="max-w-6xl mx-auto relative z-10 w-full">
+      <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
           {/* Left Column: Copy & Call-to-action */}
@@ -43,7 +43,7 @@ export function ToolsSection() {
               className="text-[clamp(1.8rem,4vw,2.5rem)] font-light text-foreground leading-tight tracking-tight mb-6"
               dangerouslySetInnerHTML={{ __html: t.raw('title') }}
             />
-            <p className="text-muted text-base md:text-lg font-light leading-relaxed mb-8">
+            <p className="text-muted text-base md:text-lg font-medium leading-relaxed mb-8">
               {t('description')}
             </p>
             <a
@@ -66,7 +66,6 @@ export function ToolsSection() {
             className="absolute right-[-40px] top-1/2 -translate-y-1/2 lg:static lg:translate-y-0 lg:col-span-7 flex justify-center lg:justify-end items-center min-h-[300px] pointer-events-none lg:pointer-events-auto z-10"
           >
           </motion.div>
-
         </div>
       </div>
     </section>

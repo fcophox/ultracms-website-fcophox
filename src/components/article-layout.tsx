@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { ReactNode } from "react";
 import { ArticleFeedback } from "./article-feedback";
 import { useTranslations } from "next-intl";
+import { ReadingProgressBar } from "./reading-progress-bar";
 
 interface ArticleLayoutProps {
   title: string;
@@ -41,7 +42,9 @@ export function ArticleLayout({
   const t = useTranslations('ArticleNav');
 
   return (
-    <main className="w-full flex-1 flex flex-col items-center pt-8 pb-32">
+    <>
+      <ReadingProgressBar />
+      <main className="w-full flex-1 flex flex-col items-center pt-8 pb-32">
       <article className="max-w-5xl mx-auto px-6 w-full">
         {/* Back Button */}
         <div className="mb-8">
@@ -171,5 +174,6 @@ export function ArticleLayout({
         )}
       </article>
     </main>
+    </>
   );
 }

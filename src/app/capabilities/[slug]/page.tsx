@@ -11,6 +11,7 @@ import { servicesData } from "@/data/services-data";
 import { ScrollProgressLine } from "@/components/scroll-progress-line";
 import { AudienceCarousel } from "@/components/audience-carousel";
 import { MotionDiv, MotionH1, MotionP, MotionSpan } from "@/components/motion-wrapper";
+import { ReadingProgressBar } from "@/components/reading-progress-bar";
 
 export const revalidate = 60; // Cache pages for 1 minute
 
@@ -82,7 +83,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     const data = locale === "en" ? coreService.en : coreService.es;
 
     return (
-      <main className="min-h-screen relative py-8 md:py-20">
+      <>
+        <ReadingProgressBar />
+        <main className="min-h-screen relative py-8 md:py-20">
 
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           {/* Header */}
@@ -395,6 +398,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           })()}
         </div>
       </main>
+      </>
     );
   }
 

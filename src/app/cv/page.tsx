@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Mail, 
-  Phone, 
-  Globe, 
+import {
+  Mail,
+  Globe,
   MapPin, 
   Printer, 
   Briefcase, 
@@ -37,7 +36,7 @@ export default function CvPage() {
       <style jsx global>{`
         @media print {
           /* Hide normal navigation bar and footer if they are rendered by the main layout */
-          header, footer, nav, .no-print {
+          .site-navbar, footer, .no-print {
             display: none !important;
           }
           
@@ -53,7 +52,7 @@ export default function CvPage() {
             display: block !important;
           }
           
-          .lg:col-span-8, .lg:col-span-4 {
+          .lg\\:col-span-8, .lg\\:col-span-4 {
             width: 100% !important;
             display: block !important;
             border-left: none !important;
@@ -179,8 +178,6 @@ export default function CvPage() {
               <span>•</span>
               <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-slate-500" /> fcojhormazabalh@gmail.com</span>
               <span>•</span>
-              <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-slate-500" /> +56 9 9072 8560</span>
-              <span>•</span>
               <span className="flex items-center gap-1"><LinkedinIcon className="w-3 h-3 text-slate-500" /> linkedin.com/in/fcophox</span>
               <span>•</span>
               <span className="flex items-center gap-1"><Globe className="w-3 h-3 text-slate-500" /> fcophox.com</span>
@@ -282,10 +279,6 @@ export default function CvPage() {
                     <a href="mailto:fcojhormazabalh@gmail.com" className="hover:text-foreground transition-colors">fcojhormazabalh@gmail.com</a>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Phone className="w-4 h-4 shrink-0 text-[#0ea5e9] dark:text-[#38bdf8]" />
-                    <a href="tel:+56990728560" className="hover:text-foreground transition-colors">+56 9 9072 8560</a>
-                  </li>
-                  <li className="flex items-center gap-3">
                     <LinkedinIcon className="w-4 h-4 shrink-0 text-[#0ea5e9] dark:text-[#38bdf8]" />
                     <a href="https://linkedin.com/in/fcophox" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">linkedin.com/in/fcophox</a>
                   </li>
@@ -301,16 +294,20 @@ export default function CvPage() {
                 <h2 className="text-xs md:text-sm font-bold uppercase tracking-wider text-foreground/70 mb-5 print:text-slate-800 print:text-xs">
                   {t('skillsTitle')}
                 </h2>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
+                <div className="flex flex-wrap gap-2 print:hidden">
                   {skills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="px-3 py-1 rounded-full bg-surface/50 border border-border/20 text-xs text-muted print:bg-slate-100 print:text-slate-800 print:border-none print:px-2.5 print:py-0.5"
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full bg-surface/50 border border-border/20 text-xs text-muted"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
+                {/* Plain comma-separated text for print/PDF so ATS parsers don't concatenate the pills without spaces */}
+                <p className="hidden print:block text-slate-700">
+                  {skills.join(", ")}
+                </p>
               </section>
 
               {/* Herramientas */}
@@ -318,16 +315,20 @@ export default function CvPage() {
                 <h2 className="text-xs md:text-sm font-bold uppercase tracking-wider text-foreground/70 mb-5 print:text-slate-800 print:text-xs">
                   {t('toolsTitle')}
                 </h2>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
+                <div className="flex flex-wrap gap-2 print:hidden">
                   {tools.map((tool) => (
-                    <span 
-                      key={tool} 
-                      className="px-3 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/20 text-xs text-[#0ea5e9] dark:text-[#38bdf8] dark:bg-[#38bdf8]/10 dark:border-[#38bdf8]/20 print:bg-slate-100 print:text-slate-800 print:border-none print:px-2.5 print:py-0.5"
+                    <span
+                      key={tool}
+                      className="px-3 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/20 text-xs text-[#0ea5e9] dark:text-[#38bdf8] dark:bg-[#38bdf8]/10 dark:border-[#38bdf8]/20"
                     >
                       {tool}
                     </span>
                   ))}
                 </div>
+                {/* Plain comma-separated text for print/PDF so ATS parsers don't concatenate the pills without spaces */}
+                <p className="hidden print:block text-slate-700">
+                  {tools.join(", ")}
+                </p>
               </section>
 
               {/* Educación */}
@@ -345,12 +346,12 @@ export default function CvPage() {
                 </div>
               </section>
 
-              {/* Keywords */}
-              <section className="print:hidden">
-                <h2 className="text-xs md:text-sm font-bold uppercase tracking-wider text-foreground/70 mb-4">
+              {/* Keywords: kept visible in print too — this is exactly the text an ATS keyword-matches against */}
+              <section>
+                <h2 className="text-xs md:text-sm font-bold uppercase tracking-wider text-foreground/70 mb-4 print:text-slate-800 print:text-xs print:mb-2">
                   {t('keywordsTitle')}
                 </h2>
-                <p className="text-xs font-mono text-muted/80 leading-relaxed">
+                <p className="text-xs font-mono text-muted/80 leading-relaxed print:text-[8pt] print:text-slate-600">
                   UX Design · Product Design · IA · CRO · Data · UX Research · Estrategia
                 </p>
               </section>

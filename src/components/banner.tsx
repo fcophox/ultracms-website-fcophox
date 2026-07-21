@@ -5,8 +5,9 @@ export function Banner() {
   const t = useTranslations('Banner');
 
   return (
-    <section className="dark w-full px-6 py-24 z-10 relative">
-      <div className="bg-background relative max-w-6xl mx-auto flex flex-col items-center text-center rounded-3xl overflow-hidden border border-border px-8 py-20 md:py- shadow-2xl">
+    <section className="dark w-full py-24 z-10 relative">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="bg-background relative w-full flex flex-col items-center text-center rounded-3xl overflow-hidden border border-border px-8 py-20 md:py-24 shadow-2xl">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <video
@@ -39,6 +40,7 @@ export function Banner() {
             <ArrowRight className="h-5 w-5" />
           </a>
         </div>
+      </div>
       </div>
     </section>
   );
