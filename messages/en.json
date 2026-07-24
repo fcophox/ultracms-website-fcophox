@@ -9,25 +9,22 @@
   "Hero": {
     "titles": [
       {
-        "line1": "Research & Optimization of",
-        "line2": "digital experiences"
+        "line1": "Hi, I'm Francisco and I can",
+        "line2": "help you with your digital projects"
       },
       {
-        "line1": "Strategic thinking to",
-        "line2": "discover opportunities."
+        "line1": "Today I'm working on a",
+        "line2": "resource optimization Suite for operations"
       },
       {
-        "line1": "Applied experience and technology to",
-        "line2": "design real solutions."
-      },
-      {
-        "line1": "Knowledge and experience to",
-        "line2": "turn ideas into reality."
+        "line1": "I am a",
+        "line2": "UX Engineer & Product Design Consultant"
       }
     ],
     "subtitle": "Strategy, aesthetics, and usability combined to optimize digital experiences that connect people with the digital world.",
     "viewProjects": "View projects",
-    "visitLinkedin": "Visit my LinkedIn"
+    "visitLinkedin": "Visit my LinkedIn",
+    "role": "UX Engineer & Product Design Consultant"
   },
   "ProjectCard": {
     "since": "Case Studies",
