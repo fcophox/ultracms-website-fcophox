@@ -82,7 +82,7 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a
             href="/case-studies"
-            className="px-8 py-3 rounded-full bg-foreground text-background font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-foreground/20 dark:shadow-foreground/5 flex items-center justify-center gap-2"
+            className="px-8 py-3 rounded-full bg-primary text-background font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
           >
             {t('viewProjects')}
             <ArrowRight className="w-4 h-4" />
@@ -93,7 +93,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className="px-8 py-3 rounded-full bg-surface text-foreground font-medium hover:scale-105 transition-transform duration-200 shadow-lg shadow-border/50 border border-border flex items-center justify-center gap-2"
           >
-            <LinkedinIcon className="w-4 h-4 text-[#0A66C2]" />
+            <LinkedinIcon className="w-4 h-4 text-white" />
             {t('visitLinkedin')}
           </a>
         </div>
