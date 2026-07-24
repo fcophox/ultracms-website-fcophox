@@ -9,22 +9,25 @@
   "Hero": {
     "titles": [
       {
-        "line1": "Hola, soy Francisco y puedo",
-        "line2": "ayudarte en tus proyectos digitales"
+        "line1": "Investigación y optimización de",
+        "line2": "experiencias digitales"
       },
       {
-        "line1": "Hoy estoy trabajando en una",
-        "line2": "Suite de optimización de recursos para la operación"
+        "line1": "Pensamiento estratégico para",
+        "line2": "descubrir oportunidades."
       },
       {
-        "line1": "Soy",
-        "line2": "UX Engineer & Product Design Consultant"
+        "line1": "Experiencia y tecnología aplicada para",
+        "line2": "diseñar soluciones reales."
+      },
+      {
+        "line1": "Conocimiento y experiencia para",
+        "line2": "convertir ideas en realidad."
       }
     ],
     "subtitle": "Estrategia, estética y usabilidad combinada para optimizar experiencias digitales que conectan personas con lo digital.",
     "viewProjects": "Ver proyectos",
-    "visitLinkedin": "Visita mi LinkedIn",
-    "role": "UX Engineer & Product Design Consultant"
+    "visitLinkedin": "Visita mi LinkedIn"
   },
   "ProjectCard": {
     "since": "Casos de estudio",

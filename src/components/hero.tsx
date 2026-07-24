@@ -56,17 +56,13 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center w-full">
-        <span className="inline-flex items-center px-3 py-1 rounded-full border border-primary text-primary text-[10px] md:text-xs font-medium mb-6 uppercase tracking-wider">
-          {t('role')}
-        </span>
-
-        <div className="h-[180px] md:h-[200px] lg:h-[240px] flex items-center justify-center mb-6 relative w-full">
+        <div className="h-[140px] md:h-[180px] flex items-center justify-center mb-6 relative w-full">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
             >
