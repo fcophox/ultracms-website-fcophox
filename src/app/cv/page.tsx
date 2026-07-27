@@ -156,7 +156,7 @@ export default function CvPage() {
               Francisco Hormazábal
             </h1>
             
-            <p className="text-xl md:text-2xl font-light text-[#0ea5e9] dark:text-[#38bdf8] mb-4 print:text-[#0ea5e9] print:mb-2 print:text-sm print:font-semibold">
+            <p className="text-xl md:text-2xl font-normal text-[#0ea5e9] dark:text-[#38bdf8] mb-4 print:text-[#0ea5e9] print:mb-2 print:text-sm print:font-semibold">
               {t('role')}
             </p>
             
@@ -197,15 +197,15 @@ export default function CvPage() {
                   {t('profileTitle')}
                 </h2>
                 <p 
-                  className="text-muted leading-relaxed font-light text-sm md:text-base print:text-slate-700"
+                  className="text-muted leading-relaxed font-normal text-sm md:text-base print:text-slate-700"
                   dangerouslySetInnerHTML={{ __html: t('profileP1') }}
                 />
                 <p 
-                  className="text-muted leading-relaxed font-light text-sm md:text-base mt-4.5 print:text-slate-700 print:mt-2"
+                  className="text-muted leading-relaxed font-normal text-sm md:text-base mt-4.5 print:text-slate-700 print:mt-2"
                   dangerouslySetInnerHTML={{ __html: t('profileP2') }}
                 />
                 <p 
-                  className="text-muted leading-relaxed font-light text-sm md:text-base mt-4.5 print:text-slate-700 print:mt-2"
+                  className="text-muted leading-relaxed font-normal text-sm md:text-base mt-4.5 print:text-slate-700 print:mt-2"
                   dangerouslySetInnerHTML={{ __html: t('profileP3') }}
                 />
               </section>

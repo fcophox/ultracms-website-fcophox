@@ -117,6 +117,21 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
   const sectionHeightVh = 100 + (N - 1) * 85;
   // Position along the timeline: 0 → N-1 (which card is at the front).
   const timeline = progress * (N - 1);
+  const activeIndex = Math.min(N - 1, Math.max(0, Math.round(timeline)));
+
+  const handleDotClick = (index: number) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const absoluteOffsetTop = rect.top + scrollTop;
+    const scrollable = el.offsetHeight - window.innerHeight;
+    const targetScrollY = absoluteOffsetTop + scrollable * (index / (N - 1));
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -128,8 +143,28 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
         <div className="max-w-6xl mx-auto px-6 h-full flex flex-col pt-16 pb-10">
           <div className="mb-20 shrink-0">{Header}</div>
 
-          {/* Card stage */}
-          <div className="relative flex-1">
+          <div className="relative flex-1 flex gap-8">
+            {/* Dots Indicator (Left side, centered vertically) */}
+            <div className="flex flex-col justify-center gap-3 pr-2 z-20 select-none">
+              {projects.map((_, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => handleDotClick(idx)}
+                    className={`w-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      isActive
+                        ? "bg-primary h-6"
+                        : "bg-border/60 hover:bg-primary/50 h-2"
+                    }`}
+                    aria-label={`Go to case ${idx + 1}`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Card stage */}
+            <div className="relative flex-1">
             {projects.map((project, index) => {
               // How much this card has slid into place (0 → 1).
               const entered = index === 0 ? 1 : clamp(timeline - (index - 1), 0, 1);
@@ -159,6 +194,7 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
           </div>
         </div>
       </div>
+     </div>
     </section>
   );
 }

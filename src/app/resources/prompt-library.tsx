@@ -197,7 +197,7 @@ export function PromptLibrary() {
               <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
                 📚 Prompt Library UX
               </h2>
-              <p className="text-lg text-muted leading-relaxed font-light mb-2">
+              <p className="text-lg text-muted leading-relaxed font-normal mb-2">
                 40 prompts para todo el proceso de diseño de productos digitales.
               </p>
               <p className="text-sm text-muted/80 leading-relaxed">
@@ -220,7 +220,7 @@ export function PromptLibrary() {
               <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
                 📚 Prompt Library — Vibe Coding
               </h2>
-              <p className="text-lg text-muted leading-relaxed font-light mb-2">
+              <p className="text-lg text-muted leading-relaxed font-normal mb-2">
                 50 prompts para construir prototipos conversando con IA.
               </p>
               <p className="text-sm text-muted/80 leading-relaxed">
@@ -243,7 +243,7 @@ export function PromptLibrary() {
               <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
                 🎓 MasterClass: <em>Diseña, prototipa, lanza</em>
               </h2>
-              <p className="text-lg text-muted leading-relaxed font-light mb-2">
+              <p className="text-lg text-muted leading-relaxed font-normal mb-2">
                 Recursos descargables y prompts complementarios.
               </p>
               <p className="text-sm text-muted/80 leading-relaxed">
@@ -333,7 +333,7 @@ export function PromptLibrary() {
 
                           <div className="relative mt-2">
                             {/* Blur effect if locked */}
-                            <p className={`text-md text-foreground/60 font-light leading-relaxed select-none transition-all duration-500 ${!unlocked ? "blur-md select-none opacity-40" : ""
+                            <p className={`text-md text-foreground/60 font-normal leading-relaxed select-none transition-all duration-500 ${!unlocked ? "blur-md select-none opacity-40" : ""
                               }`}>
                               {prompt.template}
                             </p>
@@ -387,7 +387,7 @@ export function PromptLibrary() {
             </div>
           ) : (
             <div className="text-center py-20 bg-surface/20 rounded-3xl border border-border/40">
-              <p className="text-muted text-base font-light">No se encontraron prompts que coincidan con la búsqueda.</p>
+              <p className="text-muted text-base font-normal">No se encontraron prompts que coincidan con la búsqueda.</p>
             </div>
           )}
         </div>

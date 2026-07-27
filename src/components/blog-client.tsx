@@ -89,7 +89,7 @@ export function BlogClient({ articles }: BlogClientProps) {
           <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
             {t('title')}
           </h1>
-          <p className="text-lg md:text-xl text-muted leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-muted leading-relaxed font-normal">
             {t('subtitle')}
           </p>
         </motion.div>

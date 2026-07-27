@@ -27,7 +27,8 @@
     ],
     "subtitle": "Strategy, aesthetics, and usability combined to optimize digital experiences that connect people with the digital world.",
     "viewProjects": "View projects",
-    "visitLinkedin": "Visit my LinkedIn"
+    "visitLinkedin": "Visit my LinkedIn",
+    "badge": "Growth Partner to build and scale"
   },
   "ProjectCard": {
     "since": "Case Studies",
@@ -109,9 +110,29 @@
     "cardDesc": "A web tool for creating sitemaps and flowcharts in an extremely agile way, ideal for structuring ideas fast."
   },
   "Banner": {
-    "title": "Let's get in touch",
-    "subtitle": "Interested in collaborating? We are ready to boost your next tech project.",
-    "button": "Let's get in touch"
+    "slides": [
+      {
+        "label": "Idea",
+        "title": "Got an idea?",
+        "description": "Every great idea deserves a chance. Let’s discover together how to transform it into a product ready for growth.",
+        "cta": "Let's make it real →",
+        "form": "message"
+      },
+      {
+        "label": "Consulting",
+        "title": "Let's boost your product",
+        "description": "Sometimes a small change makes a big impact. Let's review your product and discover new growth opportunities.",
+        "cta": "I want a consulting session",
+        "form": "consulting"
+      },
+      {
+        "label": "Coffee",
+        "title": "A coffee and good ideas",
+        "description": "Let's talk about your project and discover together the next step to help it grow.",
+        "cta": "Let's book a slot",
+        "form": "meeting"
+      }
+    ]
   },
   "Footer": {
     "projects": "Projects",

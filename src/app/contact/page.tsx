@@ -19,6 +19,14 @@ export default function ContactPage() {
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const formParam = params.get("form");
+    if (formParam === "message" || formParam === "consulting" || formParam === "meeting") {
+      setActiveForm(formParam);
+    }
+  }, []);
+
+  useEffect(() => {
     if (activeForm !== "none" && formRef.current) {
       // Esperamos 400ms para que la animación de framer-motion (height) termine y el DOM tenga la altura completa
       setTimeout(() => {
@@ -86,7 +94,7 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
             {t('title1')} <span className="text-primary font-normal">{t('title2')}</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-muted leading-relaxed font-normal">
             {t('subtitle')}
           </p>
         </motion.div>

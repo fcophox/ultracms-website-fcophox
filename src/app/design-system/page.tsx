@@ -52,7 +52,7 @@ export default function DesignSystemPage() {
         {/* Page Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
           <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">{t('title')}</h1>
-          <p className="text-lg md:text-xl text-muted leading-relaxed font-light max-w-3xl">{t('subtitle')}</p>
+          <p className="text-lg md:text-xl text-muted leading-relaxed font-normal max-w-3xl">{t('subtitle')}</p>
         </motion.div>
 
         {/* Colors - Light Mode */}
@@ -110,7 +110,7 @@ export default function DesignSystemPage() {
                   <div className="text-xs text-muted mt-2 font-mono uppercase">Font Medium</div>
                 </div>
                 <div>
-                  <p className="text-base md:text-lg font-light text-muted leading-relaxed">
+                  <p className="text-base md:text-lg font-normal text-muted leading-relaxed">
                     Body text. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
                   </p>
                   <div className="text-xs text-muted mt-3 font-mono uppercase">Font Light / Text Muted / Leading Relaxed</div>
@@ -186,7 +186,7 @@ export default function DesignSystemPage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-sm text-muted font-light leading-relaxed">
+              <p className="text-sm text-muted font-normal leading-relaxed">
                 Selecciona la firma completa desde la imagen hasta el link web, presiona <kbd className="px-2 py-1 bg-muted/10 rounded-md font-mono text-xs">Cmd+C</kbd> (o Ctrl+C) y pégala en los ajustes de firma de Gmail o tu cliente de correo.
               </p>
             </div>

@@ -42,7 +42,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-sm md:text-base text-muted leading-relaxed max-w-md mb-10 font-light"
+          className="text-sm md:text-base text-muted leading-relaxed max-w-md mb-10 font-normal"
         >
           {t("description")}
         </motion.p>

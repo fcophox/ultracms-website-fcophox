@@ -56,6 +56,19 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center w-full">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border/80 bg-surface/30 backdrop-blur-md text-xs font-mono tracking-wide text-foreground/80 mb-6 hover:border-primary/30 transition-colors duration-300 shadow-sm"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/70 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span>{t('badge')}</span>
+        </motion.div>
+
         <div className="h-[140px] md:h-[180px] flex items-center justify-center mb-6 relative w-full">
           <AnimatePresence mode="wait">
             <motion.h1

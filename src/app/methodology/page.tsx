@@ -37,7 +37,7 @@ export default function MethodologyPage() {
           <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
             {t('title')}
           </h1>
-          <p className="text-lg md:text-xl text-muted leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-muted leading-relaxed font-normal">
             {t('subtitle')}
           </p>
         </motion.div>
@@ -92,10 +92,10 @@ export default function MethodologyPage() {
               {t('methodTitle')}
             </h2>
             <div className="flex flex-col gap-6 text-muted text-base md:text-lg leading-relaxed font-light">
-              <p>
+              <p className="text-muted text-base md:text-lg leading-relaxed font-normal">
                 {t('methodP1')}
               </p>
-              <p>
+              <p className="text-muted text-base md:text-lg leading-relaxed font-normal">
                 {t('methodP2')}
               </p>
             </div>
@@ -107,7 +107,7 @@ export default function MethodologyPage() {
 
         {/* Certifications Section */}
         <CertificationsSection />
-        
+
         {/* Banner */}
         <Banner />
       </div>

@@ -77,7 +77,7 @@ export function MethodologySchema() {
                 <h3 className={`text-xl font-medium tracking-wide mb-2 ${step.color}`}>
                   {step.title}
                 </h3>
-                <p className="text-sm font-light text-muted leading-relaxed">
+                <p className="text-sm font-normal text-muted leading-relaxed">
                   {step.subtitle}
                 </p>
               </div>

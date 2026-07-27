@@ -27,7 +27,8 @@
     ],
     "subtitle": "Estrategia, estética y usabilidad combinada para optimizar experiencias digitales que conectan personas con lo digital.",
     "viewProjects": "Ver proyectos",
-    "visitLinkedin": "Visita mi LinkedIn"
+    "visitLinkedin": "Visita mi LinkedIn",
+    "badge": "Growth Partner para crear y escalar"
   },
   "ProjectCard": {
     "since": "Casos de estudio",
@@ -109,9 +110,29 @@
     "cardDesc": "Una herramienta web para crear sitemaps y diagramas de flujo de forma extremadamente ágil, ideal para estructurar ideas rápido."
   },
   "Banner": {
-    "title": "Estemos en contacto",
-    "subtitle": "¿Interesado en colaborar? Estamos listos para impulsar tu próximo proyecto tecnológico.",
-    "button": "Estemos en contacto"
+    "slides": [
+      {
+        "label": "Idea",
+        "title": "¿Tienes una idea?",
+        "description": "Toda gran idea merece una oportunidad. Descubramos juntos cómo transformarla en un producto preparado para crecer.",
+        "cta": "Hagámosla realidad →",
+        "form": "message"
+      },
+      {
+        "label": "Consultoría",
+        "title": "Potenciemos tu producto",
+        "description": "A veces un pequeño cambio genera un gran impacto. Revisemos tu producto y descubramos nuevas oportunidades de crecimiento.",
+        "cta": "Quiero una consultoría",
+        "form": "consulting"
+      },
+      {
+        "label": "Café virtual",
+        "title": "Un café y buenas ideas",
+        "description": "Conversemos sobre tu proyecto y descubramos juntos el siguiente paso para hacerlo crecer.",
+        "cta": "Reservemos un horario",
+        "form": "meeting"
+      }
+    ]
   },
   "Footer": {
     "projects": "Proyectos",
