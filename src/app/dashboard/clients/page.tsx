@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Inbox, Archive, MoreHorizontal, Loader2, Trash2 } from "lucide-react";
+import { Inbox, Archive, MoreHorizontal, Loader2, Trash2, Eye, X } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
 interface ContactMessage {
@@ -21,6 +21,7 @@ export default function ClientsPage() {
   const [activeTab, setActiveTab] = useState<"inbox" | "archived">("inbox");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
+  const [activeMessage, setActiveMessage] = useState<ContactMessage | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -56,6 +57,14 @@ export default function ClientsPage() {
     } else {
       console.error("Error updating archive status:", error);
     }
+  };
+
+  const openDrawer = (message: ContactMessage) => {
+    setActiveMessage(message);
+  };
+
+  const closeDrawer = () => {
+    setActiveMessage(null);
   };
 
   const promptDelete = (id: string) => {
@@ -186,6 +195,13 @@ export default function ClientsPage() {
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button 
+                          onClick={() => openDrawer(client)}
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface border border-transparent hover:border-border/40 transition-colors"
+                          title="Ver detalle"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </button>
+                        <button 
                           onClick={() => handleArchive(client.id, client.is_archived)}
                           className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface border border-transparent hover:border-border/40 transition-colors"
                           title={client.is_archived ? "Desarchivar" : "Archivar"}
@@ -240,6 +256,126 @@ export default function ClientsPage() {
           </div>
         </div>
       )}
+
+      {/* Detail Drawer */}
+      {activeMessage && (
+        <div className="fixed inset-0 z-[150] flex justify-end">
+          {/* Backdrop with blur */}
+          <div 
+            onClick={closeDrawer}
+            className="absolute inset-0 bg-background/40 backdrop-blur-[2px] transition-opacity duration-300 animate-fade-in"
+          />
+          
+          {/* Drawer content sliding from right */}
+          <div className="relative w-full max-w-lg h-full bg-surface border-l border-border/50 shadow-2xl flex flex-col z-10 transition-transform duration-300 animate-slide-in-right">
+            
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between p-6 border-b border-border/40">
+              <div className="flex items-center gap-2.5">
+                <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide bg-background border border-border/50 text-muted-foreground">
+                  {getSubjectText(activeMessage.message_type)}
+                </span>
+                <span className="text-[12px] text-muted-foreground">
+                  {formatDate(activeMessage.created_at)}
+                </span>
+              </div>
+              <button 
+                onClick={closeDrawer}
+                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted/10 transition-colors text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Drawer Body */}
+            <div className="flex-1 overflow-y-auto p-8 space-y-6">
+              {/* Client Info */}
+              <div className="space-y-1">
+                <span className="text-[12px] text-muted-foreground uppercase tracking-wider font-semibold">Cliente</span>
+                <h2 className="text-2xl font-bold text-foreground">{activeMessage.name}</h2>
+                <a 
+                  href={`mailto:${activeMessage.email}`} 
+                  className="text-[14px] text-primary hover:underline block"
+                >
+                  {activeMessage.email}
+                </a>
+              </div>
+
+              {/* Status */}
+              <div className="space-y-1">
+                <span className="text-[12px] text-muted-foreground uppercase tracking-wider font-semibold">Estado</span>
+                <div className="flex items-center gap-2 text-[13px] text-foreground font-medium">
+                  {activeMessage.status === 'new' ? (
+                    <>
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                      <span>Nuevo Mensaje</span>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-2 h-2 rounded-full bg-muted-foreground/50"></div>
+                      <span>{activeMessage.status}</span>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Message Content */}
+              <div className="space-y-2 pt-2">
+                <span className="text-[12px] text-muted-foreground uppercase tracking-wider font-semibold">Mensaje</span>
+                <div className="bg-background/60 border border-border/40 rounded-xl p-5 text-[14px] text-foreground leading-relaxed whitespace-pre-wrap">
+                  {activeMessage.message || "Este mensaje no contiene cuerpo de texto."}
+                </div>
+              </div>
+            </div>
+
+            {/* Drawer Footer Actions */}
+            <div className="p-6 border-t border-border/40 bg-surface/30 flex items-center justify-end gap-3">
+              <button
+                onClick={() => {
+                  handleArchive(activeMessage.id, activeMessage.is_archived);
+                  closeDrawer();
+                }}
+                className="px-4 py-2.5 rounded-xl text-[13px] font-semibold hover:bg-muted/10 transition-colors border border-border/40 text-foreground flex items-center gap-2"
+              >
+                {activeMessage.is_archived ? <Inbox className="w-4 h-4" /> : <Archive className="w-4 h-4" />}
+                {activeMessage.is_archived ? "Desarchivar" : "Archivar contacto"}
+              </button>
+              
+              {activeMessage.is_archived && (
+                <button
+                  onClick={() => {
+                    promptDelete(activeMessage.id);
+                    closeDrawer();
+                  }}
+                  className="px-4 py-2.5 rounded-xl text-[13px] font-semibold bg-red-500 hover:bg-red-600 text-white transition-colors flex items-center gap-2"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Eliminar permanentemente
+                </button>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* Local styles for sliding animations */}
+      <style>{`
+        @keyframes slideInRight {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-slide-in-right {
+          animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.2s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }
