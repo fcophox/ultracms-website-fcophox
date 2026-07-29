@@ -14,6 +14,7 @@ export default function DashboardResourcesPage() {
   const [records, setRecords] = useState<RecordItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<"7d" | "30d" | "all">("7d");
+  const [svgWidth, setSvgWidth] = useState(1000);
   const supabase = createClient();
 
   useEffect(() => {
@@ -35,6 +36,18 @@ export default function DashboardResourcesPage() {
 
     fetchData();
   }, [supabase]);
+
+  useEffect(() => {
+    const el = document.getElementById("chart-container");
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setSvgWidth(entry.contentRect.width || 1000);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isLoading]);
 
   // Separate unlocks and copies
   const unlocks = records.filter((r) => r.message_type === "resource_unlock");
@@ -73,7 +86,6 @@ export default function DashboardResourcesPage() {
 
   // Chart coordinate calculations
   const maxCount = Math.max(...chartData.map((d) => d.count), 5); // Default to at least 5 for scale
-  const svgWidth = 1000;
   const svgHeight = 220;
   const paddingLeft = 55;
   const paddingRight = 30;
@@ -227,8 +239,8 @@ export default function DashboardResourcesPage() {
             </div>
 
             <div className="w-full relative">
-              <div className="w-full h-[240px]">
-                <svg className="w-full h-full overflow-visible" viewBox={`0 0 ${svgWidth} ${svgHeight}`} preserveAspectRatio="none">
+              <div id="chart-container" className="w-full h-[240px]">
+                <svg className="w-full h-full overflow-visible" viewBox={`0 0 ${svgWidth} ${svgHeight}`}>
                   <defs>
                     <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
                       <stop offset="0%" stopColor="#3b82f6" />
