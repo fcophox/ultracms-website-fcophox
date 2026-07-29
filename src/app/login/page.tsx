@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,8 +129,31 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Quote */}
-      <div className="hidden lg:flex w-1/2 h-full bg-[#050505] flex-col items-center justify-center relative px-20">
-        <div className="max-w-[540px]">
+      <div className="hidden lg:flex w-1/2 h-full bg-[#050505] flex-col items-center justify-center relative px-20 overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10"
+            aria-hidden
+          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onLoadedData={() => setVideoReady(true)}
+            onCanPlay={() => setVideoReady(true)}
+            className={`w-full h-full object-cover blur-3xl scale-110 transition-opacity duration-1000 ease-out ${videoReady ? "opacity-30" : "opacity-0"}`}
+            style={{ transform: "translate3d(0, 0, 0) scale(1.1)" }}
+          >
+            <source src="/movie/background.mp4" type="video/mp4" />
+          </video>
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60 z-0" />
+        </div>
+
+        <div className="max-w-[540px] relative z-10">
           <div className="w-14 h-14 rounded-full bg-zinc-900/80 flex items-center justify-center mb-10 border border-zinc-800/50">
             <Layers className="text-white w-6 h-6" />
           </div>
@@ -156,7 +180,7 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom right settings icon just like the design */}
-        <div className="absolute bottom-8 right-8 sm:bottom-12 sm:right-12">
+        <div className="absolute bottom-8 right-8 sm:bottom-12 sm:right-12 z-10">
           <button className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center border border-zinc-800 text-zinc-400 hover:text-white transition-colors">
             <Settings2 className="w-4 h-4" />
           </button>
