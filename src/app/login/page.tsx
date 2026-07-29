@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Layers, Settings2, Loader2, AlertCircle } from "lucide-react";
+import { Settings2, Loader2, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
@@ -43,8 +43,8 @@ export default function LoginPage() {
       <div className="w-full lg:w-1/2 h-full bg-[#0c0c0e] flex flex-col relative">
         {/* Header / Logo */}
         <div className="absolute top-8 left-8 sm:top-12 sm:left-12 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-md bg-zinc-800/50 flex items-center justify-center border border-zinc-700/50">
-            <Layers className="text-white w-4 h-4" />
+          <div className="w-8 h-8 rounded-md bg-zinc-800/50 flex items-center justify-center border border-zinc-700/50 overflow-hidden">
+            <Image src="/brand/logotipo.svg" alt="Logo" width={18} height={18} className="object-contain" />
           </div>
           <span className="text-white font-light text-lg tracking-tight">fcoPhox CMS</span>
         </div>
@@ -154,8 +154,8 @@ export default function LoginPage() {
         </div>
 
         <div className="max-w-[540px] relative z-10">
-          <div className="w-14 h-14 rounded-full bg-zinc-900/80 flex items-center justify-center mb-10 border border-zinc-800/50">
-            <Layers className="text-white w-6 h-6" />
+          <div className="w-14 h-14 rounded-full bg-zinc-900/80 flex items-center justify-center mb-10 border border-zinc-800/50 overflow-hidden">
+            <Image src="/brand/logotipo.svg" alt="Logo" width={32} height={32} className="object-contain" />
           </div>
 
           <h2 className="text-3xl lg:text-4xl font-medium text-white leading-[1.3] tracking-tight mb-10">
