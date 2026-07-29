@@ -52,7 +52,7 @@ export default function LoginPage() {
         {/* Login Form Container */}
         <div className="flex-1 flex items-center justify-center px-6 sm:px-12">
           <div className="w-full max-w-[400px]">
-            <h1 className="text-3xl font-light text-white mb-2">Bienvenido de nuevo</h1>
+            <h1 className="text-3xl font-light text-white mb-2">Te damos la bienvenida</h1>
             <p className="text-zinc-400 text-sm mb-8">Inicia sesión en tu cuenta</p>
 
             {error && (
