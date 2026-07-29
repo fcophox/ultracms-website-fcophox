@@ -166,9 +166,9 @@ export default function DashboardResourcesPage() {
       ) : (
         <div className="space-y-10">
           {/* Top Analytics Panel */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* KPI Card 1: PIN entries */}
-            <div className="bg-surface border border-border/60 rounded-xl p-6 flex flex-col justify-between h-[120px] shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-xl p-4.5 flex flex-col justify-between h-[100px] shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted tracking-wider uppercase">Personas que agregaron el PIN</span>
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500">
@@ -176,7 +176,7 @@ export default function DashboardResourcesPage() {
                 </div>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-foreground">{totalUnlocks}</span>
+                <span className="text-2xl font-bold text-foreground">{totalUnlocks}</span>
                 <span className="text-xs text-emerald-500 font-medium flex items-center gap-0.5">
                   <TrendingUp className="w-3 h-3" />
                   Activo
@@ -185,7 +185,7 @@ export default function DashboardResourcesPage() {
             </div>
 
             {/* KPI Card 2: Prompts Copied */}
-            <div className="bg-surface border border-border/60 rounded-xl p-6 flex flex-col justify-between h-[120px] shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-xl p-4.5 flex flex-col justify-between h-[100px] shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted tracking-wider uppercase">Total Prompts Copiados</span>
                 <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
@@ -193,7 +193,7 @@ export default function DashboardResourcesPage() {
                 </div>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-foreground">{totalCopies}</span>
+                <span className="text-2xl font-bold text-foreground">{totalCopies}</span>
                 <span className="text-xs text-primary font-medium flex items-center gap-0.5">
                   <TrendingUp className="w-3 h-3" />
                   En vivo
@@ -202,7 +202,7 @@ export default function DashboardResourcesPage() {
             </div>
 
             {/* KPI Card 3: Status */}
-            <div className="bg-surface border border-border/60 rounded-xl p-6 flex flex-col justify-between h-[120px] shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-xl p-4.5 flex flex-col justify-between h-[100px] shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted tracking-wider uppercase">Clave de acceso activa</span>
                 <div className="w-8 h-8 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary">
@@ -210,7 +210,7 @@ export default function DashboardResourcesPage() {
                 </div>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-lg font-mono font-semibold text-foreground">8291 (Encapsulada)</span>
+                <span className="text-[15px] font-mono font-semibold text-foreground">8291 (Encapsulada)</span>
               </div>
             </div>
           </div>
