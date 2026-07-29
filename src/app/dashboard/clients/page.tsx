@@ -19,6 +19,8 @@ export default function ClientsPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"inbox" | "archived">("inbox");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -56,20 +58,30 @@ export default function ClientsPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("¿Estás seguro de que deseas eliminar este contacto para siempre?")) {
-      return;
-    }
+  const promptDelete = (id: string) => {
+    setMessageToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!messageToDelete) return;
     const { error } = await supabase
       .from("contact_messages")
       .delete()
-      .eq("id", id);
+      .eq("id", messageToDelete);
       
     if (!error) {
       fetchMessages(); // Refresh the list
     } else {
       console.error("Error deleting message:", error);
     }
+    setDeleteModalOpen(false);
+    setMessageToDelete(null);
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalOpen(false);
+    setMessageToDelete(null);
   };
 
   const formatDate = (dateStr: string) => {
@@ -182,7 +194,7 @@ export default function ClientsPage() {
                         </button>
                         {client.is_archived && (
                           <button 
-                            onClick={() => handleDelete(client.id)}
+                            onClick={() => promptDelete(client.id)}
                             className="w-8 h-8 rounded-full flex items-center justify-center text-red-400 hover:text-red-500 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-colors"
                             title="Eliminar para siempre"
                           >
@@ -198,6 +210,36 @@ export default function ClientsPage() {
           </div>
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-background/50 backdrop-blur-md transition-all duration-300">
+          <div className="bg-surface border border-border/60 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+            <div className="space-y-2">
+              <h3 className="text-[16px] font-bold text-foreground">
+                ¿Eliminar permanentemente?
+              </h3>
+              <p className="text-[13px] text-muted-foreground leading-relaxed">
+                Esta acción no se puede deshacer. El contacto se eliminará de forma definitiva de tu base de datos.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 justify-end pt-2">
+              <button
+                onClick={handleDeleteCancel}
+                className="px-4 py-2 rounded-xl text-[13px] font-semibold text-muted-foreground hover:text-foreground hover:bg-surface border border-border/40 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 rounded-xl text-[13px] font-semibold bg-red-500 hover:bg-red-600 text-white transition-colors"
+              >
+                Eliminar para siempre
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
