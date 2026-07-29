@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Inbox, Archive, MoreHorizontal, Loader2 } from "lucide-react";
+import { Inbox, Archive, MoreHorizontal, Loader2, Trash2 } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
 interface ContactMessage {
@@ -53,6 +53,22 @@ export default function ClientsPage() {
       fetchMessages(); // Refresh the list
     } else {
       console.error("Error updating archive status:", error);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("¿Estás seguro de que deseas eliminar este contacto para siempre?")) {
+      return;
+    }
+    const { error } = await supabase
+      .from("contact_messages")
+      .delete()
+      .eq("id", id);
+      
+    if (!error) {
+      fetchMessages(); // Refresh the list
+    } else {
+      console.error("Error deleting message:", error);
     }
   };
 
@@ -156,13 +172,24 @@ export default function ClientsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button 
-                        onClick={() => handleArchive(client.id, client.is_archived)}
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface border border-transparent hover:border-border/40 transition-colors ml-auto opacity-0 group-hover:opacity-100"
-                        title={client.is_archived ? "Desarchivar" : "Archivar"}
-                      >
-                        {client.is_archived ? <Inbox className="w-4 h-4" /> : <Archive className="w-4 h-4" />}
-                      </button>
+                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => handleArchive(client.id, client.is_archived)}
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface border border-transparent hover:border-border/40 transition-colors"
+                          title={client.is_archived ? "Desarchivar" : "Archivar"}
+                        >
+                          {client.is_archived ? <Inbox className="w-4 h-4" /> : <Archive className="w-4 h-4" />}
+                        </button>
+                        {client.is_archived && (
+                          <button 
+                            onClick={() => handleDelete(client.id)}
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-red-400 hover:text-red-500 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-colors"
+                            title="Eliminar para siempre"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
