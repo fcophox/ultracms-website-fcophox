@@ -52,8 +52,8 @@ export default function LoginPage() {
         {/* Login Form Container */}
         <div className="flex-1 flex items-center justify-center px-6 sm:px-12">
           <div className="w-full max-w-[400px]">
-            <h1 className="text-3xl font-light text-white mb-2">Welcome back</h1>
-            <p className="text-zinc-400 text-sm mb-8">Sign in to your account</p>
+            <h1 className="text-3xl font-light text-white mb-2">Bienvenido de nuevo</h1>
+            <p className="text-zinc-400 text-sm mb-8">Inicia sesión en tu cuenta</p>
 
             {error && (
               <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-500 text-[13px]">
@@ -65,14 +65,14 @@ export default function LoginPage() {
             <form className="space-y-6" onSubmit={handleLogin}>
               <div className="space-y-2">
                 <label className="text-[13px] font-light text-zinc-300" htmlFor="email">
-                  Email
+                  Correo electrónico
                 </label>
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder="usuario@ejemplo.com"
                   className="w-full h-12 bg-[#18181b] border border-transparent rounded-lg px-4 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
                   required
                 />
@@ -81,10 +81,10 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-[13px] font-light text-zinc-300" htmlFor="password">
-                    Password
+                    Contraseña
                   </label>
                   <Link href="#" className="text-[13px] font-medium text-indigo-500 hover:text-indigo-400 transition-colors">
-                    Forgot password?
+                    ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
                 <input
@@ -104,14 +104,14 @@ export default function LoginPage() {
                 className="w-full h-12 bg-[#4F46E5] hover:bg-[#4338ca] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-semibold text-sm transition-colors mt-2 flex items-center justify-center gap-2"
               >
                 {loading && <Loader2 size={16} className="animate-spin" />}
-                {loading ? "Signing in..." : "Sign In"}
+                {loading ? "Iniciando sesión..." : "Iniciar sesión"}
               </button>
             </form>
 
             <p className="text-center text-sm text-zinc-400 mt-8">
-              Don't have an account?{" "}
+              ¿No tienes una cuenta?{" "}
               <Link href="#" className="text-white font-semibold hover:underline">
-                Sign up
+                Regístrate
               </Link>
             </p>
           </div>
@@ -120,10 +120,10 @@ export default function LoginPage() {
         {/* Footer info left */}
         <div className="absolute bottom-8 left-8 sm:bottom-12 sm:left-12">
           <p className="text-zinc-500 text-xs">
-            By continuing, you agree to our{" "}
-            <Link href="#" className="underline hover:text-zinc-300 transition-colors">Terms of Service</Link>
-            {" "}and{" "}
-            <Link href="#" className="underline hover:text-zinc-300 transition-colors">Privacy Policy</Link>.
+            Al continuar, aceptas nuestros{" "}
+            <Link href="#" className="underline hover:text-zinc-300 transition-colors">Términos de servicio</Link>
+            {" "}y nuestra{" "}
+            <Link href="#" className="underline hover:text-zinc-300 transition-colors">Política de privacidad</Link>.
           </p>
         </div>
       </div>
@@ -159,7 +159,7 @@ export default function LoginPage() {
           </div>
 
           <h2 className="text-3xl lg:text-4xl font-medium text-white leading-[1.3] tracking-tight mb-10">
-            "Experience backed by knowledge. Designing with method, judgment, and impact vision to create digital products that connect."
+            "Experiencia respaldada por el conocimiento. Diseñando con método, criterio y visión de impacto para crear productos digitales que conecten."
           </h2>
 
           <div className="flex items-center gap-4">
