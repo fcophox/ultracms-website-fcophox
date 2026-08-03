@@ -86,7 +86,7 @@ export function BlogClient({ articles }: BlogClientProps) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-16 max-w-6xl"
         >
-          <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-[3.5rem] font-normal text-foreground mb-8 leading-tight tracking-tight">
             {t('title')}
           </h1>
           <p className="text-lg md:text-xl text-muted leading-relaxed font-normal">
@@ -146,7 +146,7 @@ export function BlogClient({ articles }: BlogClientProps) {
                   </span>
                 </div>
 
-                <h2 className="text-xl md:text-2xl font-light text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
+                <h2 className="text-xl md:text-2xl font-normal text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
                   {featuredArticle.title}
                 </h2>
                 <div className="text-base md:text-lg text-muted leading-relaxed line-clamp-3">
@@ -190,7 +190,7 @@ export function BlogClient({ articles }: BlogClientProps) {
                       </span>
                     </div>
 
-                    <h3 className="text-[clamp(1rem,2.4vw,1.2rem)] font-light text-foreground leading-tight text-left w-full mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-[clamp(1rem,2.4vw,1.2rem)] font-normal text-foreground leading-tight text-left w-full mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {article.title}
                     </h3>
                     <div className="text-sm text-muted leading-relaxed mt-auto line-clamp-2">

@@ -51,7 +51,7 @@ export default function DesignSystemPage() {
 
         {/* Page Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
-          <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">{t('title')}</h1>
+          <h1 className="text-4xl md:text-[3.5rem] font-normal text-foreground mb-8 leading-tight tracking-tight">{t('title')}</h1>
           <p className="text-lg md:text-xl text-muted leading-relaxed font-normal max-w-3xl">{t('subtitle')}</p>
         </motion.div>
 
@@ -92,13 +92,13 @@ export default function DesignSystemPage() {
             <div className="flex-1 p-8 rounded-3xl bg-surface border border-border flex flex-col gap-8">
               <div>
                 <span className="text-sm text-muted font-mono uppercase tracking-wider mb-4 block">{t('typographySans')}</span>
-                <div className="text-4xl font-light mb-2 text-foreground tracking-tight">Sansation</div>
-                <div className="text-sm text-muted font-light tracking-wide">Aa Bb Cc Dd Ee Ff Gg 0123456789</div>
+                <div className="text-4xl font-normal mb-2 text-foreground tracking-tight">Sansation</div>
+                <div className="text-sm text-muted font-normal tracking-wide">Aa Bb Cc Dd Ee Ff Gg 0123456789</div>
               </div>
               <div className="h-px w-full bg-border" />
               <div className="flex flex-col gap-8">
                 <div>
-                  <div className="text-4xl md:text-5xl font-light text-foreground tracking-tight">H1 Heading</div>
+                  <div className="text-4xl md:text-5xl font-normal text-foreground tracking-tight">H1 Heading</div>
                   <div className="text-xs text-muted mt-2 font-mono uppercase">Font Light / Tracking Tight</div>
                 </div>
                 <div>

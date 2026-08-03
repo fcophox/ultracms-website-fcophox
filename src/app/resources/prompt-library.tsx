@@ -194,7 +194,7 @@ export function PromptLibrary() {
                 <Award className="w-3.5 h-3.5" />
                 40 Prompts de Diseño
               </span>
-              <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
+              <h2 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mb-4">
                 📚 Prompt Library UX
               </h2>
               <p className="text-lg text-muted leading-relaxed font-normal mb-2">
@@ -217,7 +217,7 @@ export function PromptLibrary() {
                 <Terminal className="w-3.5 h-3.5" />
                 50 Prompts de Construcción
               </span>
-              <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
+              <h2 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mb-4">
                 📚 Prompt Library — Vibe Coding
               </h2>
               <p className="text-lg text-muted leading-relaxed font-normal mb-2">
@@ -240,7 +240,7 @@ export function PromptLibrary() {
                 <FileCheck className="w-3.5 h-3.5" />
                 Material y Recursos
               </span>
-              <h2 className="text-3xl md:text-4xl font-light text-foreground tracking-tight mb-4">
+              <h2 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mb-4">
                 🎓 MasterClass: <em>Diseña, prototipa, lanza</em>
               </h2>
               <p className="text-lg text-muted leading-relaxed font-normal mb-2">

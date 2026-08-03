@@ -42,7 +42,7 @@ export async function Blog() {
     <section className="w-full py-24 z-10 relative">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-end justify-between mb-12">
-          <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px]">
+          <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px]">
             {t('title')}
           </h2>
 
@@ -85,7 +85,7 @@ export async function Blog() {
                   </span>
                 </div>
 
-                <h3 className="text-[clamp(1rem,2.4vw,1.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-2 line-clamp-2">
+                <h3 className="text-[clamp(1rem,2.4vw,1.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-2 line-clamp-2">
                   {article.title}
                 </h3>
                 <p className="text-sm text-muted leading-relaxed line-clamp-2">

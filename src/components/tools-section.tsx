@@ -40,7 +40,7 @@ export function ToolsSection() {
               {t('badge')}
             </span>
             <h2
-              className="text-[clamp(1.8rem,4vw,2.5rem)] font-light text-foreground leading-tight tracking-tight mb-6"
+              className="text-[clamp(1.8rem,4vw,2.5rem)] font-normal text-foreground leading-tight tracking-tight mb-6"
               dangerouslySetInnerHTML={{ __html: t.raw('title') }}
             />
             <p className="text-muted text-base md:text-lg font-medium leading-relaxed mb-8">

@@ -74,7 +74,7 @@ export function ArticleLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl md:text-3xl lg:text-5xl font-light text-foreground leading-tight mb-6"
+            className="text-xl md:text-3xl lg:text-5xl font-normal text-foreground leading-tight mb-6"
           >
             {title}
           </motion.h1>

@@ -31,7 +31,7 @@ export function ExperienceLogos() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px]">
+          <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px]">
             {t('title')}
           </h2>
         </motion.div>

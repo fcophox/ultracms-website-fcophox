@@ -163,10 +163,10 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
               <KeyRound className="w-4 h-4" />
               Recursos Exclusivos
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-foreground leading-tight mb-6">
               Desbloquea el
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-light">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-normal">
                 contenido especial
               </span>
             </h1>

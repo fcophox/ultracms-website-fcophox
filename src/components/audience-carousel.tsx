@@ -52,7 +52,7 @@ export function AudienceCarousel({ cards, title }: AudienceCarouselProps) {
   return (
     <div className="mb-14 md:mb-20">
       <div className="flex items-end justify-between mb-8">
-        <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight">
+        <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight">
           {title}
         </h2>
 

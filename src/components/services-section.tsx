@@ -55,7 +55,7 @@ export function ServicesSection() {
               </span>
 
               {/* Title */}
-              <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-6">
+              <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left mb-6">
                 {t("title")}
               </h2>
 
@@ -97,7 +97,7 @@ export function ServicesSection() {
                   </div>
 
                   {/* Text content */}
-                  <h3 className="text-2xl md:text-3xl font-light text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-muted leading-relaxed text-sm md:text-base max-w-xl">

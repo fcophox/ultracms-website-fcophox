@@ -46,13 +46,13 @@ export default function LoginPage() {
           <div className="w-8 h-8 rounded-md bg-zinc-800/50 flex items-center justify-center border border-zinc-700/50 overflow-hidden">
             <Image src="/brand/logotipo.svg" alt="Logo" width={18} height={18} className="object-contain" />
           </div>
-          <span className="text-white font-light text-lg tracking-tight">fcoPhox CMS</span>
+          <span className="text-white font-normal text-lg tracking-tight">fcoPhox CMS</span>
         </div>
 
         {/* Login Form Container */}
         <div className="flex-1 flex items-center justify-center px-6 sm:px-12">
           <div className="w-full max-w-[400px]">
-            <h1 className="text-3xl font-light text-white mb-2">Te damos la bienvenida</h1>
+            <h1 className="text-3xl font-normal text-white mb-2">Te damos la bienvenida</h1>
             <p className="text-zinc-400 text-sm mb-8">Inicia sesión en tu cuenta</p>
 
             {error && (
@@ -64,7 +64,7 @@ export default function LoginPage() {
 
             <form className="space-y-6" onSubmit={handleLogin}>
               <div className="space-y-2">
-                <label className="text-[13px] font-light text-zinc-300" htmlFor="email">
+                <label className="text-[13px] font-normal text-zinc-300" htmlFor="email">
                   Correo electrónico
                 </label>
                 <input
@@ -80,7 +80,7 @@ export default function LoginPage() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-[13px] font-light text-zinc-300" htmlFor="password">
+                  <label className="text-[13px] font-normal text-zinc-300" htmlFor="password">
                     Contraseña
                   </label>
                   <Link href="#" className="text-[13px] font-medium text-indigo-500 hover:text-indigo-400 transition-colors">
@@ -173,7 +173,7 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <div className="text-white font-light text-sm">Francisco Hormazabal</div>
+              <div className="text-white font-normal text-sm">Francisco Hormazabal</div>
               <div className="text-zinc-500 text-sm">@fcophox</div>
             </div>
           </div>

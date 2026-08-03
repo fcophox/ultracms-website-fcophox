@@ -109,7 +109,7 @@ export function Banner() {
                   </span>
                 </div>
 
-                <h2 className="text-[clamp(1.5rem,5vw,2.75rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[800px] mb-4">
+                <h2 className="text-[clamp(1.5rem,5vw,2.75rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[800px] mb-4">
                   {activeSlide.title}
                 </h2>
                 <p className="text-base md:text-lg text-muted leading-relaxed mb-8 max-w-2xl text-left">

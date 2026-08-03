@@ -48,7 +48,7 @@ export function MethodologySchema() {
     <section className="dark bg-background relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-24 mt-16">
       <div className="max-w-6xl mx-auto px-6 relative">
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-3xl font-light text-foreground">
+          <h2 className="text-2xl md:text-3xl font-normal text-foreground">
             {t('mainSubtitle')}
           </h2>
         </div>
@@ -119,7 +119,7 @@ export function MethodologySchema() {
           transition={{ delay: 0.6 }}
           className="mt-24 flex flex-col w-full"
         >
-          <h3 className="text-3xl md:text-4xl font-light text-foreground mb-4 text-left">
+          <h3 className="text-3xl md:text-4xl font-normal text-foreground mb-4 text-left">
             El valor del UX Engineer
           </h3>
 

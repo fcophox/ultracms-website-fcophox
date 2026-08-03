@@ -70,7 +70,7 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
         <span className="inline-block bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-muted uppercase mb-4">
           {t("since")}
         </span>
-        <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px]">
+        <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px]">
           {t("title")}
         </h2>
       </div>
@@ -250,7 +250,7 @@ function ProjectCardItem({ project }: { project: Project }) {
               <span className="text-xs font-medium text-secondary bg-secondary/10 px-3 py-1.5 rounded-full inline-block">
                 {project.tag}
               </span>
-              <h3 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px]">
+              <h3 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px]">
                 {project.title}
               </h3>
               <p className="text-muted leading-relaxed max-w-md">

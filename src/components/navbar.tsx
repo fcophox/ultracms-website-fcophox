@@ -163,7 +163,7 @@ export function Navbar() {
                 >
                   <Link
                     href={link.path}
-                    className={`text-3xl font-light transition-colors ${pathname === link.path || pathname?.startsWith(`${link.path}/`) ? 'text-primary' : 'text-foreground hover:text-primary'}`}
+                    className={`text-3xl font-normal transition-colors ${pathname === link.path || pathname?.startsWith(`${link.path}/`) ? 'text-primary' : 'text-foreground hover:text-primary'}`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}

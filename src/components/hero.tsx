@@ -77,7 +77,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-tight absolute w-full text-center"
+              className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-foreground leading-tight absolute w-full text-center"
             >
               {currentTitle.line1}
               <br />

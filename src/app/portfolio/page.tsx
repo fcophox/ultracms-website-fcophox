@@ -111,7 +111,7 @@ export default function PortfolioPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-16 max-w-6xl"
         >
-          <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-[3.5rem] font-normal text-foreground mb-8 leading-tight tracking-tight">
             Portfolio
           </h1>
           <p className="text-lg md:text-xl text-muted leading-relaxed font-normal">

@@ -314,7 +314,7 @@ function SectionHeading({ eyebrow, title, centered }: { eyebrow?: string; title:
           {eyebrow}
         </span>
       )}
-      <h2 className="text-3xl md:text-[2.5rem] font-light text-foreground leading-[1.2] tracking-tight">
+      <h2 className="text-3xl md:text-[2.5rem] font-normal text-foreground leading-[1.2] tracking-tight">
         {title}
       </h2>
     </motion.div>
@@ -393,7 +393,7 @@ export default function MethodologyPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-16 max-w-6xl"
         >
-          <h1 className="text-4xl md:text-[3.5rem] font-light text-foreground mb-8 leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-[3.5rem] font-normal text-foreground mb-8 leading-tight tracking-tight">
             Metodología: Full Stack Experience Builder <span className="text-muted/70 text-lg md:text-xl">(FSEB)</span>
           </h1>
           <div className="flex flex-col gap-4 text-lg md:text-xl text-muted leading-relaxed font-normal">
@@ -574,7 +574,7 @@ export default function MethodologyPage() {
       <section className="dark bg-background w-full py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-[2.5rem] font-light text-foreground leading-[1.2] tracking-tight">
+            <h2 className="text-3xl md:text-[2.5rem] font-normal text-foreground leading-[1.2] tracking-tight">
               Los tres pilares del Framework
             </h2>
             <p className="text-muted text-lg md:text-xl font-normal mt-4">
@@ -803,7 +803,7 @@ export default function MethodologyPage() {
                     <item.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                   </div>
                 )}
-                <h3 className="text-xl font-light text-foreground">{item.title}</h3>
+                <h3 className="text-xl font-normal text-foreground">{item.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{item.description}</p>
               </motion.article>
             ))}
@@ -833,7 +833,7 @@ export default function MethodologyPage() {
                     <span className="w-8 h-8 rounded-full border border-primary/30 bg-primary/10 text-primary font-mono text-xs font-medium flex items-center justify-center shrink-0 shadow-sm">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-lg md:text-xl font-light text-foreground">{principle}</span>
+                    <span className="text-lg md:text-xl font-normal text-foreground">{principle}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -885,7 +885,7 @@ export default function MethodologyPage() {
             viewport={{ once: true }}
             className="flex flex-col gap-8 max-w-4xl"
           >
-            <h2 className="text-3xl md:text-[2.5rem] font-light text-foreground leading-[1.2] tracking-tight">
+            <h2 className="text-3xl md:text-[2.5rem] font-normal text-foreground leading-[1.2] tracking-tight">
               Más que UX. Más que desarrollo.
             </h2>
             <div className="flex flex-col gap-6 text-muted text-base md:text-lg leading-relaxed">

@@ -101,7 +101,7 @@ export function EvolutionTimeline() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Header Section */}
         <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-normal text-foreground mb-6">
             Evolución a lo largo del tiempo
           </h2>
           <p className="text-lg text-muted max-w-3xl">

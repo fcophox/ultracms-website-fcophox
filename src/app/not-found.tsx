@@ -32,7 +32,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-2xl md:text-3xl font-light text-foreground mb-4 tracking-tight"
+          className="text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-tight"
         >
           {t("subtitle")}
         </motion.h2>

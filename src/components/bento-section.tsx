@@ -46,7 +46,7 @@ export function BentoSection() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none transition-transform duration-700 group-hover:scale-110 z-0" />
 
             <div className="z-10 mb-12">
-              <h3 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
+              <h3 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
                 {t('card1Title')}
               </h3>
               <p className="text-muted text-sm md:text-base max-w-md">
@@ -94,7 +94,7 @@ export function BentoSection() {
             </div>
             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent opacity-50 pointer-events-none z-0" />
 
-            <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-8 z-10">
+            <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-8 z-10">
               {t('card2Title')}
             </h3>
 
@@ -118,7 +118,7 @@ export function BentoSection() {
             </div>
             <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none z-0" />
 
-            <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-6 z-10 relative shrink-0">
+            <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-6 z-10 relative shrink-0">
               {t('card3Title')}
             </h3>
 
@@ -169,7 +169,7 @@ export function BentoSection() {
             className="md:col-span-2 rounded-3xl bg-surface border-none p-8 md:p-10 flex flex-col relative overflow-hidden group"
           >
             <div className="z-10 mb-8 max-w-xl">
-              <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-light text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
+              <h3 className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-4">
                 {t('card4Title')}
               </h3>
               <p className="text-muted text-sm md:text-base">

@@ -173,7 +173,7 @@ export default function CvPage() {
             </div>
 
             {/* Print-only contact bar for ATS / Clean PDF layout */}
-            <div className="hidden print:flex flex-wrap gap-x-4 gap-y-1 text-[9pt] text-slate-600 mt-3 font-light">
+            <div className="hidden print:flex flex-wrap gap-x-4 gap-y-1 text-[9pt] text-slate-600 mt-3 font-normal">
               <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-slate-500" /> Santiago, Chile</span>
               <span>•</span>
               <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-slate-500" /> fcojhormazabalh@gmail.com</span>
@@ -218,7 +218,7 @@ export default function CvPage() {
                 </h2>
                 <ul className="space-y-3.5 text-sm text-muted print:text-slate-700 print:space-y-1.5">
                   {impactItems.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 font-light">
+                    <li key={idx} className="flex items-start gap-2.5 font-normal">
                       <span className="text-[#0ea5e9] dark:text-[#38bdf8] font-bold select-none shrink-0 print:text-slate-600">•</span>
                       <span>{item}</span>
                     </li>
@@ -247,7 +247,7 @@ export default function CvPage() {
                           <h3 className="font-bold text-foreground text-base print:text-slate-950 print:text-[10pt]">{job.title}</h3>
                           <span className="text-xs font-mono text-muted/80 uppercase print:text-[8pt] print:text-slate-500">{job.company}</span>
                         </div>
-                        <ul className="list-disc pl-4 space-y-2 text-sm text-muted font-light print:text-slate-700 print:space-y-1">
+                        <ul className="list-disc pl-4 space-y-2 text-sm text-muted font-normal print:text-slate-700 print:space-y-1">
                           {job.tasks.map((task, tIdx) => (
                             <li key={tIdx}>{task}</li>
                           ))}

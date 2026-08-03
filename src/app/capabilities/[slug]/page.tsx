@@ -110,7 +110,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl md:text-6xl font-light text-foreground leading-tight tracking-tight"
+                className="text-3xl md:text-6xl font-normal text-foreground leading-tight tracking-tight"
               >
                 {data.title}
               </MotionH1>
@@ -118,7 +118,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-base md:text-xl text-muted font-light max-w-3xl leading-relaxed mt-2"
+                className="text-base md:text-xl text-muted font-normal max-w-3xl leading-relaxed mt-2"
               >
                 {data.shortDesc}
               </MotionP>
@@ -153,7 +153,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           >
             {/* Description */}
             <div className="mb-10 md:mb-12">
-              <h2 className="text-2xl font-light text-foreground tracking-tight mb-4">
+              <h2 className="text-2xl font-normal text-foreground tracking-tight mb-4">
                 {isEs ? "Descripción de la capacidad" : "Capability Description"}
               </h2>
               <p className="text-muted leading-relaxed text-base md:text-lg whitespace-pre-line">
@@ -184,7 +184,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-42"
           >
             <div>
-              <h3 className="text-xl md:text-2xl font-light text-foreground tracking-tight mb-4">
+              <h3 className="text-xl md:text-2xl font-normal text-foreground tracking-tight mb-4">
                 {isEs ? "¿Por qué lo necesitarías?" : "Why would you need it?"}
               </h3>
               <p className="text-muted text-sm md:text-base leading-relaxed">
@@ -192,7 +192,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </p>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl font-light text-foreground tracking-tight mb-4">
+              <h3 className="text-xl md:text-2xl font-normal text-foreground tracking-tight mb-4">
                 {isEs ? "¿Qué obtendrías como aporte?" : "What would you get?"}
               </h3>
               <p className="text-muted text-sm md:text-base leading-relaxed">
@@ -209,7 +209,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             transition={{ duration: 0.5 }}
             className="mb-18 md:mb-48"
           >
-            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-20">
+            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left mb-20">
               {isEs ? "Actividades basado en la metdología" : "Activities based on the methodology"}
             </h2>
 
@@ -241,7 +241,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                           <span className="text-xs font-semibold text-primary leading-none">{item.percentage}</span>
                         </div>
 
-                        <h3 className="text-xl md:text-2xl font-light text-foreground mb-1.5">
+                        <h3 className="text-xl md:text-2xl font-normal text-foreground mb-1.5">
                           {index + 1}. {item.milestone}
                         </h3>
                         <p className="text-sm md:text-base text-muted leading-relaxed">
@@ -263,7 +263,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             transition={{ duration: 0.5 }}
             className="mb-16 md:mb-24"
           >
-            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight mb-6 md:mb-8 tracking-tight text-center">
+            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight mb-6 md:mb-8 tracking-tight text-center">
               {labels.plans}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -282,7 +282,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     </span>
 
                     {/* Plan Name */}
-                    <h3 className="text-2xl font-light text-foreground mb-2 leading-tight">
+                    <h3 className="text-2xl font-normal text-foreground mb-2 leading-tight">
                       {plan.name.includes("—") ? plan.name.split("—").pop()!.trim() : plan.name}
                     </h3>
 
@@ -319,7 +319,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             transition={{ duration: 0.5 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-light text-foreground leading-tight text-left mb-6">
+            <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left mb-6">
               {labels.conditions}
             </h2>
             <ul className="space-y-3">
@@ -363,7 +363,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted mb-1 block">
                       {isEs ? "Anterior" : "Previous"}
                     </span>
-                    <h3 className="text-lg md:text-xl font-light text-foreground group-hover:text-primary transition-colors mb-1">
+                    <h3 className="text-lg md:text-xl font-normal text-foreground group-hover:text-primary transition-colors mb-1">
                       {prevData.title}
                     </h3>
                     <p className="text-sm text-muted leading-relaxed line-clamp-2">
@@ -385,7 +385,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted mb-1 block">
                       {isEs ? "Siguiente" : "Next"}
                     </span>
-                    <h3 className="text-lg md:text-xl font-light text-foreground group-hover:text-primary transition-colors mb-1">
+                    <h3 className="text-lg md:text-xl font-normal text-foreground group-hover:text-primary transition-colors mb-1">
                       {nextData.title}
                     </h3>
                     <p className="text-sm text-muted leading-relaxed line-clamp-2">
