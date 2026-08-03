@@ -167,7 +167,7 @@ export function CertificationsSection() {
       : certifications.filter((item) => item.category === activeTab);
 
   return (
-    <section className="dark bg-background relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-24 mb-16">
+    <section className="dark bg-background w-full py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col mb-10">
           <h2 className="text-3xl md:text-4xl font-light text-foreground mb-8">

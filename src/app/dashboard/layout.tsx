@@ -2,21 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { 
-  Bell, 
-  ExternalLink, 
-  LogOut, 
-  Search, 
-  Plus, 
-  ChevronDown, 
-  ChevronsUpDown, 
+import {
+  Bell,
+  ExternalLink,
+  LogOut,
+  Search,
+  Plus,
+  ChevronDown,
+  ChevronsUpDown,
   Home as HomeIcon,
-  FileText, 
-  Briefcase, 
-  Sliders, 
-  Users, 
-  Calendar as CalendarIcon, 
-  Folder 
+  FileText,
+  Briefcase,
+  Sliders,
+  Users,
+  Calendar as CalendarIcon,
+  Folder,
+  Image as ImageIcon
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
@@ -104,6 +105,7 @@ export default function DashboardLayout({
   const addonsNav = [
     { name: "Calendario", href: "/dashboard/calendar", icon: CalendarIcon },
     { name: "Recursos", href: "/dashboard/resources", icon: Folder },
+    { name: "Portfolio", href: "/dashboard/portfolio", icon: ImageIcon },
   ];
 
   const filteredWorkspaceNav = workspaceNav.filter(item => 

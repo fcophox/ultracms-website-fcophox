@@ -57,6 +57,7 @@ export function Footer() {
             <ul className="flex flex-col gap-4">
               <li><Link href="/about" className="text-muted hover:text-foreground transition-colors">{t('about')}</Link></li>
               <li><Link href="/methodology" className="text-muted hover:text-foreground transition-colors">{t('methodology')}</Link></li>
+              <li><Link href="/portfolio" className="text-muted hover:text-foreground transition-colors">Portfolio</Link></li>
               <li><Link href="/case-studies" className="text-muted hover:text-foreground transition-colors">{t('caseStudies')}</Link></li>
               <li><Link href="/blog" className="text-muted hover:text-foreground transition-colors">{t('blog')}</Link></li>
               <li><Link href="/logs" className="text-muted hover:text-foreground transition-colors">{t('logs')}</Link></li>

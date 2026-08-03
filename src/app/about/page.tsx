@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { EvolutionTimeline } from "@/components/evolution-timeline";
 import { AreasColaboracion } from "@/components/areas-colaboracion";
+import { CertificationsSection } from "@/components/certifications";
 import Link from "next/link";
 import Image from "next/image";
 import { RevealImage } from "@/components/reveal-image";
@@ -125,6 +126,9 @@ export default function AboutPage() {
 
       <EvolutionTimeline />
       <AreasColaboracion />
+
+      {/* Certifications Section */}
+      <CertificationsSection />
     </main>
   );
 }
