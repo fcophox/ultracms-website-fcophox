@@ -5,7 +5,7 @@ import { X, Grid3x3, List, LayoutGrid, Loader2, CheckCircle2, AlertCircle } from
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@/utils/supabase/client";
 
-type TemplateType = "grid" | "list" | "masonry";
+type TemplateType = "grid" | "list" | "gallery1" | "masonry";
 
 interface PortfolioConfig {
   id?: string;
@@ -20,28 +20,16 @@ interface PortfolioConfigDrawerProps {
 
 const templates = [
   {
-    id: "grid",
-    name: "Grid de Tarjetas",
-    description: "Muestra los proyectos en una cuadrícula de tarjetas con imagen y título.",
-    icon: Grid3x3,
-  },
-  {
-    id: "list",
-    name: "Lista Detallada",
-    description: "Muestra los proyectos en una lista con descripción completa y detalles.",
-    icon: List,
-  },
-  {
-    id: "masonry",
-    name: "Galería Masonry",
-    description: "Muestra los proyectos en una galería tipo masonry con imágenes de tamaño variable.",
+    id: "gallery1",
+    name: "Galería 1",
+    description: "Galería visual de alto impacto con patrón dinámico de 2 y 3 columnas.",
     icon: LayoutGrid,
   },
 ];
 
 export function PortfolioConfigDrawer({ isOpen, onClose }: PortfolioConfigDrawerProps) {
   const supabase = createClient();
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>("grid");
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>("gallery1");
   const [isVisible, setIsVisible] = useState(false);
   const [configId, setConfigId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -80,7 +68,7 @@ export function PortfolioConfigDrawer({ isOpen, onClose }: PortfolioConfigDrawer
 
       if (data) {
         setConfigId(data.id);
-        setSelectedTemplate((data.template_type as TemplateType) || "grid");
+        setSelectedTemplate("gallery1");
         setIsVisible(data.visible || false);
       }
     } catch (error: any) {
