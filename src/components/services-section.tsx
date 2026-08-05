@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { RevealImage } from "./reveal-image";
+import { ArrowUpRight } from "lucide-react";
 
 export function ServicesSection() {
   const t = useTranslations("ServicesSection");
@@ -79,7 +80,8 @@ export function ServicesSection() {
               >
                 <Link
                   href={`/capabilities/${service.id}`}
-                  className="group flex flex-col items-start w-full cursor-pointer no-underline select-none"
+                  className="group flex flex-col items-start w-full cursor-none no-underline select-none"
+                  data-custom-cursor="true"
                 >
                   {/* Image Container with high-end hover zoom and border */}
                   <div className="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden mb-6 border border-border/30 bg-surface shadow-md">
@@ -113,3 +115,4 @@ export function ServicesSection() {
     </section>
   );
 }
+

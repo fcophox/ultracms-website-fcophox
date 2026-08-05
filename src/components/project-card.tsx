@@ -214,9 +214,6 @@ function ProjectCardItem({ project }: { project: Project }) {
         <div className="w-full rounded-3xl bg-surface border border-border/20 overflow-hidden flex flex-col md:flex-row shadow-2xl">
           <div className="w-full md:w-[50%] flex items-center justify-center p-6 md:p-10">
             <div className="relative w-full aspect-[29/20] rounded-xl overflow-hidden group border border-border/50">
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-foreground/10 backdrop-blur-md border border-border/30 flex items-center justify-center text-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300 z-10">
-                <ArrowUpRight size={18} />
-              </div>
               {project.image_url ? (
                 <div className="w-full h-full relative">
                   <RevealImage
