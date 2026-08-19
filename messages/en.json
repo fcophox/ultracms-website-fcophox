@@ -323,8 +323,10 @@
     "logsTitle": "Changelog"
   },
   "ArticleNav": {
-    "prev": "Previous",
-    "next": "Next"
+    "sectionTitle": "Explore more content",
+    "sectionSubtitle": "Discover other articles and projects you might enjoy.",
+    "viewAll": "View all",
+    "readMore": "Read more"
   },
   "LogsPage": {
     "backHome": "Back to Home",

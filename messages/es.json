@@ -323,8 +323,10 @@
     "logsTitle": "Novedades"
   },
   "ArticleNav": {
-    "prev": "Anterior",
-    "next": "Siguiente"
+    "sectionTitle": "Explora más contenido",
+    "sectionSubtitle": "Descubre otros artículos y proyectos que podrían interesarte.",
+    "viewAll": "Ver todos",
+    "readMore": "Leer más"
   },
   "LogsPage": {
     "backHome": "Volver al Inicio",

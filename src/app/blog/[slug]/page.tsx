@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { ArticleLayout } from "@/components/article-layout";
 import { getLocale } from "next-intl/server";
-import { mapToLocale } from "@/utils/locale-mapper";
+import { mapToLocale, mapArrayToLocale } from "@/utils/locale-mapper";
+import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
 
 export const revalidate = 60; // Cache pages for 1 minute
 
@@ -89,31 +90,16 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? article.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
     : "";
 
-  // Fetch Prev / Next articles
-  const currentPublishDate = rawArticle.published_at || rawArticle.created_at;
-  
-  // Next article (newer)
-  const { data: rawNextArticle } = await supabase
+  // Fetch related articles (up to 8, excluding current)
+  const { data: rawRelated } = await supabase
     .from("articles")
-    .select("title, slug, title_en, slug_en, image_url")
+    .select("id, title, slug, content, image_url, title_en, slug_en, content_en")
     .eq("status", "published")
-    .gt("published_at", currentPublishDate)
-    .order("published_at", { ascending: true })
-    .limit(1)
-    .single();
-
-  // Previous article (older)
-  const { data: rawPrevArticle } = await supabase
-    .from("articles")
-    .select("title, slug, title_en, slug_en, image_url")
-    .eq("status", "published")
-    .lt("published_at", currentPublishDate)
+    .neq("id", rawArticle.id)
     .order("published_at", { ascending: false })
-    .limit(1)
-    .single();
+    .limit(8);
 
-  const nextArticle = rawNextArticle ? mapToLocale(rawNextArticle, locale) : null;
-  const prevArticle = rawPrevArticle ? mapToLocale(rawPrevArticle, locale) : null;
+  const relatedArticles = mapArrayToLocale(rawRelated || [], locale);
 
   // Date formatter
   const formatDate = (dateStr?: string | null) => {
@@ -142,8 +128,19 @@ export default async function BlogPostPage({ params }: PageProps) {
       backLabel="Volver al Blog"
       itemId={article.id}
       tableName="articles"
-      prevArticle={prevArticle ? { title: prevArticle.title, slug: prevArticle.slug, href: `/blog/${prevArticle.slug}`, imageUrl: prevArticle.image_url } : null}
-      nextArticle={nextArticle ? { title: nextArticle.title, slug: nextArticle.slug, href: `/blog/${nextArticle.slug}`, imageUrl: nextArticle.image_url } : null}
+      relatedArticlesSection={
+        <RelatedArticlesCarousel
+          items={relatedArticles.map((a: any) => ({
+            id: a.id,
+            title: a.title,
+            slug: a.slug,
+            content: a.content || "",
+            image_url: a.image_url,
+            href: `/blog/${a.slug}`,
+          }))}
+          viewAllHref="/blog"
+        />
+      }
     >
       <div 
         className="tiptap-content max-w-none"
@@ -152,3 +149,4 @@ export default async function BlogPostPage({ params }: PageProps) {
     </ArticleLayout>
   );
 }
+

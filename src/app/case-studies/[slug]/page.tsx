@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { ArticleLayout } from "@/components/article-layout";
 import { getLocale } from "next-intl/server";
-import { mapToLocale } from "@/utils/locale-mapper";
+import { mapToLocale, mapArrayToLocale } from "@/utils/locale-mapper";
+import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
 
 export const revalidate = 60; // Cache pages for 1 minute
 
@@ -89,31 +90,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
     ? caseStudy.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
     : "";
 
-  // Fetch Prev / Next cases
-  const currentPublishDate = rawCaseStudy.published_at || rawCaseStudy.created_at;
-  
-  // Next case (newer)
-  const { data: rawNextCase } = await supabase
+  // Fetch related case studies (up to 8, excluding current)
+  const { data: rawRelated } = await supabase
     .from("case_studies")
-    .select("title, slug, title_en, slug_en, image_url")
+    .select("id, title, slug, content, image_url, title_en, slug_en, content_en")
     .eq("status", "published")
-    .gt("published_at", currentPublishDate)
-    .order("published_at", { ascending: true })
-    .limit(1)
-    .single();
-
-  // Previous case (older)
-  const { data: rawPrevCase } = await supabase
-    .from("case_studies")
-    .select("title, slug, title_en, slug_en, image_url")
-    .eq("status", "published")
-    .lt("published_at", currentPublishDate)
+    .neq("id", rawCaseStudy.id)
     .order("published_at", { ascending: false })
-    .limit(1)
-    .single();
+    .limit(8);
 
-  const nextCase = rawNextCase ? mapToLocale(rawNextCase, locale) : null;
-  const prevCase = rawPrevCase ? mapToLocale(rawPrevCase, locale) : null;
+  const relatedCases = mapArrayToLocale(rawRelated || [], locale);
 
   // Year formatter
   const formatYear = (dateStr?: string | null) => {
@@ -138,8 +124,19 @@ export default async function CaseStudyPage({ params }: PageProps) {
       backLabel="Volver al Portafolio"
       itemId={caseStudy.id}
       tableName="case_studies"
-      prevArticle={prevCase ? { title: prevCase.title, slug: prevCase.slug, href: `/case-studies/${prevCase.slug}`, imageUrl: prevCase.image_url } : null}
-      nextArticle={nextCase ? { title: nextCase.title, slug: nextCase.slug, href: `/case-studies/${nextCase.slug}`, imageUrl: nextCase.image_url } : null}
+      relatedArticlesSection={
+        <RelatedArticlesCarousel
+          items={relatedCases.map((c: any) => ({
+            id: c.id,
+            title: c.title,
+            slug: c.slug,
+            content: c.content || "",
+            image_url: c.image_url,
+            href: `/case-studies/${c.slug}`,
+          }))}
+          viewAllHref="/case-studies"
+        />
+      }
     >
       <div 
         className="tiptap-content max-w-none"
@@ -148,3 +145,4 @@ export default async function CaseStudyPage({ params }: PageProps) {
     </ArticleLayout>
   );
 }
+
