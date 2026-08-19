@@ -52,7 +52,7 @@ export function Banner() {
       <div 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="max-w-6xl mx-auto px-6"
+        className="dm-container"
       >
         {/* The Card */}
         <div className="bg-background relative w-full flex flex-col items-start text-left rounded-3xl overflow-hidden border border-border px-8 md:px-16 py-12 md:py-16 shadow-2xl min-h-[380px] justify-center">

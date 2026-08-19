@@ -71,7 +71,7 @@ export default function ContactPage() {
 
   return (
     <main className="w-full flex-1 flex flex-col pt-8 pb-32">
-      <div className="max-w-6xl mx-auto px-6 w-full relative z-10">
+      <div className="dm-container relative z-10">
 
         {/* Top Link */}
         <motion.div

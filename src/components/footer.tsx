@@ -46,7 +46,7 @@ export function Footer() {
   return (
     <footer className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 pb-8 relative overflow-hidden">
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="dm-container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
           {/* Left section - Profile */}
           <div className="md:col-span-6 flex flex-col items-start">
