@@ -54,7 +54,7 @@ export function ArticleLayout({
         </div>
 
         {/* Header */}
-        <header className="mb-12 text-center md:text-left">
+        <header className="mb-12 text-left max-w-[760px] mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,12 +78,13 @@ export function ArticleLayout({
         </header>
 
         {/* Hero Image Area */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-          className="w-full aspect-[21/9] rounded-3xl overflow-hidden mb-16 shadow-2xl relative"
-        >
+        <div className="max-w-[760px] mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="w-full md:w-[110%] md:-ml-[5%] aspect-[21/9] rounded-3xl md:rounded-[2rem] overflow-hidden mb-16 shadow-2xl relative"
+          >
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -93,7 +94,8 @@ export function ArticleLayout({
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${gradient}`} />
           )}
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Content Body */}
         <motion.div
