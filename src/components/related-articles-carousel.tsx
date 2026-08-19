@@ -71,7 +71,7 @@ export function RelatedArticlesCarousel({
 
   return (
     <section className="w-full mt-20 pt-16 pb-8 border-t border-border">
-      <div className="max-w-5xl mx-auto px-6 w-full">
+      <div className="dm-container">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
@@ -101,22 +101,22 @@ export function RelatedArticlesCarousel({
             WebkitOverflowScrolling: "touch",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
-            scrollPaddingLeft: "max(1.5rem, calc((100vw - 64rem) / 2 + 1.5rem))",
+            scrollPaddingLeft: "calc(max(0px, (100vw - 1440px) / 2) + var(--dm-padding))",
           }}
         >
           {/* Left spacer */}
-          <div className="shrink-0" style={{ width: "max(1.5rem, calc((100vw - 64rem) / 2 + 1.5rem))" }} />
+          <div className="shrink-0" style={{ width: "calc(max(0px, (100vw - 1440px) / 2) + var(--dm-padding))" }} />
 
           {items.map((item, i) => (
             <Link
               key={item.id}
               href={item.href}
               data-carousel-card
-              className="group shrink-0 w-[280px] md:w-[300px] mr-6 rounded-2xl bg-surface overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+              className="group shrink-0 w-[300px] md:w-[340px] mr-6 flex flex-col cursor-pointer"
               style={{ scrollSnapAlign: "start" }}
             >
               {/* Image */}
-              <div className="w-full aspect-[4/3] overflow-hidden relative">
+              <div className="w-full aspect-[16/9] overflow-hidden relative rounded-2xl mb-4">
                 {item.image_url ? (
                   <img
                     src={item.image_url}
@@ -132,29 +132,22 @@ export function RelatedArticlesCarousel({
               </div>
 
               {/* Body */}
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="text-base font-medium text-foreground leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">
+              <div className="flex flex-col flex-1">
+                <h3 className="text-[clamp(1rem,2.4vw,1.3rem)] font-normal text-foreground leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted leading-relaxed line-clamp-2 mb-4">
+                <p className="text-base text-muted leading-relaxed line-clamp-2">
                   {item.content.replace(/<[^>]*>/g, "").slice(0, 120)}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-muted group-hover:text-primary transition-colors">
-                  {t("readMore")}
-                  <ArrowRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </span>
               </div>
             </Link>
           ))}
           {/* Right spacer */}
-          <div className="shrink-0" style={{ width: "max(0px, calc((100vw - 64rem) / 2))" }} />
+          <div className="shrink-0" style={{ width: "max(0px, calc((100vw - 90rem) / 2))" }} />
         </div>
 
         {/* Navigation arrows */}
-        <div className="max-w-5xl mx-auto px-6 mt-6 flex items-center gap-2">
+        <div className="dm-container mt-6 flex items-center gap-2">
           <button
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}

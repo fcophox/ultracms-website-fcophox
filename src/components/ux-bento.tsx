@@ -11,11 +11,11 @@ export function UxBento() {
 
   return (
     <section className="w-full relative z-10 bg-background overflow-visible py-16 md:py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="dm-container">
+        <div className="dm-grid">
 
-          {/* Left Column (Spans 2 columns) */}
-          <div className="md:col-span-2 flex flex-col gap-6">
+          {/* Left Column (Spans 8 columns on desktop) */}
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 flex flex-col gap-6">
 
             {/* Header Section */}
             <motion.div
@@ -106,13 +106,13 @@ export function UxBento() {
 
           </div>
 
-          {/* Right Column (Spans 1 column, Tall) */}
+          {/* Right Column (Spans 4 columns on desktop, Tall) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="md:col-span-1 rounded-3xl bg-surface border-none relative overflow-hidden flex flex-col min-h-[500px] group hover:bg-foreground/5 dark:hover:bg-[#1A1A1E] transition-colors"
+            className="col-span-4 md:col-span-8 lg:col-span-4 rounded-3xl bg-surface border-none relative overflow-hidden flex flex-col min-h-[500px] group hover:bg-foreground/5 dark:hover:bg-[#1A1A1E] transition-colors"
           >
             <div className="absolute inset-0 z-0 opacity-30 transition-opacity duration-700 group-hover:opacity-50 pointer-events-none">
               <Image src="/methodology/bg-card-3.svg" alt="Background" fill className="object-cover" />

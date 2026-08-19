@@ -41,7 +41,7 @@ export function ArticleLayout({
     <>
       <ReadingProgressBar />
       <main className="w-full flex-1 flex flex-col items-center pt-8 pb-32">
-      <article className="max-w-5xl mx-auto px-6 w-full">
+      <article className="dm-container">
         {/* Back Button */}
         <div className="mb-8">
           <Link
@@ -100,7 +100,7 @@ export function ArticleLayout({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="tiptap-content max-w-3xl mx-auto"
+          className="tiptap-content max-w-[760px] mx-auto"
         >
           {children || (
             <>
@@ -129,7 +129,9 @@ export function ArticleLayout({
 
         {/* Feedback Banner */}
         {itemId && tableName && (
-          <ArticleFeedback itemId={itemId} tableName={tableName} />
+          <div className="max-w-[760px] mx-auto w-full">
+            <ArticleFeedback itemId={itemId} tableName={tableName} />
+          </div>
         )}
       </article>
 

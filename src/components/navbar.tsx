@@ -118,7 +118,7 @@ export function Navbar() {
           : "bg-transparent backdrop-blur-md border-transparent"
           }`}
       >
-        <nav className="relative w-full flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
+        <nav className="relative flex items-center justify-between py-4 dm-container">
           <Link href="/" className="flex items-center gap-3 relative z-10 group" onClick={() => setIsMenuOpen(false)}>
             <div className="w-11 h-11 rounded-full bg-[#1A1A1E] border border-border/10 flex items-center justify-center shrink-0 overflow-hidden relative">
               <Image src="/brand/logotipo.svg" alt="Logo" width={44} height={44} className="object-cover absolute transition-opacity duration-300 group-hover:opacity-0" />

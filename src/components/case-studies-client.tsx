@@ -62,7 +62,7 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
 
   return (
     <main className="w-full flex-1 flex flex-col items-center justify-start pt-8 pb-32">
-      <div className="max-w-6xl mx-auto px-6 w-full">
+      <div className="dm-container">
         {/* Top Link */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -117,9 +117,9 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
               key={featuredCase.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-12 md:mb-16 rounded-3xl border-none bg-surface overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col md:flex-row"
+              className="mb-32 md:mb-40 rounded-none border-none overflow-hidden group transition-all duration-300 cursor-pointer flex flex-col md:flex-row gap-8 md:gap-12"
             >
-              <div className="w-full md:w-3/5 overflow-hidden relative h-48 md:h-auto md:min-h-[350px]">
+              <div className="w-full md:w-3/5 overflow-hidden relative h-48 md:h-auto md:min-h-[350px] rounded-3xl">
                 {featuredCase.image_url ? (
                   <RevealImage
                     src={featuredCase.image_url}
@@ -133,15 +133,15 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                 )}
               </div>
 
-              <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
+              <div className="w-full md:w-2/5 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-sm text-muted">{formatYear(featuredCase.published_at || featuredCase.created_at)}</span>
-                  <span className="text-xs font-medium text-secondary bg-secondary/10 px-3 py-1.5 rounded-full">
+                  {/* <span className="text-xs font-medium text-secondary bg-secondary/10 px-3 py-1.5 rounded-full">
                     {featuredCase.category}
-                  </span>
+                  </span> */}
                 </div>
 
-                <h2 className="text-xl md:text-2xl font-normal text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
+                <h2 className="text-xl md:text-3xl font-normal text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
                   {featuredCase.title}
                 </h2>
                 <div className="text-base md:text-lg text-muted leading-relaxed line-clamp-3">
@@ -154,16 +154,16 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
 
         {/* Cases Grid */}
         {gridCases.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
             {gridCases.map((c, index) => (
               <Link href={`/case-studies/${c.slug}`} key={c.id} className="block cursor-none" data-custom-cursor="true">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="rounded-3xl border-none bg-surface overflow-hidden group hover:scale-[1.02] transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col h-full"
+                  className="border-none overflow-hidden group transition-all duration-300 cursor-pointer flex flex-col h-full"
                 >
-                  <div className="overflow-hidden relative h-48 w-full">
+                  <div className="overflow-hidden relative aspect-[16/9] w-full rounded-2xl mb-4">
                     {c.image_url ? (
                       <RevealImage
                         src={c.image_url}
@@ -177,18 +177,18 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                     )}
                   </div>
 
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-3 mb-4">
+                  <div className="flex flex-col flex-1">
+                    <div className="flex items-center gap-3 mb-3">
                       <span className="text-xs text-muted">{formatYear(c.published_at || c.created_at)}</span>
-                      <span className="text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full ml-auto">
+                      {/* <span className="text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full ml-auto">
                         {c.category}
-                      </span>
+                      </span> */}
                     </div>
 
-                    <h3 className="text-[clamp(1rem,2.4vw,1.2rem)]  font-normal text-foreground leading-tight text-left w-full mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-[clamp(1rem,2.4vw,1.3rem)] font-normal text-foreground leading-tight text-left w-full mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {c.title}
                     </h3>
-                    <div className="text-sm text-muted leading-relaxed mt-auto line-clamp-2">
+                    <div className="text-base text-muted leading-relaxed mt-auto line-clamp-2">
                       {c.content.replace(/<[^>]*>/g, '')}
                     </div>
                   </div>

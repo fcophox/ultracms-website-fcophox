@@ -40,7 +40,7 @@ export async function Blog() {
 
   return (
     <section className="w-full py-24 z-10 relative">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="dm-container">
         <div className="flex items-end justify-between mb-12">
           <h2 className="text-[clamp(1.2rem,4vw,2.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px]">
             {t('title')}
@@ -55,40 +55,40 @@ export async function Blog() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="dm-grid">
           {articles && articles.map((article) => (
             <Link
               href={`/blog/${article.slug}`}
               key={article.id}
-              className="block rounded-3xl border-none bg-surface overflow-hidden hover:scale-[1.02] transition-transform duration-200 cursor-none"
+              className="col-span-4 block group cursor-none flex flex-col"
               data-custom-cursor="true"
             >
               {article.image_url ? (
-                <div className="relative w-full h-48">
+                <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-4">
                   <RevealImage
                     src={article.image_url}
                     alt={article.title}
                     fill
-                    className="object-cover rounded-t-3xl"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
               ) : (
-                <div className="w-full h-48 bg-gradient-to-br from-primary/40 to-secondary/40 rounded-t-3xl" />
+                <div className="w-full aspect-[16/9] bg-gradient-to-br from-primary/40 to-secondary/40 rounded-2xl mb-4 transition-transform duration-500 group-hover:scale-105" />
               )}
 
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs text-muted">{formatDate(article.published_at || article.created_at)}</span>
-                  <span className="text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full ml-auto">
+                  {/* <span className="text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full ml-auto">
                     {article.category || t('defaultCategory')}
-                  </span>
+                  </span> */}
                 </div>
 
-                <h3 className="text-[clamp(1rem,2.4vw,1.2rem)] font-normal text-foreground leading-tight text-left w-full md:max-w-[750px] mb-2 line-clamp-2">
+                <h3 className="text-[clamp(1rem,2.4vw,1.3rem)] font-normal text-foreground leading-tight mb-2 group-hover:text-primary transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-sm text-muted leading-relaxed line-clamp-2">
+                <p className="text-base text-muted leading-relaxed line-clamp-2">
                   {/* Extracting pure text from HTML content or just using an excerpt logic */}
                   {article.content ? article.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : t('readFull')}
                 </p>

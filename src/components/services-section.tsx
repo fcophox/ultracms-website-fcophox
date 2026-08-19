@@ -38,11 +38,11 @@ export function ServicesSection() {
 
   return (
     <section className="w-full relative z-10 bg-background py-20 md:py-32 overflow-visible">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="dm-container">
+        <div className="dm-grid items-start">
 
           {/* Left Column (Sticky) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 h-fit flex flex-col items-start">
+          <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:sticky lg:top-32 h-fit flex flex-col items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ export function ServicesSection() {
           </div>
 
           {/* Right Column (Scrollable cards) */}
-          <div className="lg:col-span-7 space-y-16 lg:space-y-24">
+          <div className="col-span-4 md:col-span-8 lg:col-span-7 space-y-16 lg:space-y-24">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}

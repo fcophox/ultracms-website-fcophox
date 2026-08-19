@@ -55,7 +55,7 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center w-full">
+      <div className="relative z-10 dm-container-hero flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}

@@ -91,7 +91,7 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
   if (!isDesktop) {
     return (
       <section className="w-full relative z-10 bg-background overflow-visible">
-        <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="dm-container py-12">
           <div className="mb-16">{Header}</div>
           <div className="space-y-12">
             {projects.map((project, index) => (
@@ -140,7 +140,7 @@ export function ProjectCard({ projects = [] }: { projects?: Project[] }) {
       style={{ height: `${sectionHeightVh}vh` }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 h-full flex flex-col pt-16 pb-10">
+        <div className="dm-container h-full flex flex-col pt-16 pb-10">
           <div className="mb-20 shrink-0">{Header}</div>
 
           <div className="relative flex-1 flex gap-8">
