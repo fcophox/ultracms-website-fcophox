@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
 import { ArticleLayout } from "@/components/article-layout";
-import { getLocale } from "next-intl/server";
-import { mapToLocale, mapArrayToLocale } from "@/utils/locale-mapper";
 import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
+import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { aListadoArray, resumenDe } from "@/utils/kontororu-adapter";
 
-export const revalidate = 60; // Cache pages for 1 minute
+export const revalidate = 3600; // el webhook invalida antes; ver blog/page.tsx
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -14,99 +13,63 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = await createClient();
-  const locale = await getLocale();
+  const post = await kontororu.posts.bySlug(slug);
 
-  const { data: rawCase, error } = await supabase
-    .from("case_studies")
-    .select("title, content, image_url, title_en, content_en")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .eq("status", "published")
-    .single();
-
-  if (error || !rawCase) {
+  if (!post) {
     return {
-      title: "Caso de Estudio no encontrado",
+      title: "Caso de estudio no encontrado",
       description: "Este caso de estudio no existe o ha sido eliminado.",
     };
   }
 
-  const caseStudy = mapToLocale(rawCase, locale);
-  const cleanExcerpt = caseStudy.content
-    ? caseStudy.content.replace(/<[^>]*>?/gm, '').substring(0, 160).trim() + "..."
-    : "Descubre mis casos de estudio y procesos de diseño UI/UX.";
+  const descripcion = resumenDe(post);
 
   return {
-    title: caseStudy.title,
-    description: cleanExcerpt,
+    title: post.seo?.title || post.title,
+    description: descripcion,
     openGraph: {
-      title: caseStudy.title,
-      description: cleanExcerpt,
-      url: `/case-studies/${slug}`,
+      title: post.title,
+      description: descripcion,
+      url: `/case-studies/${post.slug}`,
       type: "article",
       siteName: "Fcophox",
-      images: caseStudy.image_url
-        ? [
-            {
-              url: caseStudy.image_url,
-              width: 1200,
-              height: 630,
-              alt: caseStudy.title,
-            },
-          ]
+      images: post.cover
+        ? [{ url: post.cover.url, width: post.cover.width, height: post.cover.height, alt: post.cover.alt ?? post.title }]
         : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: caseStudy.title,
-      description: cleanExcerpt,
-      images: caseStudy.image_url ? [caseStudy.image_url] : undefined,
+      title: post.title,
+      description: descripcion,
+      images: post.cover ? [post.cover.url] : undefined,
     },
   };
 }
 
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params;
-  const supabase = await createClient();
-  const locale = await getLocale();
 
-  // Fetch the case study by slug
-  const { data: rawCaseStudy, error } = await supabase
-    .from("case_studies")
-    .select("*")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .eq("status", "published")
-    .single();
+  const post = await kontororu.posts.bySlug(slug);
 
-  if (error || !rawCaseStudy) {
-    console.error(`Case study not found with slug '${slug}':`, error);
-    notFound();
-  }
-  
-  const caseStudy = mapToLocale(rawCaseStudy, locale);
+  /*
+   * `bySlug` devuelve null tanto si no existe como si está en borrador: para
+   * esta API son indistinguibles a propósito, que un borrador exista no es
+   * información pública. Ambos casos son un 404.
+   */
+  if (!post) notFound();
 
-  // Generate a clean excerpt for description
-  const cleanExcerpt = caseStudy.content 
-    ? caseStudy.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
-    : "";
+  const { data: relacionados } = await kontororu.posts.list({
+    categoria: CATEGORIA.casosDeEstudio,
+    limit: 9, // 8 + el actual, que se descarta abajo
+  });
 
-  // Fetch related case studies (up to 8, excluding current)
-  const { data: rawRelated } = await supabase
-    .from("case_studies")
-    .select("id, title, slug, content, image_url, title_en, slug_en, content_en")
-    .eq("status", "published")
-    .neq("id", rawCaseStudy.id)
-    .order("published_at", { ascending: false })
-    .limit(8);
+  const items = aListadoArray(relacionados.filter((p) => p.slug !== post.slug)).slice(0, 8);
 
-  const relatedCases = mapArrayToLocale(rawRelated || [], locale);
-
-  // Year formatter
+  // Los casos de estudio muestran sólo el año, no la fecha completa.
   const formatYear = (dateStr?: string | null) => {
     if (!dateStr) return "";
     try {
-      const date = new Date(dateStr);
-      return date.getFullYear().toString();
+      return new Date(dateStr).getFullYear().toString();
     } catch {
       return dateStr;
     }
@@ -114,35 +77,39 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <ArticleLayout
-      title={caseStudy.title}
-      description={cleanExcerpt}
-      date={formatYear(caseStudy.published_at || caseStudy.created_at)}
-      category={caseStudy.category}
+      title={post.title}
+      description={resumenDe(post)}
+      date={formatYear(post.publishedAt)}
+      // `category` es el tipo de contenido; el chip que se muestra es la etiqueta.
+      category={post.tags[0]?.name || post.category?.name || "Caso de estudio"}
       gradient="from-secondary/20 via-secondary/5 to-transparent"
-      imageUrl={caseStudy.image_url}
+      imageUrl={post.cover?.url}
       backHref="/case-studies"
       backLabel="Volver al Portafolio"
-      itemId={caseStudy.id}
-      tableName="case_studies"
+      slug={post.slug}
       relatedArticlesSection={
         <RelatedArticlesCarousel
-          items={relatedCases.map((c: any) => ({
-            id: c.id,
-            title: c.title,
-            slug: c.slug,
-            content: c.content || "",
-            image_url: c.image_url,
-            href: `/case-studies/${c.slug}`,
+          items={items.map((a) => ({
+            id: a.id,
+            title: a.title,
+            slug: a.slug,
+            content: a.content,
+            image_url: a.image_url,
+            href: `/case-studies/${a.slug}`,
           }))}
           viewAllHref="/case-studies"
         />
       }
     >
-      <div 
+      {/*
+        El HTML llega saneado desde el servidor de Kontorōru, con allowlist de
+        etiquetas y atributos aplicada al guardar. La alternativa es recorrer
+        `post.content.json` y renderizar componentes propios.
+      */}
+      <div
         className="tiptap-content max-w-none"
-        dangerouslySetInnerHTML={{ __html: caseStudy.content }} 
+        dangerouslySetInnerHTML={{ __html: post.content.html }}
       />
     </ArticleLayout>
   );
 }
-

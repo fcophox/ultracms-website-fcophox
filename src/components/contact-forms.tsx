@@ -3,8 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { User, Mail, MessageSquare, Send, Globe, Clock, Loader2, CheckCircle2 } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
 import { useTranslations } from "next-intl";
+import type { Availability } from "@/utils/kontororu";
+
+/** "18:30" + "18:45" → "18:30 - 18:45 hrs", que es como lo lee la interfaz. */
+function etiquetaTramo(tramo: { start: string; end: string }): string {
+  return `${tramo.start} - ${tramo.end} hrs`;
+}
 
 function TypewriterEffect({ text }: { text: string }) {
   const [phase, setPhase] = useState<'thinking' | 'typing' | 'done'>('thinking');
@@ -383,20 +388,18 @@ export function ConsultingForm() {
 export function MeetingForm() {
   const t = useTranslations('ContactForms');
   const [formData, setFormData] = useState({ name: "", email: "" });
-  const [restrictedDays, setRestrictedDays] = useState<number[]>([]);
-  const [dailyRestrictions, setDailyRestrictions] = useState<Record<string, string[]>>({});
+  const [availability, setAvailability] = useState<Availability | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
-  const supabase = createClient();
-
-  const allSlots = [
-    "18:30 - 18:45 hrs", "18:45 - 19:00 hrs", "19:00 - 19:15 hrs", "19:15 - 19:30 hrs",
-    "19:30 - 19:45 hrs", "19:45 - 20:00 hrs", "20:00 - 20:15 hrs", "20:15 - 20:30 hrs",
-    "20:30 - 20:45 hrs", "20:45 - 21:00 hrs"
-  ];
+  /*
+   * La rejilla ya no está escrita a mano: la define el complemento Calendario
+   * (`startTime`, `endTime`, `slotMinutes`) y llega en `slots`. Se usa sólo
+   * para pintar en gris los tramos cerrados mientras no hay día elegido.
+   */
+  const allSlots = (availability?.slots ?? []).map(etiquetaTramo);
 
   useEffect(() => {
     // Inicializar el día seleccionado al día de hoy
@@ -404,21 +407,25 @@ export function MeetingForm() {
     today.setHours(0, 0, 0, 0);
     setSelectedDate(today);
 
-    const fetchSettings = async () => {
-      const { data, error } = await supabase
-        .from("availability_settings")
-        .select("*")
-        .eq("id", "00000000-0000-0000-0000-000000000000")
-        .single();
+    /*
+     * Se pide a nuestro propio route handler y no al CMS: la API Key es
+     * secreta y este archivo se envía al navegador.
+     */
+    const controller = new AbortController();
 
-      if (data && !error) {
-        setRestrictedDays(data.restricted_days || []);
-        setDailyRestrictions(data.daily_slot_restrictions || {});
-      }
-      setIsLoading(false);
-    };
-    fetchSettings();
+    fetch("/api/availability", { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => setAvailability(json?.data ?? null))
+      .catch((error) => {
+        if (error.name !== "AbortError") console.error("Error al leer la disponibilidad:", error);
+      })
+      .finally(() => setIsLoading(false));
+
+    return () => controller.abort();
   }, []);
+
+  /** El patrón semanal indexado por `Date#getDay()`, que es el índice que usa la API. */
+  const semana = new Map((availability?.week ?? []).map((d) => [d.weekday, d]));
 
   const generateDays = () => {
     const today = new Date();
@@ -429,7 +436,6 @@ export function MeetingForm() {
     startMonday.setDate(today.getDate() - distanceToMonday);
 
     const daysArray = [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const headers: string[] = t.raw('days');
 
     for (let i = 0; i < 14; i++) {
@@ -437,13 +443,23 @@ export function MeetingForm() {
       date.setDate(startMonday.getDate() + i);
       const isPast = date < today;
       const dayIndex = date.getDay();
-      const isRestricted = restrictedDays.includes(dayIndex);
+      const dia = semana.get(dayIndex);
+
+      /*
+       * Un día se ofrece si el CMS no lo marcó cerrado Y le quedan tramos.
+       * Antes se restaban bloqueos de una rejilla fija; ahora se pinta lo que
+       * la API dice que está disponible, que es lo contrario.
+       *
+       * Mientras carga, `semana` está vacía: se deja no disponible para no
+       * ofrecer un día que puede estar cerrado.
+       */
+      const seOfrece = Boolean(dia && !dia.isClosed && dia.available.length > 0);
 
       daysArray.push({
         jsDate: date,
         dateString: date.getDate().toString(),
         dayHeader: i < 7 ? headers[dayIndex] : '',
-        isAvailable: !isPast && !isRestricted,
+        isAvailable: !isPast && seOfrece,
         dayIndex
       });
     }
@@ -452,13 +468,21 @@ export function MeetingForm() {
 
   const calendarDays = generateDays();
 
+  /**
+   * Los tramos del día elegido.
+   *
+   * Se pinta la rejilla completa para que se vea qué horas existen, pero sólo
+   * se habilitan las que están en `available` — la lista de lo que de verdad
+   * se ofrece. La rejilla (`slots`) es sólo el fondo en gris.
+   */
   const getSlotsForSelected = () => {
-    if (!selectedDate) return allSlots;
-    const dayIndex = selectedDate.getDay();
-    const blockedForDay = dailyRestrictions[dayIndex] || [];
-    return allSlots.map(slot => ({
+    if (!selectedDate) return [];
+    const dia = semana.get(selectedDate.getDay());
+    const ofrecidos = new Set((dia?.available ?? []).map(etiquetaTramo));
+
+    return allSlots.map((slot) => ({
       time: slot,
-      isAvailable: !blockedForDay.includes(slot)
+      isAvailable: ofrecidos.has(slot),
     }));
   };
 
@@ -481,6 +505,14 @@ export function MeetingForm() {
           email: formData.email,
           messageType: "meeting",
           message: composedMessage,
+          /*
+           * Además del texto: en la bandeja se leen como campos propios, no
+           * hay que parsear el mensaje para saber qué hora se pidió.
+           */
+          payload: {
+            fecha: selectedDate.toISOString().slice(0, 10),
+            tramo: selectedSlot,
+          },
         }),
       });
       if (res.ok) {
@@ -507,6 +539,22 @@ export function MeetingForm() {
         <button onClick={() => setIsSuccess(false)} className="mt-4 text-sm font-medium text-primary hover:underline transition-colors">
           {t('sendAnotherMeet')}
         </button>
+      </div>
+    );
+  }
+
+  /*
+   * Sin complemento Calendario no hay horario que ofrecer. Se retira la
+   * sección en lugar de mostrar un calendario vacío que no deja avanzar.
+   */
+  if (!isLoading && !availability) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center gap-3 w-full bg-surface/30 border border-border/20 rounded-2xl">
+        <Clock className="w-8 h-8 text-muted-foreground" />
+        <h3 className="text-lg font-medium text-foreground">La agenda no está disponible</h3>
+        <p className="text-muted-foreground text-sm max-w-[340px]">
+          Escríbeme por el formulario de mensaje y coordinamos una hora.
+        </p>
       </div>
     );
   }
@@ -588,10 +636,14 @@ export function MeetingForm() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <label className="text-sm font-medium text-muted-foreground">{t('lblSelectTime')}</label>
+        <label className="text-sm font-medium text-muted-foreground">
+          {t('lblSelectTime')}
+          {/* La duración la fija el complemento; escribirla a mano se desincroniza. */}
+          {availability?.slotMinutes ? ` (${availability.slotMinutes} min)` : ""}
+        </label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {selectedDate ? (
-            currentSlots.map((slot: any, i) => {
+            currentSlots.map((slot, i) => {
               const isSlotSelected = selectedSlot === slot.time;
               return (
                 <button
@@ -625,7 +677,11 @@ export function MeetingForm() {
             ))
           )}
         </div>
-        <p className="text-xs text-muted-foreground mt-2">{t('meetNote')}</p>
+        <p className="text-xs text-muted-foreground mt-2">
+          {t('meetNote')}
+          {/* La zona la fija el complemento; antes era la del navegador y no se decía. */}
+          {availability?.timezone ? ` (horario de ${availability.timezone})` : ""}
+        </p>
       </div>
 
       <button

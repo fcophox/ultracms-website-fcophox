@@ -1,27 +1,20 @@
 import { ArrowRight } from "lucide-react";
-import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { RevealImage } from "./reveal-image";
 import { getTranslations, getLocale } from "next-intl/server";
-import { mapArrayToLocale } from "@/utils/locale-mapper";
+import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { aListadoArray } from "@/utils/kontororu-adapter";
 
 export async function Blog() {
   const t = await getTranslations('Blog');
   const locale = await getLocale();
-  const supabase = await createClient();
 
-  const { data: articlesData, error } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .limit(3);
+  const { data: posts } = await kontororu.posts.list({
+    categoria: CATEGORIA.blog,
+    limit: 3,
+  });
 
-  if (error) {
-    console.error("Error fetching articles for home:", error);
-  }
-  
-  const articles = mapArrayToLocale(articlesData || [], locale);
+  const articles = aListadoArray(posts);
 
   // Date formatter
   const formatDate = (dateStr?: string | null) => {
@@ -89,8 +82,8 @@ export async function Blog() {
                   {article.title}
                 </h3>
                 <p className="text-base text-muted leading-relaxed line-clamp-2">
-                  {/* Extracting pure text from HTML content or just using an excerpt logic */}
-                  {article.content ? article.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : t('readFull')}
+                  {/* `content` ya es el excerpt que escribió el editor, no HTML. */}
+                  {article.content || t('readFull')}
                 </p>
               </div>
             </Link>

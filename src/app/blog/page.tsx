@@ -1,10 +1,15 @@
-import { createClient } from "@/utils/supabase/server";
 import { BlogClient } from "@/components/blog-client";
 import { getLocale, getTranslations } from "next-intl/server";
-import { mapArrayToLocale } from "@/utils/locale-mapper";
+import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { aListadoArray } from "@/utils/kontororu-adapter";
 import { Metadata } from 'next';
 
-export const revalidate = 60; // Cache for 1 minute for great performance and SEO
+/*
+ * Una hora, no un minuto: la invalidación ya no depende del reloj sino del
+ * webhook de Kontorōru, que revalida la etiqueta `posts` al publicar. Esto es
+ * sólo la red de seguridad por si una entrega se pierde.
+ */
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -16,21 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  const supabase = await createClient();
-  const locale = await getLocale();
-  
-  // Fetch published articles
-  const { data: articlesData, error } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
+  const { data: posts } = await kontororu.posts.list({
+    categoria: CATEGORIA.blog,
+    limit: 100,
+  });
 
-  if (error) {
-    console.error("Error fetching articles from Supabase:", error);
-  }
-  
-  const articles = mapArrayToLocale(articlesData || [], locale);
-
-  return <BlogClient articles={articles} />;
+  return <BlogClient articles={aListadoArray(posts)} />;
 }
