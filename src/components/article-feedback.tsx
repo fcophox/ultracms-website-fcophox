@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HandMetal, ThumbsUp } from "lucide-react";
 
 interface ArticleFeedbackProps {
-  itemId: string;
-  tableName: "articles" | "case_studies";
+  /** Slug del contenido en Kontorōru: la reacción es del contenido, no de la fila. */
+  slug: string;
 }
 
-export function ArticleFeedback({ itemId, tableName }: ArticleFeedbackProps) {
+export function ArticleFeedback({ slug }: ArticleFeedbackProps) {
   const [hasLiked, setHasLiked] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
-  const storageKey = `liked_${tableName}_${itemId}`;
+  const storageKey = `liked_kontororu_${slug}`;
 
   useEffect(() => {
     // Check if user already liked this article in this browser
@@ -35,20 +35,32 @@ export function ArticleFeedback({ itemId, tableName }: ArticleFeedbackProps) {
       localStorage.setItem(storageKey, "true");
     }
 
+    /*
+     * La llamada sale del navegador, no de nuestro servidor: es el único
+     * endpoint del CMS sin clave y su cupo es de 60/min POR IP. Proxiándolo,
+     * todo el tráfico del sitio compartiría una IP y agotaría el cupo entre
+     * todos los lectores.
+     */
     try {
-      const res = await fetch("/api/likes", {
+      const base = process.env.NEXT_PUBLIC_KONTORORU_URL;
+      const tenant = process.env.NEXT_PUBLIC_KONTORORU_TENANT;
+
+      if (!base || !tenant) {
+        console.error("Faltan NEXT_PUBLIC_KONTORORU_URL o NEXT_PUBLIC_KONTORORU_TENANT.");
+        return;
+      }
+
+      const res = await fetch(`${base.replace(/\/$/, "")}/reactions`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: itemId, tableName }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tenant, slug, reaction: "like" }),
       });
 
       if (!res.ok) {
-        console.error("Failed to update like count on server. Continuing with local state.");
+        console.error("No se pudo registrar la reacción. Se mantiene el estado local.");
       }
     } catch (error) {
-      console.error("Error liking article:", error);
+      console.error("Error al registrar la reacción:", error);
     } finally {
       setIsLiking(false);
     }

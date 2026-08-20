@@ -6,7 +6,6 @@ import { Check, ShieldAlert, KeyRound, Loader2, ArrowRight, ArrowLeft } from "lu
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import { createClient } from "@/utils/supabase/client";
 import { sendGAEvent } from "@next/third-parties/google";
 
 // SHA-256 hash of "8291"
@@ -97,20 +96,15 @@ export function ResourcesHero({ onUnlock }: { onUnlock?: () => void }) {
     try {
       const hashed = await sha256(fullCode);
       if (hashed === CODE_HASH) {
-        // Log to Supabase database
-        const supabase = createClient();
-        await supabase
-          .from("contact_messages")
-          .insert([
-            {
-              name: "Resource Unlock",
-              email: "unlock@fcophox.com",
-              message_type: "resource_unlock",
-              message: "Acceso concedido a recursos",
-              status: "new",
-              is_archived: false
-            }
-          ]);
+        // Registro en la bandeja de Kontorōru, vía servidor: la API Key es secreta.
+        await fetch("/api/track", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "resource_unlock",
+            message: "Acceso concedido a recursos",
+          }),
+        }).catch((err) => console.error("Error al registrar el desbloqueo:", err));
 
         sendGAEvent("event", "resource_unlock");
 

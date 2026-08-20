@@ -8,9 +8,9 @@ import { ServicesSection } from "@/components/services-section";
 import { ExperienceLogos } from "@/components/experience-logos";
 import { ToolsSection } from "@/components/tools-section";
 import { Metadata } from "next";
-import { createClient } from "@/utils/supabase/server";
 import { getTranslations, getLocale } from 'next-intl/server';
-import { mapArrayToLocale } from "@/utils/locale-mapper";
+import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { aListadoArray } from "@/utils/kontororu-adapter";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -24,22 +24,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const revalidate = 0;
+/*
+ * Era 0 —sin caché— porque el contenido salía de Supabase y no había forma de
+ * saber cuándo cambiaba. Ahora avisa el webhook, así que se puede cachear.
+ */
+export const revalidate = 3600;
 
 export default async function Home() {
-  const supabase = await createClient();
-  const locale = await getLocale();
+  const { data: casos } = await kontororu.posts.list({
+    categoria: CATEGORIA.casosDeEstudio,
+    limit: 6,
+  });
 
-  const { data: caseStudies } = await supabase
-    .from("case_studies")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .limit(6);
-
-  const localizedCaseStudies = mapArrayToLocale(caseStudies || [], locale);
-
-  const mappedProjects = localizedCaseStudies.map((c, i) => {
+  const mappedProjects = aListadoArray(casos).map((c, i) => {
     const colorPalettes = [
       ["#3b82f6", "#06b6d4"],
       ["#8b5cf6", "#ec4899"],
@@ -53,10 +50,11 @@ export default async function Home() {
       slug: c.slug,
       tag: c.category || "Case Study",
       title: c.title,
-      description: c.content ? c.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : "Explora este caso de estudio.",
-      tags: c.category ? c.category.split(',').map((t: string) => t.trim()) : [],
+      // `content` ya es el excerpt del editor, no HTML que haya que limpiar.
+      description: c.content || "Explora este caso de estudio.",
+      tags: c.tags ?? [],
       colors: colorPalettes[i % colorPalettes.length],
-      image_url: c.image_url || null,
+      image_url: c.image_url ?? undefined,
     };
   });
 

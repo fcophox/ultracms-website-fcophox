@@ -42,6 +42,17 @@ export function BlogClient({ articles }: BlogClientProps) {
 
   const categories = ["All", ...Array.from(new Set(articles.map((a) => a.category).filter(Boolean)))];
 
+  /*
+   * Con una sola categoría el filtro no filtra nada: son "Todos" y un botón que
+   * devuelve exactamente lo mismo. Se esconde en vez de ofrecer un control
+   * inerte.
+   *
+   * Es lo que pasa hoy: la taxonomía por entrada no sobrevivió a la migración y
+   * el panel de Kontorōru todavía no permite asignar etiquetas. Los chips
+   * vuelven solos en cuanto cada entrada tenga la suya.
+   */
+  const showFilter = categories.length > 2;
+
   const filteredArticles =
     activeCategory === "All"
       ? articles
@@ -95,6 +106,7 @@ export function BlogClient({ articles }: BlogClientProps) {
         </motion.div>
 
         {/* Category Filter */}
+        {showFilter && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,6 +126,7 @@ export function BlogClient({ articles }: BlogClientProps) {
             </button>
           ))}
         </motion.div>
+        )}
 
         {/* Featured Article */}
         {featuredArticle && (

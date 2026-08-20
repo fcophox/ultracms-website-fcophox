@@ -6,7 +6,6 @@ import { Copy, Check, Lock, Search, Compass, Layout, Sparkles, HelpCircle, FileC
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { promptStages, vibeCodingStages, masterclassStages } from "./prompts-data";
-import { createClient } from "@/utils/supabase/client";
 import { sendGAEvent } from "@next/third-parties/google";
 
 export function PromptLibrary() {
@@ -39,26 +38,22 @@ export function PromptLibrary() {
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
 
-    // Evento anónimo en GA4 (complementa el registro en Supabase).
+    // Evento anónimo en GA4 (complementa el registro en la bandeja de Kontorōru).
     sendGAEvent("event", "prompt_copy", {
       prompt_title: title,
       prompt_library: activeLibrary,
     });
 
     try {
-      const supabase = createClient();
-      await supabase
-        .from("contact_messages")
-        .insert([
-          {
-            name: "Prompt Copy",
-            email: "copy@fcophox.com",
-            message_type: "prompt_copy",
-            message: title,
-            status: "new",
-            is_archived: false
-          }
-        ]);
+      await fetch("/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "prompt_copy",
+          message: title,
+          payload: { library: activeLibrary },
+        }),
+      });
     } catch (err) {
       console.error("Error logging prompt copy:", err);
     }

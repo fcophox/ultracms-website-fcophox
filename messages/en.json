@@ -299,7 +299,7 @@
     "meetSentDesc": "I've received your request. I'll send you a Meet/Teams link very soon.",
     "sendAnotherMeet": "Schedule another meeting",
     "lblSelectDay": "Select day to schedule",
-    "lblSelectTime": "Meeting time (15 mins)",
+    "lblSelectTime": "Meeting time",
     "meetNote": "Contact meeting via Teams or Google Meet.",
     "meetFooter": "It will be a brief space to understand your needs and see how I can help.",
     "days": [

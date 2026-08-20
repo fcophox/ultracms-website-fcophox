@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
-import { ArticleLayout } from "@/components/article-layout";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { mapToLocale, mapArrayToLocale } from "@/utils/locale-mapper";
+import { ArticleLayout } from "@/components/article-layout";
 import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
+import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { aListadoArray, resumenDe } from "@/utils/kontororu-adapter";
 
-export const revalidate = 60; // Cache pages for 1 minute
+export const revalidate = 3600; // el webhook invalida antes; ver blog/page.tsx
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -14,99 +14,76 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = await createClient();
-  const locale = await getLocale();
+  const post = await kontororu.posts.bySlug(slug.toLowerCase());
 
-  const { data: rawArticle, error } = await supabase
-    .from("articles")
-    .select("title, content, image_url, title_en, content_en")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .eq("status", "published")
-    .single();
-
-  if (error || !rawArticle) {
+  if (!post) {
     return {
       title: "Artículo no encontrado",
       description: "Este artículo no existe o ha sido eliminado.",
     };
   }
 
-  const article = mapToLocale(rawArticle, locale);
-  const cleanExcerpt = article.content
-    ? article.content.replace(/<[^>]*>?/gm, '').substring(0, 160).trim() + "..."
-    : "Descubre artículos sobre diseño, tecnología y desarrollo web.";
+  const descripcion = resumenDe(post);
 
   return {
-    title: article.title,
-    description: cleanExcerpt,
+    title: post.seo?.title || post.title,
+    description: descripcion,
     openGraph: {
-      title: article.title,
-      description: cleanExcerpt,
-      url: `/blog/${slug}`,
+      title: post.title,
+      description: descripcion,
+      url: `/blog/${post.slug}`,
       type: "article",
       siteName: "Fcophox",
-      images: article.image_url
-        ? [
-            {
-              url: article.image_url,
-              width: 1200,
-              height: 630,
-              alt: article.title,
-            },
-          ]
+      images: post.cover
+        ? [{ url: post.cover.url, width: post.cover.width, height: post.cover.height, alt: post.cover.alt ?? post.title }]
         : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: cleanExcerpt,
-      images: article.image_url ? [article.image_url] : undefined,
+      title: post.title,
+      description: descripcion,
+      images: post.cover ? [post.cover.url] : undefined,
     },
   };
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const supabase = await createClient();
   const locale = await getLocale();
 
-  // Fetch the article by slug
-  const { data: rawArticle, error } = await supabase
-    .from("articles")
-    .select("*")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .eq("status", "published")
-    .single();
-
-  if (error || !rawArticle) {
-    console.error(`Article not found with slug '${slug}':`, error);
-    notFound();
+  /*
+   * Los slugs de Kontorōru son siempre minúsculas: `slugify` del CMS las fuerza.
+   * Varias URLs antiguas llevaban mayúsculas, así que una visita con otra
+   * capitalización se manda a la forma canónica con un 301.
+   *
+   * Esto NO puede hacerse con una entrada en `redirects()`: el `source` de
+   * next.config se compara sin distinguir capitalización, de modo que la regla
+   * se capturaría a sí misma y dejaría la URL correcta en un bucle infinito.
+   */
+  if (slug !== slug.toLowerCase()) {
+    permanentRedirect(`/blog/${slug.toLowerCase()}`);
   }
-  
-  const article = mapToLocale(rawArticle, locale);
 
-  // Generate a clean excerpt for description
-  const cleanExcerpt = article.content 
-    ? article.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
-    : "";
+  const post = await kontororu.posts.bySlug(slug);
 
-  // Fetch related articles (up to 8, excluding current)
-  const { data: rawRelated } = await supabase
-    .from("articles")
-    .select("id, title, slug, content, image_url, title_en, slug_en, content_en")
-    .eq("status", "published")
-    .neq("id", rawArticle.id)
-    .order("published_at", { ascending: false })
-    .limit(8);
+  /*
+   * `bySlug` devuelve null tanto si no existe como si está en borrador: para
+   * esta API son indistinguibles a propósito, que un borrador exista no es
+   * información pública. Ambos casos son un 404.
+   */
+  if (!post) notFound();
 
-  const relatedArticles = mapArrayToLocale(rawRelated || [], locale);
+  const { data: relacionados } = await kontororu.posts.list({
+    categoria: CATEGORIA.blog,
+    limit: 9, // 8 + el actual, que se descarta abajo
+  });
 
-  // Date formatter
+  const items = aListadoArray(relacionados.filter((p) => p.slug !== post.slug)).slice(0, 8);
+
   const formatDate = (dateStr?: string | null) => {
     if (!dateStr) return "";
     try {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-ES', {
+      return new Date(dateStr).toLocaleDateString(locale === "en" ? "en-US" : "es-ES", {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -118,23 +95,23 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <ArticleLayout
-      title={article.title}
-      description={cleanExcerpt}
-      date={formatDate(article.published_at || article.created_at)}
-      category={article.category || 'Blog'}
+      title={post.title}
+      description={resumenDe(post)}
+      date={formatDate(post.publishedAt)}
+      // `category` es el tipo de contenido; el chip que se muestra es la etiqueta.
+      category={post.tags[0]?.name || post.category?.name || "Blog"}
       gradient="from-primary/20 via-primary/5 to-transparent"
-      imageUrl={article.image_url}
+      imageUrl={post.cover?.url}
       backHref="/blog"
       backLabel="Volver al Blog"
-      itemId={article.id}
-      tableName="articles"
+      slug={post.slug}
       relatedArticlesSection={
         <RelatedArticlesCarousel
-          items={relatedArticles.map((a: any) => ({
+          items={items.map((a) => ({
             id: a.id,
             title: a.title,
             slug: a.slug,
-            content: a.content || "",
+            content: a.content,
             image_url: a.image_url,
             href: `/blog/${a.slug}`,
           }))}
@@ -142,11 +119,15 @@ export default async function BlogPostPage({ params }: PageProps) {
         />
       }
     >
-      <div 
+      {/*
+        El HTML llega saneado desde el servidor de Kontorōru, con allowlist de
+        etiquetas y atributos aplicada al guardar. La alternativa es recorrer
+        `post.content.json` y renderizar componentes propios.
+      */}
+      <div
         className="tiptap-content max-w-none"
-        dangerouslySetInnerHTML={{ __html: article.content }} 
+        dangerouslySetInnerHTML={{ __html: post.content.html }}
       />
     </ArticleLayout>
   );
 }
-

@@ -16,8 +16,8 @@ interface ArticleLayoutProps {
   imageUrl?: string | null;
   backHref: string;
   backLabel: string;
-  itemId?: string;
-  tableName?: "articles" | "case_studies";
+  /** Slug del contenido en Kontorōru. Es la clave de las reacciones. */
+  slug?: string;
   relatedArticlesSection?: ReactNode;
   children?: ReactNode;
 }
@@ -31,8 +31,7 @@ export function ArticleLayout({
   imageUrl,
   backHref,
   backLabel,
-  itemId,
-  tableName,
+  slug,
   relatedArticlesSection,
   children,
 }: ArticleLayoutProps) {
@@ -130,9 +129,9 @@ export function ArticleLayout({
         </motion.div>
 
         {/* Feedback Banner */}
-        {itemId && tableName && (
+        {slug && (
           <div className="max-w-[760px] mx-auto w-full">
-            <ArticleFeedback itemId={itemId} tableName={tableName} />
+            <ArticleFeedback slug={slug} />
           </div>
         )}
       </article>

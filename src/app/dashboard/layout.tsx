@@ -11,12 +11,6 @@ import {
   ChevronDown,
   ChevronsUpDown,
   Home as HomeIcon,
-  FileText,
-  Briefcase,
-  Sliders,
-  Users,
-  Calendar as CalendarIcon,
-  Folder,
   Image as ImageIcon
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
@@ -34,18 +28,6 @@ export default function DashboardLayout({
   const [userName, setUserName] = useState<string>("Francisco");
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  
-  const [counts, setCounts] = useState<{
-    articles: number;
-    caseStudies: number;
-    services: number;
-    clients: number;
-  }>({
-    articles: 0,
-    caseStudies: 0,
-    services: 0,
-    clients: 0,
-  });
 
   useEffect(() => {
     const getUser = async () => {
@@ -63,28 +45,6 @@ export default function DashboardLayout({
     getUser();
   }, [supabase.auth]);
 
-  useEffect(() => {
-    const fetchCounts = async () => {
-      const getCount = async (table: string, filter?: (query: any) => any) => {
-        let q = supabase.from(table).select("*", { count: "exact", head: true });
-        if (filter) q = filter(q);
-        const { count, error } = await q;
-        return error ? 0 : (count ?? 0);
-      };
-
-      const [articles, caseStudies, services, clients] = await Promise.all([
-        getCount("articles"),
-        getCount("case_studies"),
-        getCount("services"),
-        getCount("contact_messages", q => q.neq("message_type", "resource_unlock")),
-      ]);
-
-      setCounts({ articles, caseStudies, services, clients });
-    };
-
-    fetchCounts();
-  }, [supabase]);
-
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.push("/login");
@@ -95,22 +55,17 @@ export default function DashboardLayout({
     ? userName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)
     : "FR";
 
-  const workspaceNav = [
-    { name: "Artículos", href: "/dashboard/articles", icon: FileText, countKey: "articles" as const },
-    { name: "Casos de Estudio", href: "/dashboard/case-studies", icon: Briefcase, countKey: "caseStudies" as const },
-    { name: "Servicios", href: "/dashboard/services", icon: Sliders, countKey: "services" as const },
-    { name: "Clientes", href: "/dashboard/clients", icon: Users, countKey: "clients" as const },
-  ];
-
+  /*
+   * Portafolio es lo único que queda en Supabase. Todo lo demás se administra
+   * en Kontorōru: artículos y casos de estudio como contenido; calendario,
+   * contactos y reacciones como complementos.
+   *
+   * Saldrá de aquí cuando exista el complemento de Portafolio, y con él se va
+   * el dashboard entero junto con /login y el middleware.
+   */
   const addonsNav = [
-    { name: "Calendario", href: "/dashboard/calendar", icon: CalendarIcon },
-    { name: "Recursos", href: "/dashboard/resources", icon: Folder },
     { name: "Portfolio", href: "/dashboard/portfolio", icon: ImageIcon },
   ];
-
-  const filteredWorkspaceNav = workspaceNav.filter(item => 
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   const filteredAddonsNav = addonsNav.filter(item =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -164,44 +119,8 @@ export default function DashboardLayout({
             </Link>
           </div>
 
-          {/* Workspaces / CMS Sections */}
+          {/* Secciones del CMS interno */}
           <div className="flex-1 space-y-6">
-            <div>
-              <div className="px-6 py-1.5 text-[12px] font-bold tracking-wider text-muted/70 uppercase mb-2">
-                Workspaces
-              </div>
-
-              <nav className="px-2 space-y-0.5">
-                {filteredWorkspaceNav.map((item) => {
-                  const IconComponent = item.icon;
-                  const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/dashboard");
-                  const count = item.countKey ? counts[item.countKey] : null;
-
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-[14.5px] font-medium transition-colors ${
-                        isActive
-                          ? "bg-surface/50 text-foreground border border-border/40 shadow-sm"
-                          : "text-muted hover:text-foreground hover:bg-muted/10"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <IconComponent size={17} className={isActive ? "text-primary" : "text-muted/80"} />
-                        <span>{item.name}</span>
-                      </div>
-                      {count !== null && (
-                        <span className="text-[12px] text-muted/80 font-semibold px-2 py-0.2">
-                          {count}
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
-              </nav>
-            </div>
-
             {/* Complementos Section */}
             {(filteredAddonsNav.length > 0 || searchQuery === "") && (
               <div>
