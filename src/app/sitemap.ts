@@ -25,30 +25,51 @@ const estaticas: Entrada[] = [
   { url: `${SITE_URL}/contact`, changeFrequency: 'yearly', priority: 0.5, lastModified: ahora },
 ];
 
+type Posts = Awaited<ReturnType<typeof kontororu.posts.list>>['data'];
+
+const deContenido = (base: string, posts: Posts): Entrada[] =>
+  posts.map((p) => ({
+    url: `${SITE_URL}${base}/${p.slug}`,
+    // `updatedAt` es la última edición real, no la fecha del build.
+    lastModified: new Date(p.updatedAt || p.publishedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /*
    * Antes el sitemap sólo listaba páginas estáticas: ninguna entrada del blog
    * ni de casos de estudio aparecía. Con la migración cambiaron los slugs,
    * así que declararlos importa más que nunca — los buscadores todavía
    * conocen las URLs viejas.
+   *
+   * Esta ruta se prerenderiza, así que la llamada ocurre EN EL BUILD. Sin el
+   * try/catch, una clave ausente o un fallo pasajero de Kontorōru aborta el
+   * despliegue entero: fue lo que pasó en el primer intento, en un preview que
+   * no tenía las variables de entorno.
+   *
+   * Un sitemap temporalmente incompleto es un problema de SEO acotado y que se
+   * corrige solo en la siguiente revalidación. Un build roto bloquea todo.
    */
-  const [articulos, casos] = await Promise.all([
-    kontororu.posts.list({ categoria: CATEGORIA.blog, limit: 100 }),
-    kontororu.posts.list({ categoria: CATEGORIA.casosDeEstudio, limit: 100 }),
-  ]);
+  let contenido: Entrada[] = [];
 
-  const deContenido = (base: string, posts: Awaited<ReturnType<typeof kontororu.posts.list>>['data']): Entrada[] =>
-    posts.map((p) => ({
-      url: `${SITE_URL}${base}/${p.slug}`,
-      // `updatedAt` es la última edición real, no la fecha del build.
-      lastModified: new Date(p.updatedAt || p.publishedAt),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    }));
+  try {
+    const [articulos, casos] = await Promise.all([
+      kontororu.posts.list({ categoria: CATEGORIA.blog, limit: 100 }),
+      kontororu.posts.list({ categoria: CATEGORIA.casosDeEstudio, limit: 100 }),
+    ]);
 
-  return [
-    ...estaticas,
-    ...deContenido('/blog', articulos.data),
-    ...deContenido('/case-studies', casos.data),
-  ];
+    contenido = [
+      ...deContenido('/blog', articulos.data),
+      ...deContenido('/case-studies', casos.data),
+    ];
+  } catch (error) {
+    console.error(
+      '[sitemap] No se pudo leer el contenido de Kontorōru; se emiten sólo las ' +
+      'páginas estáticas. Revisa KONTORORU_URL y KONTORORU_API_KEY en este entorno.',
+      error,
+    );
+  }
+
+  return [...estaticas, ...contenido];
 }
