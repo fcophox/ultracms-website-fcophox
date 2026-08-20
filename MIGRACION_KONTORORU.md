@@ -270,14 +270,53 @@ Las URLs en inglés entran en el mapa porque **hoy responden en producción**: l
 consulta anterior hacía `.or(slug.eq.X,slug_en.eq.X)`, así que ambas formas
 están indexadas.
 
-- Mapa: `src/data/slug-redirects.ts` (generado, no editar a mano)
+- Mapa: `src/data/slug-redirects.ts` (generado, no editar a mano) — **9 entradas**
 - Conexión: `redirects()` en `next.config.ts`
+- Normalización de capitalización: en las páginas `[slug]`
 
 Van en `next.config.ts` y no en `src/middleware.ts` a propósito: se resuelven
 antes de que el middleware corra, así que una redirección no arrastra la
 comprobación de sesión de Supabase.
 
-Verificado: **12/12 devuelven 308 al destino correcto.**
+### ⚠️ El `source` de `redirects()` NO distingue mayúsculas
+
+Esto provocó **tres bucles infinitos** en el primer intento. Una entrada como
+
+```
+the-winter-of-UX-…  →  the-winter-of-ux-…
+```
+
+parece inofensiva, pero como el `source` se compara sin distinguir
+capitalización, **se captura a sí misma**: la URL correcta —la de destino—
+también hace match con la regla y se redirige a sí misma para siempre. Tres de
+los 18 posts publicados quedaban inalcanzables, y los tres respondían 308 en vez
+de 404, que es justo lo que hace difícil notarlo.
+
+Por eso los cambios que son **sólo de capitalización no van en el mapa**. Se
+resuelven en las páginas `[slug]`:
+
+```ts
+if (slug !== slug.toLowerCase()) {
+  permanentRedirect(`/blog/${slug.toLowerCase()}`);
+}
+```
+
+La comparación es sobre la cadena real, no sobre un matcher, así que no puede
+capturarse a sí misma. Y cubre **cualquier** capitalización, no sólo las cuatro
+que traíamos: `/blog/The-Psychology-Of-Color…` también acaba en la forma
+canónica.
+
+Los slugs de Kontorōru son siempre minúsculas (`slugify` las fuerza), así que
+bajar a minúsculas es siempre seguro.
+
+**Verificado:**
+
+| Comprobación | Resultado |
+|---|---|
+| Los 18 slugs publicados | 18/18 en **200** |
+| Las 9 redirecciones de slug | 9/9 en **308** al destino correcto |
+| Variantes en mayúsculas | 301 a la forma canónica, y de ahí 200 |
+| Bucles | ninguno |
 
 ---
 

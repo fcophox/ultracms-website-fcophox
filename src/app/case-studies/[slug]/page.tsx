@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ArticleLayout } from "@/components/article-layout";
 import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
 import { kontororu, CATEGORIA } from "@/utils/kontororu";
@@ -13,7 +13,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await kontororu.posts.bySlug(slug);
+  const post = await kontororu.posts.bySlug(slug.toLowerCase());
 
   if (!post) {
     return {
@@ -48,6 +48,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params;
+
+  /*
+   * Los slugs de Kontorōru son siempre minúsculas: `slugify` del CMS las fuerza.
+   * Varias URLs antiguas llevaban mayúsculas, así que una visita con otra
+   * capitalización se manda a la forma canónica con un 301.
+   *
+   * Esto NO puede hacerse con una entrada en `redirects()`: el `source` de
+   * next.config se compara sin distinguir capitalización, de modo que la regla
+   * se capturaría a sí misma y dejaría la URL correcta en un bucle infinito.
+   */
+  if (slug !== slug.toLowerCase()) {
+    permanentRedirect(`/case-studies/${slug.toLowerCase()}`);
+  }
 
   const post = await kontororu.posts.bySlug(slug);
 

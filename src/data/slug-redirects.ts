@@ -13,6 +13,12 @@
  * consulta de `blog/[slug]/page.tsx` hacía `.or(slug.eq.X,slug_en.eq.X)`, así
  * que ambas formas están indexadas.
  *
+ * ⚠️ **Aquí NO van los slugs que sólo cambian de mayúsculas.** El `source` de
+ * `redirects()` se compara sin distinguir capitalización, así que una entrada
+ * como `the-winter-of-UX-…` → `the-winter-of-ux-…` se captura a sí misma y
+ * produce un bucle infinito: la URL correcta deja de ser alcanzable. Esos casos
+ * los resuelve la normalización a minúsculas de las páginas `[slug]`.
+ *
  * Generado el 2026-08-20 cruzando GET /posts contra MIGRACION_LIKES.md.
  * No editar a mano: si cambia un slug en el CMS, regenerar.
  */
@@ -32,10 +38,7 @@ export const SLUG_REDIRECTS: SlugRedirect[] = [
   { base: "/blog", from: "is-your-digital-product-not-working-and-you-dont-know-why-keys-to-heuristic-analysis-that-perhaps-you-did-not-know", to: "is-your-digital-product-not-working-and-you-dont-know" },
   { base: "/blog", from: "the-design-system-is-no-longer-a-library-it-is-the-source-that-the-machine-will-read", to: "the-design-system-is-no-longer-a-library-it-is-the-source-that-the-machine-will" },
   { base: "/blog", from: "the-self-explanatory-design-why-the-5-second-test-is-the-essential-tuner-of-your-digital-product", to: "the-self-explanatory-design-why-the-5-second-test-is-the-essential-tuner-of-your" },
-  { base: "/blog", from: "the-winter-of-UX-and-why-your-portfolio-of-pretty-screens-is-no-longer-enough", to: "the-winter-of-ux-and-why-your-portfolio-of-pretty-screens-is-no-longer-enough" },
-  { base: "/case-studies", from: "RAG-Platform-Logistics-management-with-artificial-intelligence", to: "rag-platform-logistics-management-with-artificial-intelligence" },
   { base: "/case-studies", from: "a-community-of-cyclists-to-share-and-discover-routes", to: "community-of-cyclists-to-share-and-discover-routes" },
-  { base: "/case-studies", from: "data-viewer-optimization-for-Covid-19", to: "data-viewer-optimization-for-covid-19" },
   { base: "/case-studies", from: "digital-menu-service-for-pizzerias", to: "digital-menu-service-for-pizzeria" },
   { base: "/case-studies", from: "postpandemic-It-talent-recruitment-management", to: "post-pandemic-it-talent-recruitment-management" },
   { base: "/case-studies", from: "support-community-for-people-with-food-allergies", to: "community-for-people-with-food-allergies" },
