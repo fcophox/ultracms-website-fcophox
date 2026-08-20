@@ -11,6 +11,27 @@ Manual paso a paso para sacar el CMS interno (Supabase + `/dashboard`) de
 
 ---
 
+## Estado: desplegado
+
+Mergeado a `main` y en producción el 2026-08-20. Verificado contra
+`https://www.fcophox.com`:
+
+| Comprobación | Resultado |
+|---|---|
+| Páginas clave | 200 |
+| Los 18 slugs publicados, siguiendo redirecciones | 18/18 en 200 |
+| Las 9 redirecciones de slug | 9/9, destino en 200 |
+| Variantes en mayúsculas | 301 a la canónica, final 200 |
+| Bucles de redirección | ninguno |
+| Calendario | 18:00–22:00, 30 min, sáb y dom cerrados |
+| Webhook | entrega y revalida sin desplegar |
+
+> Al verificar slugs, usar siempre `curl -L`. Un bucle de redirección responde
+> **308, igual que una redirección sana**: sin seguir los saltos, tres posts
+> inalcanzables pasaron por correctos en la primera revisión.
+
+---
+
 ## 0. Alcance acordado
 
 ### Entra en la migración
@@ -580,6 +601,16 @@ dice de qué categoría era la entrada.
 hace 307 hacia `www` pierde la entrega en el salto y el panel la registra como
 fallida. Sólo se aceptan direcciones públicas por HTTPS, así que en local no se
 puede recibir una entrega real: hay que usar un túnel o firmar a mano.
+
+El dominio de producción de este sitio lleva `www` —lo confirma la regla de
+`vercel.json`—, así que la URL registrada es:
+
+```
+https://www.fcophox.com/api/revalidate/kontororu
+```
+
+**Verificado en producción:** un cambio publicado en el CMS se refleja en la web
+sin desplegar.
 
 ---
 

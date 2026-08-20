@@ -1,13 +1,12 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/utils/site';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fcophox.com';
-
   return {
     rules: {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
