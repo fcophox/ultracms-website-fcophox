@@ -24,18 +24,29 @@ export interface ContenidoListado {
 }
 
 /**
- * El chip de filtro sale de la primera etiqueta, no de `category`.
+ * El chip de filtro, por orden de preferencia.
  *
  * En Supabase `category` era un valor por entrada —"Academy", "UX", "App"— y es
  * lo que alimenta los chips. En Kontorōru `category` es el TIPO de contenido
  * (`blog` / `casos-de-estudio`), igual para todas las entradas de una sección:
- * usarlo dejaría el filtro en un solo botón.
+ * usarlo deja el filtro en un solo botón.
  *
- * La taxonomía vieja está en MIGRACION_TAXONOMIA.md, para reintroducirla como
- * etiquetas en el panel. Mientras no existan, se cae al nombre de la categoría
- * y los componentes esconden el filtro por sí solos al ver un único valor.
+ * El sitio natural de esa taxonomía son las etiquetas, y la API ya las
+ * devuelve y sabe filtrar por ellas (`?tag=`)... pero **el panel todavía no
+ * permite asignarlas**: `tags` y `post_tags` existen en el esquema del CMS y no
+ * hay ninguna escritura sobre ellas en el código. Hasta que la haya, se usa un
+ * campo personalizado, que el editor sí soporta.
+ *
+ * El orden importa: cuando existan las etiquetas pasarán a mandar solas sin
+ * tocar nada, y el campo personalizado se podrá retirar.
+ *
+ * La taxonomía anterior está en MIGRACION_TAXONOMIA.md.
  */
 function chipDe(post: Post): string {
+  const personalizado = post.customFields?.categoria;
+  if (typeof personalizado === "string" && personalizado.trim()) {
+    return personalizado.trim();
+  }
   return post.tags[0]?.name ?? post.category?.name ?? "";
 }
 

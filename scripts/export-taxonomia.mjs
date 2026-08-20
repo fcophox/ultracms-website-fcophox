@@ -7,8 +7,12 @@
  * la categoría es el TIPO de contenido —`blog` o `casos-de-estudio`—, así que
  * al importar se perdió esa taxonomía: los 18 posts llegaron con `tags: []`.
  *
- * Este volcado es la lista de qué etiqueta hay que ponerle a cada post en el
- * panel para recuperar los filtros.
+ * Su sitio natural serían las etiquetas, pero el panel de Kontorōru TODAVÍA NO
+ * permite asignarlas: `tags` y `post_tags` están en el esquema y la API las
+ * lee, pero no hay ninguna escritura en el código del CMS. Hasta que la haya,
+ * el puente es un campo personalizado, que el editor sí soporta.
+ *
+ * Este volcado es la lista de qué valor ponerle a cada post.
  *
  * Uso:
  *   node scripts/export-taxonomia.mjs > MIGRACION_TAXONOMIA.md
@@ -67,7 +71,7 @@ for (const [tabla, label] of [["articles", "Artículos"], ["case_studies", "Caso
     `## ${label} (\`${tabla}\`)\n\n` +
     `Chips de filtro actuales: ` +
     Object.entries(resumen).map(([c, n]) => `**${c}** (${n})`).join(", ") + "\n\n" +
-    "| título | etiqueta a poner | tags adicionales |\n|---|---|---|\n" +
+    "| título | valor de `categoria` | tags adicionales (para cuando existan) |\n|---|---|---|\n" +
     filas
       .map((r) => {
         const tags = Array.isArray(r.tags) && r.tags.length ? r.tags.join(", ") : "—";
@@ -80,12 +84,21 @@ for (const [tabla, label] of [["articles", "Artículos"], ["case_studies", "Caso
 process.stdout.write(
   `# Taxonomía previa a Kontorōru\n\n` +
   `Generado por \`scripts/export-taxonomia.mjs\` el ${new Date().toISOString()}.\n\n` +
-  `La importación dejó los 18 posts con \`tags: []\`. Sin etiquetas, los chips de\n` +
-  `filtro de \`/blog\` y \`/case-studies\` se quedan en un único botón y el filtro\n` +
-  `deja de tener sentido.\n\n` +
-  `**Para recuperarlos:** añade en el panel de Kontorōru, a cada post, la etiqueta\n` +
-  `de la columna "etiqueta a poner". El código ya lee \`post.tags\` y hace\n` +
-  `reaparecer los chips en cuanto existan.\n\n` +
+  `La importación dejó los 18 posts con \`tags: []\`, así que los chips de filtro de\n` +
+  `\`/blog\` y \`/case-studies\` se quedan en un único valor. Con uno solo el filtro\n` +
+  `no filtra nada, así que **la web lo esconde** en lugar de mostrar un control\n` +
+  `inerte.\n\n` +
+  `> ⚠️ **El panel de Kontorōru todavía no permite asignar etiquetas.** Las tablas\n` +
+  `> \`tags\` y \`post_tags\` existen y la API las lee —incluso acepta \`?tag=\` como\n` +
+  `> filtro—, pero no hay ninguna escritura sobre ellas en el código del CMS.\n\n` +
+  `**Para recuperar los chips hoy:** en cada post, en **Campos personalizados**,\n` +
+  `añade la clave \`categoria\` con el valor de la tabla de abajo.\n\n` +
+  `El adaptador lo lee en este orden:\n\n` +
+  `1. \`customFields.categoria\` — lo que funciona hoy\n` +
+  `2. \`tags[0].name\` — cuando el CMS permita etiquetas, mandan solas\n` +
+  `3. \`category.name\` — respaldo\n\n` +
+  `Cuando lleguen las etiquetas, el campo personalizado se puede retirar sin\n` +
+  `tocar código.\n\n` +
   bloques.join("\n\n") + "\n"
 );
 console.error("OK — taxonomía respaldada.");

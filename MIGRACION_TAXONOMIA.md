@@ -1,20 +1,33 @@
 # Taxonomía previa a Kontorōru
 
-Generado por `scripts/export-taxonomia.mjs` el 2026-08-20T16:09:14.800Z.
+Generado por `scripts/export-taxonomia.mjs` el 2026-08-20T17:29:03.325Z.
 
-La importación dejó los 18 posts con `tags: []`. Sin etiquetas, los chips de
-filtro de `/blog` y `/case-studies` se quedan en un único botón y el filtro
-deja de tener sentido.
+La importación dejó los 18 posts con `tags: []`, así que los chips de filtro de
+`/blog` y `/case-studies` se quedan en un único valor. Con uno solo el filtro
+no filtra nada, así que **la web lo esconde** en lugar de mostrar un control
+inerte.
 
-**Para recuperarlos:** añade en el panel de Kontorōru, a cada post, la etiqueta
-de la columna "etiqueta a poner". El código ya lee `post.tags` y hace
-reaparecer los chips en cuanto existan.
+> ⚠️ **El panel de Kontorōru todavía no permite asignar etiquetas.** Las tablas
+> `tags` y `post_tags` existen y la API las lee —incluso acepta `?tag=` como
+> filtro—, pero no hay ninguna escritura sobre ellas en el código del CMS.
+
+**Para recuperar los chips hoy:** en cada post, en **Campos personalizados**,
+añade la clave `categoria` con el valor de la tabla de abajo.
+
+El adaptador lo lee en este orden:
+
+1. `customFields.categoria` — lo que funciona hoy
+2. `tags[0].name` — cuando el CMS permita etiquetas, mandan solas
+3. `category.name` — respaldo
+
+Cuando lleguen las etiquetas, el campo personalizado se puede retirar sin
+tocar código.
 
 ## Artículos (`articles`)
 
 Chips de filtro actuales: **Academy** (5), **Artificial intelligence** (2), **Design System** (1), **UX** (2)
 
-| título | etiqueta a poner | tags adicionales |
+| título | valor de `categoria` | tags adicionales (para cuando existan) |
 |---|---|---|
 | ¿Tu app o web es un laberinto? Descubre cómo el Card Sorting te da el mapa para guiar a tus usuarios | `Academy` | — |
 | Más allá de espiar a la competencia: 5 Ideas sobre Benchmarking que cambiarán tu estrategia | `Academy` | — |
@@ -31,7 +44,7 @@ Chips de filtro actuales: **Academy** (5), **Artificial intelligence** (2), **De
 
 Chips de filtro actuales: **App** (5), **Desktop** (3)
 
-| título | etiqueta a poner | tags adicionales |
+| título | valor de `categoria` | tags adicionales (para cuando existan) |
 |---|---|---|
 | Comunidad de ciclistas para compartir y descubrir rutas | `App` | Colaboración con emprendedor, PoC, Product Designer, UX Strategy |
 | Servicio de menú digital para pizzería | `App` | Colaboración con empresa, Design Sprint, Product Designer |

@@ -196,13 +196,27 @@ cambió de dónde salen los datos.
 **Regresión de taxonomía.** En Supabase `category` era un valor POR ENTRADA
 ("Academy", "UX", "App"…) y es lo que alimenta los chips de filtro. En Kontorōru
 `category` es el TIPO de contenido, igual para toda la sección: el filtro se
-queda en un botón. El adaptador usa `post.tags[0]` para el chip y cae al nombre
-de la categoría si no hay etiquetas. **La taxonomía anterior está en
-`MIGRACION_TAXONOMIA.md`** para reintroducirla como etiquetas en el panel; los
-chips reaparecen solos en cuanto existan.
+queda en un botón. Los casos de estudio además tenían `tags` con valores reales
+("Product Designer", "UX Strategy"…) que tampoco se importaron.
 
-Los casos de estudio además tenían `tags` con valores reales ("Product Designer",
-"UX Strategy"…) que tampoco se importaron.
+⚠️ **El panel de Kontorōru todavía no permite asignar etiquetas.** `tags` y
+`post_tags` están en el esquema y la API las lee —acepta `?tag=` como filtro—,
+pero **no hay ninguna escritura sobre esas tablas en el código del CMS**: ni
+componente, ni ruta de administración, ni server action. Etiquetar no es una
+tarea pendiente, está bloqueado.
+
+Solución en dos partes:
+
+1. **El adaptador lee `customFields.categoria` primero**, luego `tags[0].name`,
+   luego `category.name`. Los campos personalizados sí tienen editor en el panel
+   (`custom-fields-editor.tsx`), así que el filtro se puede recuperar hoy. El
+   orden está elegido para que las etiquetas manden solas en cuanto existan, sin
+   tocar código, y el campo personalizado se pueda retirar.
+2. **Con un solo valor, la web esconde el filtro** (`showFilter` en
+   `blog-client.tsx` y `case-studies-client.tsx`): "Todos" más un botón que
+   devuelve lo mismo es un control inerte.
+
+`MIGRACION_TAXONOMIA.md` tiene la tabla de qué valor va en cada post.
 
 Puntos de atención:
 

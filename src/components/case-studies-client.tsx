@@ -42,6 +42,17 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
 
   const categories = ["All", ...Array.from(new Set(cases.map((c) => c.category).filter(Boolean)))];
 
+  /*
+   * Con una sola categoría el filtro no filtra nada: son "Todos" y un botón que
+   * devuelve exactamente lo mismo. Se esconde en vez de ofrecer un control
+   * inerte.
+   *
+   * Es lo que pasa hoy: la taxonomía por entrada no sobrevivió a la migración y
+   * el panel de Kontorōru todavía no permite asignar etiquetas. Los chips
+   * vuelven solos en cuanto cada entrada tenga la suya.
+   */
+  const showFilter = categories.length > 2;
+
   const filteredCases =
     activeCategory === "All"
       ? cases
@@ -90,6 +101,7 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
         </motion.div>
 
         {/* Category Filter */}
+        {showFilter && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,6 +121,7 @@ export function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
             </button>
           ))}
         </motion.div>
+        )}
 
         {/* Featured Case */}
         {featuredCase && (
