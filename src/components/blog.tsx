@@ -2,14 +2,15 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { RevealImage } from "./reveal-image";
 import { getTranslations, getLocale } from "next-intl/server";
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray } from "@/utils/kontororu-adapter";
 
 export async function Blog() {
   const t = await getTranslations('Blog');
   const locale = await getLocale();
 
-  const { data: posts } = await kontororu.posts.list({
+  const posts = await listarLocalizado({
     categoria: CATEGORIA.blog,
     limit: 3,
   });

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { ArticleLayout } from "@/components/article-layout";
 import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado, porSlugLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray, resumenDe } from "@/utils/kontororu-adapter";
 
 export const revalidate = 3600; // el webhook invalida antes; ver blog/page.tsx
@@ -13,12 +15,13 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await kontororu.posts.bySlug(slug.toLowerCase());
+  const post = await porSlugLocalizado(slug.toLowerCase());
 
   if (!post) {
+    const t = await getTranslations("ArticlePage");
     return {
-      title: "Caso de estudio no encontrado",
-      description: "Este caso de estudio no existe o ha sido eliminado.",
+      title: t("caseNotFoundTitle"),
+      description: t("caseNotFoundDescription"),
     };
   }
 
@@ -48,6 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params;
+  const t = await getTranslations("ArticlePage");
 
   /*
    * Los slugs de Kontorōru son siempre minúsculas: `slugify` del CMS las fuerza.
@@ -62,7 +66,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
     permanentRedirect(`/case-studies/${slug.toLowerCase()}`);
   }
 
-  const post = await kontororu.posts.bySlug(slug);
+  const post = await porSlugLocalizado(slug);
 
   /*
    * `bySlug` devuelve null tanto si no existe como si está en borrador: para
@@ -71,7 +75,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
    */
   if (!post) notFound();
 
-  const { data: relacionados } = await kontororu.posts.list({
+  const relacionados = await listarLocalizado({
     categoria: CATEGORIA.casosDeEstudio,
     limit: 9, // 8 + el actual, que se descarta abajo
   });
@@ -94,11 +98,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
       description={resumenDe(post)}
       date={formatYear(post.publishedAt)}
       // `category` es el tipo de contenido; el chip que se muestra es la etiqueta.
-      category={post.tags[0]?.name || post.category?.name || "Caso de estudio"}
+      category={post.tags[0]?.name || post.category?.name || t("caseStudyCategory")}
       gradient="from-secondary/20 via-secondary/5 to-transparent"
       imageUrl={post.cover?.url}
       backHref="/case-studies"
-      backLabel="Volver al Portafolio"
+      backLabel={t("backToCaseStudies")}
       slug={post.slug}
       relatedArticlesSection={
         <RelatedArticlesCarousel

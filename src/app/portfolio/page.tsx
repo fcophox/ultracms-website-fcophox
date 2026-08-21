@@ -1,4 +1,5 @@
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray } from "@/utils/kontororu-adapter";
 import { PortfolioClient } from "./portfolio-client";
 
@@ -13,14 +14,14 @@ export const revalidate = 3600; // el webhook invalida antes; ver blog/page.tsx
 
 export default async function PortfolioPage() {
   const [articulos, casos] = await Promise.all([
-    kontororu.posts.list({ categoria: CATEGORIA.blog, limit: 3 }),
-    kontororu.posts.list({ categoria: CATEGORIA.casosDeEstudio, limit: 3 }),
+    listarLocalizado({ categoria: CATEGORIA.blog, limit: 3 }),
+    listarLocalizado({ categoria: CATEGORIA.casosDeEstudio, limit: 3 }),
   ]);
 
   return (
     <PortfolioClient
-      recentArticles={aListadoArray(articulos.data)}
-      recentCases={aListadoArray(casos.data)}
+      recentArticles={aListadoArray(articulos)}
+      recentCases={aListadoArray(casos)}
     />
   );
 }

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArticleLayout } from "@/components/article-layout";
 import { RelatedArticlesCarousel } from "@/components/related-articles-carousel";
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado, porSlugLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray, resumenDe } from "@/utils/kontororu-adapter";
 
 export const revalidate = 3600; // el webhook invalida antes; ver blog/page.tsx
@@ -14,12 +15,13 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await kontororu.posts.bySlug(slug.toLowerCase());
+  const post = await porSlugLocalizado(slug.toLowerCase());
 
   if (!post) {
+    const t = await getTranslations("ArticlePage");
     return {
-      title: "Artículo no encontrado",
-      description: "Este artículo no existe o ha sido eliminado.",
+      title: t("postNotFoundTitle"),
+      description: t("postNotFoundDescription"),
     };
   }
 
@@ -50,6 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const locale = await getLocale();
+  const t = await getTranslations("ArticlePage");
 
   /*
    * Los slugs de Kontorōru son siempre minúsculas: `slugify` del CMS las fuerza.
@@ -64,7 +67,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     permanentRedirect(`/blog/${slug.toLowerCase()}`);
   }
 
-  const post = await kontororu.posts.bySlug(slug);
+  const post = await porSlugLocalizado(slug);
 
   /*
    * `bySlug` devuelve null tanto si no existe como si está en borrador: para
@@ -73,7 +76,7 @@ export default async function BlogPostPage({ params }: PageProps) {
    */
   if (!post) notFound();
 
-  const { data: relacionados } = await kontororu.posts.list({
+  const relacionados = await listarLocalizado({
     categoria: CATEGORIA.blog,
     limit: 9, // 8 + el actual, que se descarta abajo
   });
@@ -99,11 +102,11 @@ export default async function BlogPostPage({ params }: PageProps) {
       description={resumenDe(post)}
       date={formatDate(post.publishedAt)}
       // `category` es el tipo de contenido; el chip que se muestra es la etiqueta.
-      category={post.tags[0]?.name || post.category?.name || "Blog"}
+      category={post.tags[0]?.name || post.category?.name || t("blogCategory")}
       gradient="from-primary/20 via-primary/5 to-transparent"
       imageUrl={post.cover?.url}
       backHref="/blog"
-      backLabel="Volver al Blog"
+      backLabel={t("backToBlog")}
       slug={post.slug}
       relatedArticlesSection={
         <RelatedArticlesCarousel

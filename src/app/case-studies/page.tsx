@@ -1,6 +1,7 @@
 import { CaseStudiesClient } from "@/components/case-studies-client";
 import { getLocale, getTranslations } from "next-intl/server";
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray } from "@/utils/kontororu-adapter";
 import { Metadata } from 'next';
 
@@ -16,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CasosDeEstudioPage() {
-  const { data: posts } = await kontororu.posts.list({
+  const posts = await listarLocalizado({
     categoria: CATEGORIA.casosDeEstudio,
     limit: 100,
   });

@@ -9,7 +9,8 @@ import { ExperienceLogos } from "@/components/experience-logos";
 import { ToolsSection } from "@/components/tools-section";
 import { Metadata } from "next";
 import { getTranslations, getLocale } from 'next-intl/server';
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray } from "@/utils/kontororu-adapter";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export const revalidate = 3600;
 
 export default async function Home() {
-  const { data: casos } = await kontororu.posts.list({
+  const casos = await listarLocalizado({
     categoria: CATEGORIA.casosDeEstudio,
     limit: 6,
   });
