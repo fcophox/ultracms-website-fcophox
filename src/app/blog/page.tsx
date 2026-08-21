@@ -1,6 +1,7 @@
 import { BlogClient } from "@/components/blog-client";
 import { getLocale, getTranslations } from "next-intl/server";
-import { kontororu, CATEGORIA } from "@/utils/kontororu";
+import { CATEGORIA } from "@/utils/kontororu";
+import { listarLocalizado } from "@/utils/kontororu-i18n";
 import { aListadoArray } from "@/utils/kontororu-adapter";
 import { Metadata } from 'next';
 
@@ -21,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  const { data: posts } = await kontororu.posts.list({
+  const posts = await listarLocalizado({
     categoria: CATEGORIA.blog,
     limit: 100,
   });

@@ -328,6 +328,24 @@
     "viewAll": "Ver todos",
     "readMore": "Leer más"
   },
+  "ArticlePage": {
+    "backToBlog": "Volver al Blog",
+    "backToCaseStudies": "Volver al Portafolio",
+    "blogCategory": "Blog",
+    "caseStudyCategory": "Caso de estudio",
+    "postNotFoundTitle": "Artículo no encontrado",
+    "postNotFoundDescription": "Este artículo no existe o ha sido eliminado.",
+    "caseNotFoundTitle": "Caso de estudio no encontrado",
+    "caseNotFoundDescription": "Este caso de estudio no existe o ha sido eliminado."
+  },
+  "ArticleFeedback": {
+    "question": "¿Te resultó interesante este contenido?",
+    "invitation": "Si este artículo te aportó valor, házmelo saber con un me gusta. Me ayuda a crear mejor contenido.",
+    "saving": "Guardando...",
+    "like": "Sí, me pareció útil",
+    "thanksTitle": "¡Gracias por tu feedback!",
+    "thanksSubtitle": "Me alegra saber que te ha sido de utilidad."
+  },
   "LogsPage": {
     "backHome": "Volver al Inicio",
     "title": "Novedades",
