@@ -416,7 +416,7 @@ export default function MethodologyPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-            className="absolute left-0 lg:left-[5%] top-[25%] md:top-[30%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
+            className="absolute left-0 lg:left-[1%] top-[25%] md:top-[30%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
           >
             <Image src="/methodology/aa.png" alt="Methodology Phase 1" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
           </motion.div>
@@ -438,7 +438,7 @@ export default function MethodologyPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-            className="absolute right-0 lg:right-[5%] top-[10%] md:top-[15%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
+            className="absolute right-0 lg:right-[1%] top-[10%] md:top-[15%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
           >
             <Image src="/methodology/ac.png" alt="Methodology Phase 3" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
           </motion.div>

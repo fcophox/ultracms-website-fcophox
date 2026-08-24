@@ -54,7 +54,7 @@ export default function AboutPage() {
       </div>
 
       {/* Biography Section */}
-      <div className="dark w-full py-24 mb-24 md:mb-32">
+      <div className="dark w-full py-2 mb-4 md:mb-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
           {/* Portrait Image */}
           <motion.div
