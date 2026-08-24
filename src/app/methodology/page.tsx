@@ -408,57 +408,40 @@ export default function MethodologyPage() {
           </div>
         </motion.div>
 
-        {/* 4 Images Staggered Square Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
-          {/* Fila 1, Columna 1 */}
-          <div className="w-full aspect-square rounded-3xl overflow-hidden bg-surface relative">
-            <RevealImage
-              src="/about/desk.png"
-              alt="Workspace"
-              fill
-              className="object-cover"
-              delayMs={100}
-            />
-          </div>
+        {/* 3 Staggered Images (aa.png, ab.png, ac.png) */}
+        <div className="relative w-full max-w-5xl mx-auto h-[350px] sm:h-[450px] md:h-[600px] mb-32 pointer-events-none">
+          {/* Left Image (aa.png) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="absolute left-0 lg:left-[5%] top-[25%] md:top-[30%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
+          >
+            <Image src="/methodology/aa.png" alt="Methodology Phase 1" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+          </motion.div>
 
-          {/* Fila 1, Columna 2 (en blanco) */}
-          <div className="hidden md:block" />
+          {/* Middle Image (ab.png) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="absolute left-[29%] lg:left-[32.5%] top-[45%] md:top-[50%] w-[42%] md:w-[35%] aspect-[4/5] md:aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale z-10"
+          >
+            <Image src="/methodology/ab.png" alt="Methodology Phase 2" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+          </motion.div>
 
-          {/* Fila 1, Columna 3 */}
-          <div className="w-full aspect-square rounded-3xl overflow-hidden bg-surface relative">
-            <RevealImage
-              src="/about/cowork.png"
-              alt="Coworking"
-              fill
-              className="object-cover"
-              delayMs={200}
-            />
-          </div>
-
-          {/* Fila 1, Columna 4 */}
-          <div className="w-full aspect-square rounded-3xl overflow-hidden bg-surface relative">
-            <RevealImage
-              src="/about/coffeeshop.png"
-              alt="Coffeeshop"
-              fill
-              className="object-cover"
-              delayMs={300}
-            />
-          </div>
-
-          {/* Fila 2, Columna 1 (en blanco) */}
-          <div className="hidden md:block" />
-
-          {/* Fila 2, Columna 2 */}
-          <div className="w-full aspect-square rounded-3xl overflow-hidden bg-surface relative">
-            <RevealImage
-              src="/about/desktop.png"
-              alt="Desktop setup"
-              fill
-              className="object-cover"
-              delayMs={400}
-            />
-          </div>
+          {/* Right Image (ac.png) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+            className="absolute right-0 lg:right-[5%] top-[10%] md:top-[15%] w-[42%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl grayscale"
+          >
+            <Image src="/methodology/ac.png" alt="Methodology Phase 3" fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+          </motion.div>
         </div>
 
         {/* ¿Por qué nació FSEB? */}

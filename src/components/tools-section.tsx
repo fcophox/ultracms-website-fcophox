@@ -36,7 +36,7 @@ export function ToolsSection() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 flex flex-col items-start w-[85%] lg:w-full relative z-10"
           >
-            <span className="inline-block bg-[#dfb281]/10 text-[#dfb281] border border-[#dfb281]/20 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-6">
+            <span className="inline-block bg-[#dfb281]/10 text-[#dfb281] border border-[#dfb281]/20 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wide uppercase mb-6">
               {t('badge')}
             </span>
             <h2

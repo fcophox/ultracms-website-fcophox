@@ -51,7 +51,7 @@ export function ServicesSection() {
               className="w-full"
             >
               {/* Badge */}
-              <span className="inline-block bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-muted uppercase mb-6">
+              <span className="inline-block bg-muted/10 dark:bg-muted/5 border border-border/40 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wide text-foreground/80 uppercase mb-6">
                 {t("badge")}
               </span>
 

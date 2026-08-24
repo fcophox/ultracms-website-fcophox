@@ -25,7 +25,7 @@ export function UxBento() {
               className="mb-2"
             >
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-semibold tracking-wider text-muted uppercase">
+                <span className="text-xs font-mono tracking-wide text-foreground/80 uppercase">
                   {t('headerLabel')}
                 </span>
               </div>

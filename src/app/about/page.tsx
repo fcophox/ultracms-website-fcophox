@@ -50,79 +50,91 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        {/* Hero Image */}
-        <div className="w-full relative aspect-[21/9] rounded-[2rem] overflow-hidden mb-24">
-          <RevealImage
-            src="/about/desktop1.png"
-            alt="Workspace"
-            fill
-            className="object-cover"
-            priority
-            delayMs={200}
-          />
-        </div>
-
-
 
       </div>
 
       {/* Biography Section */}
-      <div className="dark bg-background w-full py-24 mb-24 md:mb-32">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-24 w-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="w-full lg:w-48 shrink-0"
-            >
-              <span className="text-xl font-medium text-muted">{t('bioLabel')}</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex-1"
-            >
-              <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={56} height={56} className="w-full h-full object-contain p-1" />
-                </div>
-                <p className="text-xl md:text-2xl text-primary font-medium leading-snug pt-1">
-                  {t('bioBadge')}
+      <div className="dark w-full py-24 mb-24 md:mb-32">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
+          {/* Portrait Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="w-full lg:w-[400px] shrink-0"
+          >
+            <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden">
+              <Image
+                src="/about/fcophox-about.png"
+                alt="Francisco Hormazábal"
+                fill
+                className="object-cover grayscale transition-[filter] duration-700 ease-out group-hover:grayscale-0"
+                sizes="(max-width: 1024px) 100vw, 400px"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-6 pt-12 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center text-center">
+                <p className="text-white font-medium text-sm drop-shadow-md">
+                  {t('imageHoverText')}
                 </p>
               </div>
+            </div>
+          </motion.div>
 
-              <div className="space-y-6 text-lg text-muted">
-                <p className="text-foreground font-medium">
-                  {t('bioP1')}
-                </p>
-                <p>
-                  {t('bioP2')}
-                </p>
+          {/* Bio Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex-1 flex flex-col justify-center"
+          >
+            <h2 className="text-md md:text-lg font-light text-foreground mb-8">
+              {t('bioGreeting1')}
+              <a href="https://www.linkedin.com/in/fcophox/" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold italic underline underline-offset-4 decoration-primary/50 hover:decoration-primary transition-colors">Francisco Hormazábal</a>
+              {t('bioGreeting2')}
+              <a href="https://github.com/fcophox" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold italic underline underline-offset-4 decoration-primary/50 hover:decoration-primary transition-colors">@fcophox</a>
+              {t('bioGreeting3')}
+            </h2>
+            <div className="flex flex-col md:flex-row items-center gap-6 mb-12">
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                <Image src="/about/uxpm.svg" alt="UX-PM Badge" width={80} height={80} className="w-full h-full object-contain p-1" />
               </div>
+              <p className="text-md md:text-lg text-primary font-medium leading-snug">
+                {t('bioBadge')}
+              </p>
+            </div>
 
-              <div className="flex flex-wrap gap-4 mt-12">
-                <a
-                  href="https://www.linkedin.com/in/fcophox/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-                >
-                  <LinkedinIcon className="w-5 h-5 mr-2" />
-                  {t('linkedin')}
-                </a>
-                <Link
-                  href="/cv"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#27272A]/80 transition-colors"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Ver CV
-                </Link>
-              </div>
-            </motion.div>
-          </div>
+            <div className="space-y-6 text-lg text-muted">
+              <p className="text-foreground font-medium">
+                {t('bioP1')}
+              </p>
+              <p>
+                {t.rich('bioP2', {
+                  b: (chunks) => <strong className="font-semibold">{chunks}</strong>
+                })}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 mt-12">
+              <a
+                href="https://www.linkedin.com/in/fcophox/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              >
+                <LinkedinIcon className="w-5 h-5 mr-2" />
+                {t('linkedin')}
+              </a>
+              <Link
+                href="/cv"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#27272A] text-white font-medium hover:bg-[#27272A]/80 transition-colors"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Ver CV
+              </Link>
+            </div>
+          </motion.div>
         </div>
+      </div>
+
 
       <EvolutionTimeline />
       <AreasColaboracion />

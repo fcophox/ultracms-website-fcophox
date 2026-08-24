@@ -104,7 +104,7 @@ export function Banner() {
               >
                 {/* Dynamic Category Badge inside motion.div */}
                 <div className="mb-6">
-                  <span className="text-[10px] md:text-xs font-mono tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                  <span className="text-[10px] md:text-xs font-mono tracking-wide text-primary uppercase bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
                     {activeSlide.label}
                   </span>
                 </div>
