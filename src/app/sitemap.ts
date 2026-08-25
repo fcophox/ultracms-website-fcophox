@@ -18,7 +18,6 @@ const estaticas: Entrada[] = [
   { url: `${SITE_URL}/about`, changeFrequency: 'monthly', priority: 0.8, lastModified: ahora },
   { url: `${SITE_URL}/blog`, changeFrequency: 'weekly', priority: 0.8, lastModified: ahora },
   { url: `${SITE_URL}/case-studies`, changeFrequency: 'monthly', priority: 0.8, lastModified: ahora },
-  { url: `${SITE_URL}/portfolio`, changeFrequency: 'monthly', priority: 0.8, lastModified: ahora },
   { url: `${SITE_URL}/methodology`, changeFrequency: 'monthly', priority: 0.8, lastModified: ahora },
   { url: `${SITE_URL}/resources`, changeFrequency: 'monthly', priority: 0.6, lastModified: ahora },
   { url: `${SITE_URL}/cv`, changeFrequency: 'yearly', priority: 0.5, lastModified: ahora },

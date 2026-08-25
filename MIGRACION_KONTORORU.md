@@ -690,16 +690,54 @@ los artículos siguen sirviéndose desde ahí (§4-ter).
 
 ---
 
+## 9-bis. Supabase retirado por completo (hecho)
+
+La previsión era esperar al complemento de Portafolio. No hizo falta: al
+auditarlo, lo que quedaba en Supabase no servía nada.
+
+- **Las imágenes de los artículos ya no salen de ahí.** Al reimportarlas, las 43
+  del cuerpo y las 19 portadas pasaron a la biblioteca de Kontorōru
+  (`glepekbxevoowijfzywe.supabase.co`, que es infraestructura del CMS, no del
+  cliente). Cero referencias a `kmpspmzaelzdrkasvhrg` en ninguna página.
+- **La tabla `portfolio` tenía 5 filas de prueba** (`uno`, `asasas`, `uuu`,
+  `iiii`, `ppp`) y `portfolio_config.visible` era `false`: `/portfolio` mostraba
+  "El portfolio aún no está disponible" y no había un solo enlace hacia ella.
+  Existe además un portafolio externo real en `tanzo.fcophox.com`, enlazado
+  desde la home.
+- **La tabla `services` estaba vacía**, así que el respaldo de
+  `capabilities/[slug]` era código muerto.
+
+Borrado: `src/app/dashboard/`, `src/app/login/`, `src/app/portfolio/`,
+`src/utils/supabase/`, `src/utils/locale-mapper.ts`, `src/middleware.ts`,
+`portfolio-config-drawer.tsx` y `rich-text-editor.tsx`.
+
+Limpiado: la comprobación de visibilidad en `navbar.tsx` y `footer.tsx`, el
+respaldo de `capabilities/[slug]`, el `remotePattern` del host propio, la
+entrada de `/portfolio` en el sitemap y la redirección de `cms.fcophox.com` en
+`vercel.json`.
+
+Dependencias fuera: `@supabase/ssr`, `@supabase/supabase-js` y las cuatro de
+Tiptap. `src/app/tiptap-content.css` **se queda**: da estilo al HTML que sirve
+Kontorōru, no al editor.
+
+Con `src/middleware.ts` desaparece también el aviso de que el convenio
+`middleware` está deprecado en favor de `proxy`.
+
+Variables de entorno a retirar en Vercel: `NEXT_PUBLIC_SUPABASE_URL` y
+`NEXT_PUBLIC_SUPABASE_ANON_KEY`. Y el proyecto de Supabase se puede dar de baja.
+
+---
+
 ## 10. Fases posteriores
 
 - **Traducciones al inglés.** Cargar cada artículo como contenido hermano en `en`.
   Después: `?locale=` en las llamadas, `post.translations` para el selector de idioma
   y los `hreflang`, y `mapToLocale` fuera de blog/casos. Pedir un locale no activado
   devuelve `400`, no lista vacía.
-- **Portafolio y Recursos a Kontorōru** cuando existan sus complementos: el
-  propietario los cargará a mano desde el panel. Ahí se puede apagar Supabase y
-  borrar `/login`, `src/middleware.ts`, `src/utils/supabase/*` y lo que queda de
-  `/dashboard`.
+- **Portafolio y Recursos a Kontorōru** cuando existan sus complementos. Ya no
+  bloquean nada: Supabase se retiró antes (§9-bis) porque no servía contenido
+  real. Cuando lleguen, el portafolio se carga desde cero en el panel y se
+  rehace la ruta `/portfolio`.
 - **Recuperar los conteos de likes** desde `MIGRACION_LIKES.md` si se decide
   reflejarlos.
 

@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { createClient } from "@/utils/supabase/client";
 
 export function Navbar() {
   const t = useTranslations('Navbar');
@@ -15,41 +14,11 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isDashboard = pathname?.startsWith('/dashboard');
-  const isLogin = pathname === '/login';
-
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [isPortfolioVisible, setIsPortfolioVisible] = useState<boolean>(false);
   const { scrollY } = useScroll();
 
-  useEffect(() => {
-    async function checkPortfolioVisibility() {
-      try {
-        const supabase = createClient();
-        const { data } = await supabase
-          .from("portfolio_config")
-          .select("visible")
-          .limit(1)
-          .single();
-
-        if (data?.visible) {
-          setIsPortfolioVisible(true);
-        } else {
-          setIsPortfolioVisible(false);
-        }
-      } catch {
-        setIsPortfolioVisible(false);
-      }
-    }
-
-    checkPortfolioVisibility();
-  }, []);
-
-  if (isDashboard || isLogin) {
-    return null;
-  }
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -99,7 +68,6 @@ export function Navbar() {
   const navLinks = [
     { name: t('about'), path: "/about" },
     { name: t('methodology'), path: "/methodology" },
-    ...(isPortfolioVisible ? [{ name: "Portfolio", path: "/portfolio" }] : []),
     { name: t('caseStudies'), path: "/case-studies" },
     { name: t('blog'), path: "/blog" },
   ];
