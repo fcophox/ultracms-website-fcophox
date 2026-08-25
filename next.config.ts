@@ -17,13 +17,7 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
       {
-        // Storage propio: portfolio, services y las imágenes incrustadas en el
-        // cuerpo de los artículos, que la importación dejó apuntando aquí.
-        protocol: 'https',
-        hostname: 'kmpspmzaelzdrkasvhrg.supabase.co',
-      },
-      {
-        // Biblioteca de medios de Kontorōru: las portadas de los posts.
+        // Biblioteca de medios de Kontorōru: portadas e imágenes del contenido.
         // URLs firmadas con 24 h de validez, no rutas permanentes.
         protocol: 'https',
         hostname: 'glepekbxevoowijfzywe.supabase.co',

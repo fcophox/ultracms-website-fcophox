@@ -1,47 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
 
 export function Footer() {
   const t = useTranslations('Footer');
-  const pathname = usePathname();
-  const [isPortfolioVisible, setIsPortfolioVisible] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function checkPortfolioVisibility() {
-      try {
-        const supabase = createClient();
-        const { data } = await supabase
-          .from("portfolio_config")
-          .select("visible")
-          .limit(1)
-          .single();
-
-        if (data?.visible) {
-          setIsPortfolioVisible(true);
-        } else {
-          setIsPortfolioVisible(false);
-        }
-      } catch {
-        setIsPortfolioVisible(false);
-      }
-    }
-
-    checkPortfolioVisibility();
-  }, []);
-  
-  const isDashboard = pathname?.startsWith('/dashboard');
-  const isLogin = pathname === '/login';
-
-  if (isDashboard || isLogin) {
-    return null;
-  }
 
   return (
     <footer className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 pb-8 relative overflow-hidden">
@@ -83,9 +48,6 @@ export function Footer() {
             <ul className="flex flex-col gap-4">
               <li><Link href="/about" className="text-muted hover:text-foreground transition-colors">{t('about')}</Link></li>
               <li><Link href="/methodology" className="text-muted hover:text-foreground transition-colors">{t('methodology')}</Link></li>
-              {isPortfolioVisible && (
-                <li><Link href="/portfolio" className="text-muted hover:text-foreground transition-colors">Portfolio</Link></li>
-              )}
               <li><Link href="/case-studies" className="text-muted hover:text-foreground transition-colors">{t('caseStudies')}</Link></li>
               <li><Link href="/blog" className="text-muted hover:text-foreground transition-colors">{t('blog')}</Link></li>
               <li><Link href="/logs" className="text-muted hover:text-foreground transition-colors">{t('logs')}</Link></li>

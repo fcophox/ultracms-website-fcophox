@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Check, AlertCircle, Calendar } from "lucide-react";
-import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "next-intl/server";
-import { mapToLocale } from "@/utils/locale-mapper";
 import { ArticleLayout } from "@/components/article-layout";
 import { servicesData } from "@/data/services-data";
 import { ScrollProgressLine } from "@/components/scroll-progress-line";
@@ -34,29 +32,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  // Fallback: Check Supabase database
-  const supabase = await createClient();
-  const { data: rawService } = await supabase
-    .from("services")
-    .select("title, content, image_url, title_en, content_en")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .single();
-
-  if (!rawService) {
-    return {
-      title: isEs ? "Servicio no encontrado" : "Service not found",
-      description: isEs ? "Este servicio no existe o ha sido eliminado." : "This service does not exist or has been removed.",
-    };
-  }
-
-  const service = mapToLocale(rawService, locale);
-  const cleanExcerpt = service.content
-    ? service.content.replace(/<[^>]*>?/gm, '').substring(0, 160).trim() + "..."
-    : "";
-
+  /*
+   * Los servicios viven en `src/data/services-data.ts`. Antes había un respaldo
+   * que buscaba en la tabla `services` de Supabase, pero esa tabla quedó vacía
+   * y el camino siempre terminaba aquí: un slug desconocido no existe.
+   */
   return {
-    title: `${service.title} | Fcophox`,
-    description: cleanExcerpt,
+    title: isEs ? "Servicio no encontrado" : "Service not found",
+    description: isEs
+      ? "Este servicio no existe o ha sido eliminado."
+      : "This service does not exist or has been removed.",
   };
 }
 
@@ -402,39 +387,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     );
   }
 
-  // 2. Fallback: load custom dynamic service from Supabase
-  const supabase = await createClient();
-  const { data: rawService, error } = await supabase
-    .from("services")
-    .select("*")
-    .or(`slug.eq.${slug},slug_en.eq.${slug}`)
-    .single();
-
-  if (error || !rawService) {
-    console.error(`Service not found with slug '${slug}':`, error);
-    notFound();
-  }
-
-  const service = mapToLocale(rawService, locale);
-  const cleanExcerpt = service.content
-    ? service.content.replace(/<[^>]*>/g, '').slice(0, 160).trim() + "..."
-    : "";
-
-  return (
-    <ArticleLayout
-      title={service.title}
-      description={cleanExcerpt}
-      date={service.published_at ? new Date(service.published_at).getFullYear().toString() : ""}
-      category={service.category}
-      gradient="from-primary/20 via-primary/5 to-transparent"
-      imageUrl={service.image_url}
-      backHref="/"
-      backLabel={labels.back}
-    >
-      <div
-        className="tiptap-content max-w-none"
-        dangerouslySetInnerHTML={{ __html: service.content }}
-      />
-    </ArticleLayout>
-  );
+  // Sin respaldo en base de datos: si no es uno de los servicios del archivo, no existe.
+  notFound();
 }

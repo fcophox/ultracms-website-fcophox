@@ -5,17 +5,6 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "cms.fcophox.com"
-                }
-            ],
-            "destination": "https://www.fcophox.com/login/:path*",
-            "permanent": true
-        },
-        {
-            "source": "/:path*",
-            "has": [
-                {
-                    "type": "host",
                     "value": "resources.fcophox.com"
                 }
             ],
