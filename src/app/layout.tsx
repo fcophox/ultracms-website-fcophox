@@ -3,7 +3,6 @@ import { Sansation, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./tiptap-content.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeShortcut } from "@/components/theme-shortcut";
 
 import { Suspense } from 'react'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -83,10 +82,16 @@ export default async function RootLayout({
     >
       <body className="min-h-full overflow-x-hidden relative flex flex-col bg-background text-foreground transition-colors duration-300">
         <NextIntlClientProvider messages={messages}>
+          {/*
+            Dark only. `forcedTheme` pins the class rather than merely defaulting
+            to it: the system preference is ignored and any setTheme call becomes
+            a no-op, so there is no path back to the light palette. The ⌘B/Ctrl+B
+            shortcut that used to flip it is unmounted — src/components/
+            theme-shortcut.tsx and theme-toggle.tsx are now unused.
+          */}
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            forcedTheme="dark"
             disableTransitionOnChange
           >
             <CustomCursor />
@@ -97,7 +102,6 @@ export default async function RootLayout({
             </div>
             <Footer />
             <ChromaticEdge />
-            <ThemeShortcut />
             <GoogleAnalytics gaId="G-N30VCBN4MR" />
             <Suspense fallback={null}>
               <GoogleAnalyticsPageview />

@@ -96,7 +96,16 @@ export default function ParticleLabPage() {
   const points = params.cols * params.rows;
 
   return (
-    <main className="dark relative min-h-screen w-full overflow-hidden bg-background text-foreground">
+    <main
+      className="dark relative min-h-screen w-full overflow-hidden bg-background text-foreground"
+      /*
+        Painted inline so it survives the frame before the stylesheet applies,
+        where a class-only background renders as nothing and flashes white.
+        The custom property still wins once CSS lands, so a palette change in
+        DESIGN.MD carries; the literal matches --background in .dark.
+      */
+      style={{ backgroundColor: "var(--background, #101012)" }}
+    >
       <div className="absolute inset-0">
         <ParticleWave params={params} />
       </div>

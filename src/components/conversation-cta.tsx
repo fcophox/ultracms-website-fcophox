@@ -70,6 +70,17 @@ export function ConversationCta() {
     <section
       ref={sectionRef}
       className="dark relative w-full overflow-hidden bg-background py-28 md:py-36"
+      /*
+        The class already resolves to the page background, but only once the
+        stylesheet is applied — before that the section paints as nothing and
+        flashes white until the mesh appears. An inline background paints in
+        that first frame, with no stylesheet needed.
+
+        The custom property still wins in normal operation, so a palette change
+        in DESIGN.MD carries; the literal only covers the instant before CSS
+        lands, and matches --background in .dark.
+      */
+      style={{ backgroundColor: "var(--background, #101012)" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

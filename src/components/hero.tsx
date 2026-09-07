@@ -31,7 +31,16 @@ export function Hero() {
   const currentTitle = titles?.[currentIndex] || { line1: "", line2: "" };
 
   return (
-    <section className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20">
+    <section
+      className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20"
+      /*
+        Painted inline so it survives the frame before the stylesheet applies,
+        where a class-only background renders as nothing and flashes white.
+        The custom property still wins once CSS lands, so a palette change in
+        DESIGN.MD carries; the literal matches --background in .dark.
+      */
+      style={{ backgroundColor: "var(--background, #101012)" }}
+    >
       {/*
         Background. This replaced a looping <video> drawn through blur-3xl —
         a 64px gaussian over the whole viewport recomputed every frame, on top
