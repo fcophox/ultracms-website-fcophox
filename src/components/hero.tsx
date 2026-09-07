@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
+import { GradientField } from "@/components/gradient-field";
+
 import { ArrowRight } from "lucide-react";
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
@@ -15,7 +17,6 @@ export function Hero() {
   const t = useTranslations('Hero');
   const shouldReduceMotion = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [videoReady, setVideoReady] = useState(false);
 
   const titles = t.raw('titles') as { line1: string; line2: string }[];
 
@@ -31,30 +32,48 @@ export function Hero() {
 
   return (
     <section className="dark bg-background text-foreground relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden text-center py-20">
-      {/* Background Video */}
+      {/*
+        Background. This replaced a looping <video> drawn through blur-3xl —
+        a 64px gaussian over the whole viewport recomputed every frame, on top
+        of a continuous h264 decode. The 248 KB the file weighed was never the
+        problem; that filter was. A shader paints the softness instead of
+        post-processing it, so the expensive pass stops existing rather than
+        being swapped for another one.
+
+        The scrim and the bottom fade that used to sit here are gone too: the
+        field carries its own vignette and dissolves into the page colour in the
+        shader, which is two fewer full-viewport surfaces to composite.
+      */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-        {/* Immediate gradient placeholder so the section is never blank while the video loads */}
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/20"
-          aria-hidden
-        />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          onLoadedData={() => setVideoReady(true)}
-          onCanPlay={() => setVideoReady(true)}
-          className={`w-full h-full object-cover blur-3xl scale-110 transition-opacity duration-1000 ease-out ${videoReady ? "opacity-40" : "opacity-0"}`}
-          style={{ transform: "translate3d(0, 0, 0) scale(1.1)" }} // Force GPU acceleration for better blur performance
-        >
-          <source src="/movie/background.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay to ensure text readability against the video */}
-        <div className="absolute inset-0 bg-background/30" />
-        {/* Bottom fade gradient to blend smoothly into the next section */}
-        <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-background via-background/80 to-transparent" />
+        {/*
+          One viewport tall, pinned to the top — not the section's full height.
+          `min-h-screen` is a minimum: when the copy is taller than the screen
+          the section grows, the canvas grows with it, and the shader reframes,
+          because it normalises its coordinates by the canvas aspect ratio. That
+          is why the hero stopped matching /hero-lab, whose main box is exactly
+          one viewport. Fixing the canvas to h-screen makes the two identical,
+          and caps the shader's cost at one screenful however tall the hero gets.
+
+          Nothing shows below it: the field has already dissolved into the page
+          colour by then, so it meets plain background with no seam.
+        */}
+        <div className="absolute inset-x-0 top-0 h-screen overflow-hidden">
+          {/* Paints instantly, and stays as the fallback wherever WebGL is unavailable. */}
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/20"
+            aria-hidden
+          />
+          {/*
+            `absolute` is load-bearing, not cosmetic. The canvas is static by
+            default, and CSS paints positioned elements above non-positioned
+            ones whatever the DOM order — so the gradient above, which is
+            absolute, was covering the field entirely. Positioning the canvas
+            too puts them in the same painting phase, where source order wins
+            and the canvas lands on top. The gradient stays underneath doing its
+            real job: showing through only when WebGL never starts.
+          */}
+          <GradientField className="absolute inset-0" />
+        </div>
       </div>
 
       <div className="relative z-10 dm-container-hero flex flex-col items-center">
@@ -64,7 +83,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
           className="relative mb-5"
         >
-          {/* Soft halo so the photo sits on the blurred video instead of floating on it */}
+          {/* Soft halo so the photo sits on the field instead of floating on it */}
           <div
             className="absolute -inset-3 rounded-full bg-primary/15 blur-xl"
             aria-hidden

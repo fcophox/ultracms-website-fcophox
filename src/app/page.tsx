@@ -75,8 +75,12 @@ export default async function Home() {
       <ToolsSection />
       <Blog />
       <ConversationCta />
-      {/* Decorative Grid */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5 mix-blend-overlay pointer-events-none" />
+      {/*
+        Decorative grain. Starts below the hero: it spans the whole <main> with
+        mix-blend-overlay, so over the hero it tinted the shader field and made
+        the home read differently from /hero-lab, which has no such layer.
+      */}
+      <div className="absolute inset-x-0 top-[100vh] bottom-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5 mix-blend-overlay pointer-events-none" />
     </main>
   );
 }
