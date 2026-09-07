@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Search, PenTool, BarChart3, ChevronDown, ChevronUp, Briefcase, Code2, Sparkles, TrendingUp, Layers, BookOpen, CheckCircle2 } from "lucide-react";
 import { RevealImage } from "@/components/reveal-image";
-import { Banner } from "@/components/banner";
+import { ConversationCta } from "@/components/conversation-cta";
 
 const disciplines = [
   "Negocio",
@@ -891,9 +891,13 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 w-full">
-        <Banner />
-      </div>
+      {/*
+        Was <Banner />, removed with its card. ConversationCta serves the same
+        three messages from the same `Banner` namespace and the same CTAs, so
+        the closing section keeps its content — it is now full-bleed over the
+        mesh instead of a boxed card, and does not need the width wrapper.
+      */}
+      <ConversationCta />
     </main>
   );
 }
