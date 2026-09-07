@@ -65,6 +65,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/custom-cursor";
 import { HeaderBackground } from "@/components/header-background";
+import { ChromaticEdge } from "@/components/chromatic-edge";
 
 export default async function RootLayout({
   children,
@@ -95,6 +96,7 @@ export default async function RootLayout({
               {children}
             </div>
             <Footer />
+            <ChromaticEdge />
             <ThemeShortcut />
             <GoogleAnalytics gaId="G-N30VCBN4MR" />
             <Suspense fallback={null}>

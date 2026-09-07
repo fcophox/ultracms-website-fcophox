@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 import { ArrowRight } from "lucide-react";
 
@@ -12,6 +13,7 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 
 export function Hero() {
   const t = useTranslations('Hero');
+  const shouldReduceMotion = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
 
@@ -56,6 +58,29 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 dm-container-hero flex flex-col items-center">
+        <motion.div
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: -8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          className="relative mb-5"
+        >
+          {/* Soft halo so the photo sits on the blurred video instead of floating on it */}
+          <div
+            className="absolute -inset-3 rounded-full bg-primary/15 blur-xl"
+            aria-hidden
+          />
+          <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden ring-1 ring-border/60 shadow-lg shadow-background/40">
+            <Image
+              src="/brand/francisco-avatar.png?v=2"
+              alt="Francisco Hormazábal"
+              fill
+              sizes="80px"
+              priority
+              className="object-cover"
+            />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
