@@ -1,6 +1,6 @@
 import { Hero } from "@/components/hero";
 import { ProjectCard } from "@/components/project-card";
-import { Banner } from "@/components/banner";
+import { ConversationCta } from "@/components/conversation-cta";
 import { Blog } from "@/components/blog";
 // import { BentoSection } from "@/components/bento-section";
 import { UxBento } from "@/components/ux-bento";
@@ -74,7 +74,7 @@ export default async function Home() {
       <ExperienceLogos />
       <ToolsSection />
       <Blog />
-      <Banner />
+      <ConversationCta />
       {/* Decorative Grid */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5 mix-blend-overlay pointer-events-none" />
     </main>
