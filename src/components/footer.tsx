@@ -5,11 +5,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
+import { CHROMATIC_EDGE_HEIGHT } from "@/components/chromatic-edge";
+
 export function Footer() {
   const t = useTranslations('Footer');
 
   return (
-    <footer className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 pb-8 relative overflow-hidden">
+    <footer
+      className="dark w-full bg-background text-foreground border-t border-border mt-auto pt-16 relative overflow-hidden"
+      /*
+        Clear the chromatic edge instead of guessing a padding. That band is
+        fixed to the bottom of the viewport, so the copyright line used to sit
+        inside it and render smeared. Derived from the band's own height so the
+        two cannot drift apart.
+      */
+      style={{ paddingBottom: `calc(${CHROMATIC_EDGE_HEIGHT} + 2rem)` }}
+    >
 
       <div className="dm-container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">

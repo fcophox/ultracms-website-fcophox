@@ -41,6 +41,12 @@ const MAX_STRENGTH = 0.006;
 
 const ID = "chromatic-edge";
 
+/**
+ * Band height, exported so anything that has to clear it stays in step. The
+ * footer's copyright sits inside this strip otherwise, and reads smeared.
+ */
+export const CHROMATIC_EDGE_HEIGHT = "clamp(52px, 9vh, 88px)";
+
 /** Isolates one channel and keeps alpha. */
 const CHANNEL = {
   r: "1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0",
@@ -65,7 +71,8 @@ export function ChromaticEdge() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-[9vh] min-h-[52px] max-h-[88px] overflow-hidden motion-reduce:hidden"
+      style={{ height: CHROMATIC_EDGE_HEIGHT }}
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-30 overflow-hidden motion-reduce:hidden"
     >
       <svg width="0" height="0" className="absolute" aria-hidden>
         <defs>
